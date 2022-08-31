@@ -134,7 +134,7 @@ let car = {
             "Max Horsepower/RPM": "138 hp @ 6400 RPM",
             "Transmission": "Automatic",
             "Fuel Capacity (Litres)": "55 L",
-            img: "Altis.jpg",
+            img: "Altis.png",
         },
     },
 }
