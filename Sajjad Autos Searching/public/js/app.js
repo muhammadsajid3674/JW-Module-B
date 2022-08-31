@@ -171,7 +171,7 @@ function features() {
     carDetails.innerHTML = ""
     carDetails.innerHTML = `<h1 class="mb-3">${carCompany.value} ${carModal.value} Features:</h1>
     <img class="img-fluid" src="img/${modalFeaturesValues[5]}">`
-    for (let i = 0; i < modalFeaturesKeys.length; i++) {
+    for (let i = 0; i < 5; i++) {
         carDetails.innerHTML += `
         <div class="features">
         <ul>
