@@ -38,9 +38,7 @@ function fillModal() {
     carModal.innerHTML = ""
     let companyName = carCompany.value
     let modalArr = car.filter(car => car.name === companyName)
-    for (let i = 0; i < modalArr.length; i++) {
-        carModal.innerHTML += `<option value="${modalArr[i].modal}">${modalArr[i].modal}</option>`
-    }
+    modalArr.map( value => carModal.innerHTML += `<option value="${value.modal}">${value.modal}</option>`)
 }
 
 function features() {
@@ -51,15 +49,14 @@ function features() {
     carDetails.innerHTML = ""
     carDetails.innerHTML = `<h1 class="mb-3">${carCompany.value} ${carModal.value} Features:</h1>
     <img class="img-fluid" src="img/${detailArr[0].img}">`
-    detailArr.map(function (details) {
-        carDetails.innerHTML += `<ul>
+    detailArr.map( details => carDetails.innerHTML += `<ul>
             <li><b>Engine Displacement</b> : ${details.Engine}</li>
             <li><b>Fuel Supply System</b> : ${details.FuelSystem}</li>
             <li><b>Max Horsepower/RPM</b> : ${details.HorsepowerOrRPM}</li>
             <li><b>Transmission</b> : ${details.Transmission}</li>
             <li><b>Fuel Capacity (Litres)</b> : ${details.FuelCapacity}</li>
             </ul>`
-    })
+    )
 }
 
 
