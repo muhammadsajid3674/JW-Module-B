@@ -24,12 +24,14 @@ let carDetails = document.getElementById("details")
 
 function fillCompany() {
     carCompany.innerHTML = ""
-    company = car.filter((value, index, self) =>
-        index === self.findIndex((t) => (
-            t.place === value.place && t.name === value.name
-        ))
-    )
-    company.map(companyName => carCompany.innerHTML += `<option value="${companyName.name}">${companyName.name}</option>`)
+    let companyArr = car.map((x) => x.name)
+    let companyDuplicate = [...new Set(companyArr)] // Sir Technic 
+    // company = car.filter((value, index, self) => // My Chepiya
+    //     index === self.findIndex((t) => (
+    //         t.place === value.place && t.name === value.name
+    //     ))
+    // )
+    companyDuplicate.map(companyName => carCompany.innerHTML += `<option value="${companyName}">${companyName}</option>`)
 }
 fillCompany()
 
