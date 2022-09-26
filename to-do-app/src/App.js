@@ -12,27 +12,17 @@ function App() {
     setList([...list])
     // console.log(list)
   }
-
-  let edit = () => {
-    console.log(list)
-  }
   
   let deleteAll = () => {
     setList([])
   }
 
-  let deleteItem = (id) => {
-    let listI = list.filter((value, index) => {
-      return index != id
-    }) 
-    console.log(listI)
-    setList(listI)
-  }
   // list = []
   // text = ""
 
   return (
     <div className="App">
+      <div className='container'>  
       <h1>To Do App</h1>
       <input placeholder='Enter Value' onChange={(e) => setText(e.target.value)} />
       <button className='btn addBtn' onClick={add}>Add</button>
@@ -40,10 +30,11 @@ function App() {
       {/* <Btn btnValue="Delete All" classes="deleteAllBtn" /> */}
       <ol>{list.map((value, index) => {
         return <li className='listItems' key={index}>{value}
-          <i className="fa-regular fa-pen-to-square listI" onClick={edit}></i>
-          <i className="fa-solid fa-trash listI" onClick={deleteItem}></i>
+          <i className="fa-regular fa-pen-to-square listI"></i>
+          <i className="fa-solid fa-trash listI"></i>
           </li>
       })}</ol>
+      </div>
     </div>
   );
 }
