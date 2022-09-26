@@ -1,0 +1,38 @@
+.App {
+  margin: 20px;
+}
+input, .btn{
+  padding: 5px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  margin: 0 5px;
+  background-color: #fff;
+}
+.addBtn{
+  border: 1px solid green;
+  color: green;
+}
+.addBtn:hover{
+  background-color: green;
+  color: #fff;
+  cursor: pointer;
+}
+.deleteBtn, .deleteAllBtn{
+  border: 1px solid red;
+  color: red;
+}
+.deleteBtn:hover, .deleteAllBtn:hover{
+  background-color: red;
+  color: #fff;
+  cursor: pointer;
+}
+.listI{
+  padding: 10px;
+  cursor: pointer;
+}
+.listItems{
+  margin: 0;
+  padding: 0;
+  font-size: 1.5rem;
+}
