@@ -5,12 +5,13 @@
   align-items: center;
 }
 .container {
-  border: 1px solid #fff;
+  border: 1px solid #000;
   border-radius: 10px;
   box-shadow: 0px 10px 15px rgba(0,0,0,0.5);
   padding: 20px;
   margin: 20px;
   min-height: 500px;
+  min-width: 400px;
 }
 input, .btn{
   padding: 5px;
@@ -38,12 +39,18 @@ input, .btn{
   color: #fff;
   cursor: pointer;
 }
-.listI{
-  padding: 10px;
-  cursor: pointer;
-}
 .listItems{
   margin: 0;
   padding: 0;
   font-size: 1.5rem;
+  border: 1px solid #000;
+  border-radius: 10px;
+  margin: 5px 0px !important;
+  padding: 10px !important;
+  display: flex;
+  justify-content: space-between;
+}
+.listItems span i {
+  padding: 0 10px;
+  cursor: pointer;
 }

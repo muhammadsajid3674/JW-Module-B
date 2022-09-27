@@ -7,14 +7,32 @@ function App() {
   let [text, setText] = useState("");
   let [list, setList] = useState([]);
 
+  // add button functionality
   let add = () => {
     list.push(text)
     setList([...list])
     // console.log(list)
+    setText("")
   }
   
+  // Delete All button functionality
   let deleteAll = () => {
     setList([])
+  }
+
+  // Delete item button functionality
+  let deleteItem = (id) => {
+    let listI = list.filter((value, index) => {
+      return index !== id
+    })
+    setList(listI)
+  }
+
+  // Edit button functionality
+  let editBtn = (elem) => {
+    // let newValue = prompt("New Value")
+    // console.log(newValue)
+    // setList(newValue)
   }
 
   // list = []
@@ -25,13 +43,14 @@ function App() {
       <div className='container'>  
       <h1>To Do App</h1>
       <input placeholder='Enter Value' onChange={(e) => setText(e.target.value)} />
-      <button className='btn addBtn' onClick={add}>Add</button>
-      <button className='btn deleteAllBtn' onClick={deleteAll}>Delete All</button>
-      {/* <Btn btnValue="Delete All" classes="deleteAllBtn" /> */}
-      <ol>{list.map((value, index) => {
+      <Btn btnValue="Add" classes="addBtn" clickName={add} />
+      <Btn btnValue="Delete All" classes="deleteAllBtn" clickName={deleteAll} />
+      <ol style={{listStyleType : "none", padding: "0px"}}>{list.map((value, index) => {
         return <li className='listItems' key={index}>{value}
-          <i className="fa-regular fa-pen-to-square listI"></i>
-          <i className="fa-solid fa-trash listI"></i>
+          <span>
+          <Btn classes="fa-regular fa-pen-to-square" clickName={() => editBtn(value)}/>
+          <Btn classes="fa-solid fa-trash" clickName={() => deleteItem(index)}/>
+          </span>
           </li>
       })}</ol>
       </div>
