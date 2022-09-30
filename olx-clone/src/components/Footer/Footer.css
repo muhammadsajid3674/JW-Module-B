@@ -1,0 +1,21 @@
+.footer{
+    margin-top: 50px;
+    background-color: #eee;
+    
+}
+.grid1{
+    text-align: center;
+}
+.grid2{
+    font-size: 1.3rem;
+}
+.grid3 {
+    border-left: 1px solid #aaa;
+    padding: 10px;
+}
+.copyright{
+    text-align: end;
+    padding: 20px;
+    background-color: var(--Purple);
+    color: #eee;
+}

@@ -1,0 +1,44 @@
+main{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    align-items: center;
+    padding: 20px 0px;
+    background-color: rgb(250, 250, 250);
+}
+.searchBar {
+    display: flex;
+    align-items: center;
+}
+.categoryDrop select, .searchBar input {
+    padding: 10px;
+    min-width: 200px;
+    border: 2px solid var(--Purple);
+    font-size: 1.1rem;
+    border-radius: 5px;
+}
+select,input[type="text"]:focus{
+    outline: none;
+}
+.searchIcons:hover{
+    cursor: pointer;
+    background-color: var(--Purple);
+    color: #fff;
+    transition: 250ms;
+    border-radius: 0 5px 5px 0;
+}
+.cardMain {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #eee;
+}
+.cardMain:hover {
+    /* box-shadow: 1px 10px 15px 1px rgba(0,0,0,0.5); */
+    box-shadow: 10px 10px 15px #aaaaaa;
+    transform: translateY(-10px);
+    transition: 500ms;
+    cursor: pointer;
+}
+.cardText{
+    border-left: 5px solid var(--Orange);
+}
