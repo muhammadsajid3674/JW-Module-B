@@ -1,85 +1,91 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { Grid, TextField, Typography, Container, Stack, Button } from "@mui/material";
+import { Grid, TextField, Typography, Container, Stack, Chip } from "@mui/material";
 import { Box } from "@mui/system";
 import data from '../data';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import DeleteIcon from '@mui/icons-material/Delete';
 import logo from '../../img/logo.png'
 import './Searching.css'
 
-function Searching() {
-
-    console.log('first')
-    
+function Searching() {  
     const [categories, setCategories] = useState([])
-    const [multiCategories, setMultiCategories] = useState([])
-    const [selectedCategories, setSelectedCategories] = useState("")
-    const [filterList, setFilterList] = useState([])
+    const [selectedCategoriesArr, setSelectedCategoriesArr] = useState([])
+    let [filterList, setFilterList] = useState([])
 
-    let categoryList = data.cardData.map((x) => x.category)
+
     const getCategories = () => {
+        let categoryList = data.cardData.map(x => x.category)
         categoryList = [...new Set([...categoryList])]
         setCategories([...categoryList])
-        // console.log(categoryList)
     }
-    
-    const searchCategoryItem = (val) => {
-        setSelectedCategories(val);
-        let filteredList = data.cardData.filter((x) => x.category == val);
+
+    const searchItems = (val) => {
+        let filteredList = [];
+        selectedCategoriesArr.forEach(elem => filteredList = [...filteredList, ...data.cardData.filter(x => x.category === elem && x.label.toLowerCase().includes(val.toLowerCase()))]);
         setFilterList([...filteredList])
+    }
+
+    const selectedChip = (val) => {
+        let chipArr = [...selectedCategoriesArr];
+        chipArr.push(val);
+        chipArr = [...new Set([...chipArr])];
         
-        categoryList.unshift(val)
-        categoryList = [...new Set([...categoryList])]
-        // console.log(categoryList)
-        setCategories([...categoryList])
+        let chipArr2= []
 
+        chipArr.forEach(elem => chipArr2 = [...chipArr2, ...data.cardData.filter(x => x.category === elem)]);
+        
+        setFilterList([...chipArr2])
+        setSelectedCategoriesArr([...chipArr])
+    }
+
+    const deleteChip = (val) => {
+        selectedCategoriesArr.splice(val, 1)
+        setSelectedCategoriesArr([...selectedCategoriesArr])
+
+        let chipArr2 = [];
+        selectedCategoriesArr.forEach(elem => chipArr2 = [...chipArr2, ...data.cardData.filter(x => x.category === elem)]);
+        setFilterList([...chipArr2])
 
     }
 
-    const searchedItems = (val) => {
-        let filteredList = data.cardData.filter(
-            (x) =>
-                x.category == selectedCategories &&
-                x.label.toLowerCase().includes(val.toLowerCase())
-        )
-        setFilterList([...filteredList])
-    }
-
+    // it will run when component initialize ...
     useEffect(() => {
         getCategories()
     }, [])
 
 
     return (
-        <div>
-            <main>
-                <div className='logo'>
-                    <img src={logo} />
-                </div>
-                <div className='searchBar'>
-                    <form>
-                        <input
+        <>
+            <Container>
+                <Stack spacing={2} direction="row" className="main" >
+                <Box className='logo'>
+                    <img src={logo} alt="" />
+                </Box>
+                <Box>
+                        <TextField
+                            id="outlined-base"
+                            variant="outlined"
+                            color="warning"
                             style={{
                                 minWidth: '500px',
                             }}
                             type="text"
-                            placeholder="What would you like to buy"
-                            onChange={(e) => searchedItems(e.target.value)}
+                            label="What would you like to buy"
+                            onChange={(e) => searchItems(e.target.value)}
                         />
-                    </form>
-                </div>
-            </main>
-            <Container>
+                </Box>
+                </Stack>
                 <Grid>
-                    <Stack spacing={2} direction="row"
-                        onClick={(e) => searchCategoryItem(e.target.value)}
-                        value={categories}
-                    >
-                        {categories.map((e, i) => (
-                            <Button color='warning' variant='contained' size='large' key={i} value={e}>{e}</Button>
-                        ))}
+                    <Stack spacing={2} direction="row">
+                        {selectedCategoriesArr && selectedCategoriesArr.length > 0 ? selectedCategoriesArr.map((e, i) => (
+                            <Chip sx={{padding: 2, borderRadius: '5px'}} color="error" label={e} key={i} onDelete={() => deleteChip(e)} deleteIcon={<DeleteIcon/>}/>
+                        )): null}
+                        {categories && categories.length > 0 ? categories.map((e, i) => (
+                            <Chip sx={{padding: 2, borderRadius: '5px'}} color="warning" label={e} key={i} onClick={() => selectedChip(e)}/>
+                        )): null}
                     </Stack>
                 </Grid>
                 <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
@@ -133,7 +139,7 @@ function Searching() {
                     })}
                 </Box>
             </Container>
-        </div>
+        </>
 
     )
 }

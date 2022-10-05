@@ -1,4 +1,4 @@
-main{
+.main{
     display: flex;
     justify-content: center;
     gap: 50px;
@@ -7,44 +7,7 @@ main{
     background-color: rgb(250, 250, 250);
     margin-bottom: 10px;
 }
-.searchBar {
-    display: flex;
-    align-items: center;
-}
-.categoryDrop select, .searchBar input {
-    padding: 10px;
-    min-width: 200px;
-    border: 2px solid var(--Orange);
-    font-size: 1.1rem;
-    border-radius: 5px;
-}
-select,input[type="text"]:focus{
-    outline: none;
-}
-.searchIcons:hover{
-    cursor: pointer;
-    background-color: var(--Orange);
-    color: #fff;
-    transition: 250ms;
-    border-radius: 0 5px 5px 0;
-}
-.categoryDrop select, .searchBar input {
-    padding: 10px;
-    min-width: 200px;
-    border: 2px solid var(--Orange);
-    font-size: 1.1rem;
-    border-radius: 5px;
-}
-select,input[type="text"]:focus{
-    outline: none;
-}
-.searchIcons:hover{
-    cursor: pointer;
-    background-color: var(--Orange);
-    color: #fff;
-    transition: 250ms;
-    border-radius: 0 5px 5px 0;
-}
+
 .cardMain {
     margin: 10px 0;
     padding: 10px;
