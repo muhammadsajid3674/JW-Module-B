@@ -5,6 +5,7 @@ import {
 import Navbar from "../components/Navbar/Navbar";
 import About from "../pages/About/About";
 import Contact from "../pages/Contact/Contact";
+import Error404 from "../pages/Error404";
 import Home from "../pages/Home/Home";
 import Pricing from "../pages/Pricing/Pricing";
 
@@ -19,6 +20,7 @@ export default function AppRouter() {
         <Route path='about' element={<About/>}/>
         <Route path='pricing' element={<Pricing/>}/>
         <Route path='contact' element={<Contact/>}/>
+        <Route path='*' element={<Error404/>}/>
       </Routes>
     </Router>
   );
