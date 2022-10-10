@@ -1,0 +1,11 @@
+.custButton{
+    background-color: #212121;
+    color: #fff;
+    border-radius: 50px;
+    padding: 10px 30px;
+}
+.custButton:hover{
+    border: 1px solid #000;
+    background-color: #fff;
+    color: #000;
+}

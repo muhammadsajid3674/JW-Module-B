@@ -1,0 +1,15 @@
+.custNavLinks{
+    padding: 10px;
+    text-decoration: none;
+    border: 0;
+    color: #fff;
+}
+.linkMobile{
+    padding: 10px;
+    text-decoration: none;
+    border: 0;
+    color: #000;
+}
+.custNavLinks:hover{
+    background-color: #272727;
+}
