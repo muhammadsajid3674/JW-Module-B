@@ -1,0 +1,48 @@
+/* Board Css */
+
+.dashCard1 {
+    background-image: -webkit-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
+    border-radius: 10px;
+}
+.dashCard2 {
+    background-image: -webkit-linear-gradient(90deg,#11998e 0%,#38ef7d 100%);    border-radius: 10px;
+    border-radius: 10px;
+}
+.dashCard3 {
+    background-image: -webkit-linear-gradient(90deg,#ee0979 0%,#ff6a00 100%);    border-radius: 10px;    
+    border-radius: 10px;
+}
+.dashCard4 {
+    background-image: -webkit-linear-gradient(90deg,#45b649 0%,#dce35b 100%);    border-radius: 10px;
+    border-radius: 10px;
+}
+.dashCardDefault {
+    background-color: #fff;
+    border-radius: 10px;
+}
+.list1::before{
+    content: "\2022";
+    color:#11998e;
+    font-weight: bolder;
+    display: inline-block; 
+    width: 1em;
+    margin-left: -1em;
+}
+.list2::before{
+    content: "\2022";
+    color:#f3ba2f;
+    font-weight: bolder;
+    display: inline-block; 
+    width: 1em;
+    margin-left: -1em;
+}
+.list3::before{
+    content: "\2022";
+    color:#2a71d0;
+    font-weight: bolder;
+    display: inline-block; 
+    width: 1em;
+    margin-left: -1em;
+}
+
+/* Board Css */

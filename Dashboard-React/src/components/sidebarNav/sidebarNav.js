@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { Link } from "react-router-dom";
+import './sidebarNav.css';
 
 export default function SidebarNav(props) {
 
@@ -6,31 +8,31 @@ export default function SidebarNav(props) {
     const [active, setActive] = useState(false)
     const navItem = [
         {
-            item: 'Home',
-            icon: 'fa-house'
-        },
-        {
             item: 'Dashboard',
-            icon: 'fa-gauge'
+            icon: 'fa-gauge',
+            to: '/'
         },
         {
-            item: 'Orders',
-            icon: 'fa-calendar-days'
+            item: 'Charts',
+            icon: 'fa-calendar-days',
+            to: 'chart'
         },
         {
-            item: 'Products',
-            icon: 'fa-cubes-stacked'
+            item: 'Tables',
+            icon: 'fa-cubes-stacked',
+            to: 'table'
         },
         {
-            item: 'Customers',
-            icon: 'fa-user'
+            item: 'Forms',
+            icon: 'fa-user',
+            to: 'form'
         },
     ]
 
 
 
     return <>
-        <div className="d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
+        <div className="d-flex flex-column flex-shrink-0 p-3 text-bg-dark position-fixed" style={{ width: 280, height: "100vh" }}>
             <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <img className="img-fluid" src={imageSrc}/>
                 <span className="fs-4">{sideBarLabel}</span>
@@ -39,10 +41,10 @@ export default function SidebarNav(props) {
             <ul className="nav nav-pills flex-column mb-auto">
                 {navItem.map((e, i) => {
                     return <li className="nav-item" key={i}>
-                        <a className={`nav-link link-light ${active == e.item && `active`}`} aria-current="page" onClick={() => setActive(e.item)}>
+                        <Link to={e.to} className={`nav-link link-light hover ${active == e.item && `active`}`} aria-current="page" onClick={() => setActive(e.item)}>
                             <span className="bi pe-none me-2" key={i}><i className={`fa-solid ${e.icon}`}></i></span>
                             {e.item}
-                        </a>
+                        </Link>
                     </li>
                 })}
             </ul>
