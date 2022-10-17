@@ -8,9 +8,9 @@ export default function SidebarNav(props) {
     const [active, setActive] = useState(false)
     const navItem = [
         {
-            item: 'Dashboard',
+            item: 'Overview',
             icon: 'fa-gauge',
-            to: '/'
+            to: ''
         },
         {
             item: 'Charts',
@@ -26,6 +26,11 @@ export default function SidebarNav(props) {
             item: 'Forms',
             icon: 'fa-user',
             to: 'form'
+        },
+        {
+            item: 'News',
+            icon: 'fa-newspaper',
+            to: 'news'
         },
     ]
 
