@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Card, CardActionArea, CardContent, CardMedia, Container, Grid, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 function News() {
 
@@ -16,6 +16,16 @@ function News() {
                 console.log(error);
             })
     }
+
+    const navigate = useNavigate()
+    const transferData = (data) => {
+        navigate('cardDetails', {
+            state:{
+                data
+            }
+        })
+    }
+
     useEffect(() => {
         getData()
     }, [])
@@ -26,28 +36,25 @@ function News() {
                 <Typography variant='p' className='display-4' sx={{ m: 5 }}>Recent News</Typography>
                 <Grid container spacing={2} justifyContent='center' sx>
                     {data.map((e, i) => {
-                        console.log(e)
-                        return <Grid item >
-                            <Link to='cardDetails' style={{ textDecoration: 'none' }}>
-                                <Card sx={{ maxWidth: 345 }}>
-                                    <CardActionArea>
-                                        <CardMedia
-                                            component="img"
-                                            height="140"
-                                            image={e.urlToImage}
-                                            alt="green iguana"
-                                        />
-                                        <CardContent>
-                                            <Typography gutterBottom variant="h5" component="">
-                                                {e.title}
-                                            </Typography>
-                                            <Typography variant="body2" color="text.secondary">
-                                                {e.description}
-                                            </Typography>
-                                        </CardContent>
-                                    </CardActionArea>
-                                </Card>
-                            </Link>
+                        return <Grid item key={i} className='d-flex'>
+                            <Card sx={{ maxWidth: 345 }} onClick={() => transferData(e)} className='align-self-normal'>
+                                <CardActionArea>
+                                    <CardMedia
+                                        component="img"
+                                        height="140"
+                                        image={e.urlToImage}
+                                        alt="green iguana"
+                                    />
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="">
+                                            {e.title}
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary">
+                                            {e.description}
+                                        </Typography>
+                                    </CardContent>
+                                </CardActionArea>
+                            </Card>
                         </Grid>
                     })}
                 </Grid>
