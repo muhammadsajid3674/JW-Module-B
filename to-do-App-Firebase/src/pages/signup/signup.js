@@ -11,22 +11,20 @@ function Signup() {
     const [data, setData] = useState({})
     const handleChange = (event) => {
         let newInput = { [event.target.name]: event.target.value }
-        setData({ ...data, ...newInput })
-    // fields data push
+        setData({ ...data, ...newInput });
+        // fields data push
     }
+    const {email, password, name} = data;
+
     const handleSubmit = () => {
-        handleSignup(data.email, data.password)
-        // sendDataFirestore(data.name, data.email) // to add data to fireStore dataBase
+        handleSignup({email, password, name})
             .then((userCredential) => {
                 // Signed in 
-                const user = userCredential.user;
-                console.log(user);
-                alert("Your Account is created")
-                // alert("data added")
+                console.log(userCredential)
                 navigate('/login')
             })
             .catch((error) => {
-                alert(error.message)
+                console.log(error.message)
             });
     }
 

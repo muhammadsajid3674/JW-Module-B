@@ -1,10 +1,51 @@
 import { Delete, Edit } from '@mui/icons-material'
-import { Box, Button, createTheme, FormControl, Grid, InputLabel, OutlinedInput, ThemeProvider } from '@mui/material'
-import React from 'react'
+import { Box, Button, createTheme, FormControl, Grid, InputLabel, OutlinedInput, ThemeProvider, Typography } from '@mui/material'
+import { onValue, ref } from 'firebase/database';
+import React, { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom';
+import Loader from '../../components/loader/loader';
+import { dataBase, handleGetDatabase } from '../../config/firebaseMethods';
 
 
 
 function ToDoList() {
+
+    //Loader
+    const [isLoader, setIsLoader] = useState(true)
+
+    const [data, setData] = useState([])
+
+    // ToDo Functionality---------------
+    let [text, setText] = useState("");
+    let [list, setList] = useState([]);
+
+    // add button functionality
+    let add = () => {
+        list.push(text)
+        setList([...list])
+        // console.log(list)
+    }
+
+    // Delete All button functionality
+    let deleteAll = () => {
+        setList([])
+    }
+
+    // Delete item button functionality
+    let deleteItem = (id) => {
+        let listI = list.filter((value, index) => {
+            return index !== id
+        })
+        setList(listI)
+    }
+
+    let editBtn = (id) => {
+        let newValue = prompt("New Value")
+        list[id] = newValue
+        setList([...list])
+      }
+    // ToDo Functionality-----------------
+
     const colorTheme = createTheme({
         palette: {
             neutral: {
@@ -13,68 +54,123 @@ function ToDoList() {
             },
         },
     });
+
+
+    const handleGetDatabase = () => {
+        let reference = ref(dataBase, `user/`);
+        onValue(reference, (snapshot) => {
+            const data = snapshot.val();
+            const userData = data[location.state.user];
+            setData(userData)
+            setIsLoader(false)
+        })
+    };
+
+    const location = useLocation()
+    const navigate = useNavigate()
+
+    const logOut = () => {
+        navigate('/login')
+    }
+
+    useEffect(() => {
+        handleGetDatabase()
+    }, [])
+
+
     return (
         <>
-            <Box sx={{ backgroundColor: "#3c6e71", height: '100vh' }}>
-                <Grid container justifyContent='center'>
-                    <Grid item md={4} xs={10}>
-                        <Box sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'space-between',
-                            boxShadow: '0px 0px 10px rgba(0,0,0,0.5)',
-                            p: 4,
-                            borderRadius: '10px',
-                            backgroundColor: '#fff'
-                        }}>
-                            <ThemeProvider theme={colorTheme}>
-                                <FormControl sx={{ m: 1 }} variant='outlined' color='neutral'>
-                                    <InputLabel htmlFor='outlined-userInput'>Enter items</InputLabel>
-                                    <OutlinedInput
-                                        id='outlined-userInput'
-                                        type='text'
-                                        // onChange={handleChange('password')}
-                                        label='Enter items'
-                                    ></OutlinedInput>
-                                </FormControl>
-                            </ThemeProvider>
-                            <Box>
-                                <Button variant="contained" color='info'
-                                    sx={{
-                                        mx: 1,
-                                        backgroundColor: '#191919',
-                                        '&:hover': {
-                                            backgroundColor: '#fff',
-                                            color: '#191919'
-                                        }
-                                    }}
-                                >Add</Button>
-                                <Button variant="contained" color='info'
-                                    sx={{
-                                        mx: 1,
-                                        backgroundColor: '#d90429',
-                                        '&:hover': {
-                                            backgroundColor: '#fff',
-                                            color: '#d90429'
-                                        }
-                                    }}
-                                >Delete All</Button>
+
+            {isLoader ? <Loader /> :
+                <Box sx={{ backgroundColor: "#3c6e71", height: '100vh' }}>
+                    <Box 
+                    sx={{
+                        display:'flex',
+                        justifyContent: 'end',
+                        p: 1
+                    }}
+                    >
+                        <Button variant="contained" color='info'
+                            sx={{
+                                mx: 1,
+                                backgroundColor: '#000',
+                                '&:hover': {
+                                    backgroundColor: '#fff',
+                                    color: '#000'
+                                }
+                            }}
+                            onClick={logOut}
+                        >Log Out</Button>
+                    </Box>
+                    <Box className='text-white text-center mb-4'>
+                        <Typography variant='p' className='display-4'>Welcome {data.name}</Typography>
+                    </Box>
+                    <Grid container justifyContent='center'>
+                        <Grid item md={4} xs={10}>
+                            <Box sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'space-between',
+                                boxShadow: '0px 0px 10px rgba(0,0,0,0.5)',
+                                p: 4,
+                                borderRadius: '10px',
+                                backgroundColor: '#fff'
+                            }}>
+                                <Typography variant='p' className='display-5 text-center'>Todo App</Typography>
+                                <ThemeProvider theme={colorTheme}>
+                                    <FormControl sx={{ m: 1 }} variant='outlined' color='neutral'>
+                                        <InputLabel htmlFor='outlined-userInput'>Enter items</InputLabel>
+                                        <OutlinedInput
+                                            id='outlined-userInput'
+                                            type='text'
+                                            // onChange={handleChange('password')}
+                                            label='Enter items'
+                                            onChange={(e) => setText(e.target.value)}
+                                        ></OutlinedInput>
+                                    </FormControl>
+                                </ThemeProvider>
+                                <Box>
+                                    <Button variant="contained" color='info'
+                                        sx={{
+                                            mx: 1,
+                                            backgroundColor: '#191919',
+                                            '&:hover': {
+                                                backgroundColor: '#fff',
+                                                color: '#191919'
+                                            }
+                                        }}
+                                        onClick={add}
+                                    >Add</Button>
+                                    <Button variant="contained" color='info'
+                                        sx={{
+                                            mx: 1,
+                                            backgroundColor: '#d90429',
+                                            '&:hover': {
+                                                backgroundColor: '#fff',
+                                                color: '#d90429'
+                                            }
+                                        }}
+                                        onClick={deleteAll}
+                                    >Delete All</Button>
+                                </Box>
+                                <Box sx={{ m: 1 }}>
+                                    <ul className='list-group' style={{ width: '100%', bgcolor: 'background.paper' }}>
+                                        {list.map((e, i) => {
+                                            return <li key={i} className='list-group-item' style={{ display: 'flex', justifyContent: 'space-between', borderColor: '#ccc' }}>
+                                                {e}
+                                                <Box>
+                                                    <Edit onClick={() => editBtn(i)} />
+                                                    <Delete onClick={() => deleteItem(i)} />
+                                                </Box>
+                                            </li>
+                                        })}
+                                    </ul>
+                                </Box>
                             </Box>
-                            <Box sx={{ m: 1 }}>
-                                <ul className='list-group' style={{ width: '100%', bgcolor: 'background.paper' }}>
-                                    <li className='list-group-item' style={{ display: 'flex', justifyContent: 'space-between', borderColor: '#ccc' }}>
-                                        hello world
-                                        <Box>
-                                            <Edit />
-                                            <Delete />
-                                        </Box>
-                                    </li>
-                                </ul>
-                            </Box>
-                        </Box>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Box>
+                </Box>
+            }
         </>
     )
 }

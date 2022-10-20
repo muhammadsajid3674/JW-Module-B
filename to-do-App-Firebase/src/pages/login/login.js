@@ -18,7 +18,11 @@ function Login() {
             .then((userCredential) => {
                 // Log in 
                 const user = userCredential.user;
-                navigate('/todoapp')
+                navigate('/todoapp', {
+                    state: {
+                        user: user.uid
+                    }
+                })
                 // ...
             })
             .catch((error) => {
@@ -50,7 +54,7 @@ function Login() {
         <>
             <Box sx={{ backgroundColor: '#457b9d' }}>
                 <Grid container justifyContent='center' alignItems='center' height='100vh'>
-                    <Grid item  md={4} xs={10}>
+                    <Grid item md={4} xs={10}>
                         <Box sx={{ boxShadow: '0px 0px 10px rgba(0,0,0,0.5)', p: 5, borderRadius: '10px', backgroundColor: '#fff' }}>
                             <Box
                                 sx={{
@@ -107,7 +111,7 @@ function Login() {
                                         }
                                     }}>Submit</Button>
                             </Box>
-                        <Typography variant='subtitle1' className='text-center'>Need an account? <Link to='/signup'>Sign Up</Link></Typography>
+                            <Typography variant='subtitle1' className='text-center'>Need an account? <Link to='/'>Sign Up</Link></Typography>
                         </Box>
                     </Grid>
                 </Grid>
