@@ -3,6 +3,7 @@ import { Box, Button, FormControl, Grid, IconButton, InputAdornment, InputLabel,
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { handleSignup, sendDataFirestore } from '../../config/firebaseMethods'
+import signUpIcon from '../../images/signup-icon.png'
 
 function Signup() {
 
@@ -14,10 +15,11 @@ function Signup() {
         setData({ ...data, ...newInput });
         // fields data push
     }
-    const {email, password, name} = data;
+    const { email, password, name } = data;
+    console.log(data);
 
     const handleSubmit = () => {
-        handleSignup({email, password, name})
+        handleSignup({ email, password, name })
             .then((userCredential) => {
                 // Signed in 
                 console.log(userCredential)
@@ -49,7 +51,7 @@ function Signup() {
         <>
             <Box sx={{ backgroundColor: '#e76f51' }}>
                 <Grid container justifyContent='center' alignItems='center' height='100vh'>
-                    <Grid item  md={4} xs={10}>
+                    <Grid item md={4} xs={10}>
                         <Box sx={{ boxShadow: '0px 0px 10px rgba(0,0,0,0.5)', p: 5, borderRadius: '10px', backgroundColor: '#fff' }}>
                             <Box
                                 sx={{
@@ -58,8 +60,11 @@ function Signup() {
                                     justifyContent: 'space-between'
                                 }}
                             >
-                                <Typography variant='h2' className='text-center'>Signup</Typography>
-                                <FormControl sx={{ m: 1 }} variant='outlined'>
+                                <Box className='d-flex justify-content-center align-items-center text-center mb-2'>
+                                    <img src={signUpIcon} className='w-25' />
+                                    <Typography variant='h4' className='text-center'>Signup</Typography>
+                                </Box>
+                                {/* <FormControl sx={{ m: 1 }} variant='outlined'>
                                     <InputLabel htmlFor='outlined-name'>Name</InputLabel>
                                     <OutlinedInput
                                         id='outlined-name'
@@ -68,18 +73,26 @@ function Signup() {
                                         label='Name'
                                         name="name"
                                     ></OutlinedInput>
-                                </FormControl>
-                                <FormControl sx={{ m: 1 }} variant='outlined'>
-                                    <InputLabel htmlFor='outlined-email'>Email</InputLabel>
-                                    <OutlinedInput
-                                        id='outlined-email'
-                                        type='email'
-                                        onChange={(event) => handleChange(event)}
-                                        label='Email'
-                                        name="email"
-                                    ></OutlinedInput>
-                                </FormControl>
-                                <FormControl sx={{ m: 1 }} variant='outlined'>
+                                </FormControl> */}
+                                <TextField
+                                    margin='dense'
+                                    id="outlined-name"
+                                    label="Username"
+                                    variant="outlined"
+                                    type='text'
+                                    onChange={(event) => handleChange(event)}
+                                    name="name"
+                                />
+                                <TextField
+                                    margin='dense'
+                                    id="outlined-email"
+                                    label="Email"
+                                    variant="outlined"
+                                    type='email'
+                                    onChange={(event) => handleChange(event)}
+                                    name="email"
+                                />
+                                <FormControl margin='dense' variant='outlined'>
                                     <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
                                     <OutlinedInput
                                         id='outlined-adornment-password'

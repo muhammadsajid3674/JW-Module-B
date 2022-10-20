@@ -24,6 +24,7 @@ function ToDoList() {
         list.push(text)
         setList([...list])
         // console.log(list)
+        setText('')
     }
 
     // Delete All button functionality
@@ -63,8 +64,10 @@ function ToDoList() {
             const userData = data[location.state.user];
             setData(userData)
             setIsLoader(false)
+            // console.log(userData.name.charAt(0).toUpperCase())
         })
     };
+
 
     const location = useLocation()
     const navigate = useNavigate()
@@ -126,6 +129,7 @@ function ToDoList() {
                                             // onChange={handleChange('password')}
                                             label='Enter items'
                                             onChange={(e) => setText(e.target.value)}
+                                            value={text}
                                         ></OutlinedInput>
                                     </FormControl>
                                 </ThemeProvider>

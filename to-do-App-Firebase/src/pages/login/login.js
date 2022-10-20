@@ -3,6 +3,7 @@ import { Box, Button, FormControl, Grid, IconButton, InputAdornment, InputLabel,
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { handleLogIn } from '../../config/firebaseMethods'
+import logInIcon from '../../images/login-icon.png';
 
 function Login() {
 
@@ -63,18 +64,20 @@ function Login() {
                                     justifyContent: 'space-between'
                                 }}
                             >
-                                <Typography variant='h2' className='text-center'>Login</Typography>
-                                <FormControl sx={{ m: 1 }} variant='outlined'>
-                                    <InputLabel htmlFor='outlined-email'>Email</InputLabel>
-                                    <OutlinedInput
-                                        id='outlined-email'
-                                        type='email'
-                                        onChange={(event) => handleChange(event)}
-                                        label='Email'
-                                        name='email'
-                                    ></OutlinedInput>
-                                </FormControl>
-                                <FormControl sx={{ m: 1 }} variant='outlined'>
+                                <Box className='d-flex justify-content-center align-items-center text-center mb-2'>
+                                    <img src={logInIcon} className='w-25' />
+                                    <Typography variant='h4' className='text-center'>Login</Typography>
+                                </Box>
+                                <TextField
+                                    margin='dense'
+                                    id="outlined-email"
+                                    label="Email"
+                                    variant="outlined"
+                                    type='email'
+                                    onChange={(event) => handleChange(event)}
+                                    name="email"
+                                />
+                                <FormControl margin='dense' variant='outlined'>
                                     <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
                                     <OutlinedInput
                                         id='outlined-adornment-password'
