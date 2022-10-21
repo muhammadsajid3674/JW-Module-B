@@ -1,5 +1,5 @@
 import { Delete, Edit } from '@mui/icons-material'
-import { Box, Button, createTheme, FormControl, Grid, InputLabel, OutlinedInput, ThemeProvider, Typography } from '@mui/material'
+import { Box, Button, createTheme, FormControl, Grid, IconButton, InputLabel, OutlinedInput, ThemeProvider, Typography } from '@mui/material'
 import { onValue, ref } from 'firebase/database';
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -44,7 +44,7 @@ function ToDoList() {
         let newValue = prompt("New Value")
         list[id] = newValue
         setList([...list])
-      }
+    }
     // ToDo Functionality-----------------
 
     const colorTheme = createTheme({
@@ -86,12 +86,12 @@ function ToDoList() {
 
             {isLoader ? <Loader /> :
                 <Box sx={{ backgroundColor: "#3c6e71", height: '100vh' }}>
-                    <Box 
-                    sx={{
-                        display:'flex',
-                        justifyContent: 'end',
-                        p: 1
-                    }}
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'end',
+                            p: 1
+                        }}
                     >
                         <Button variant="contained" color='info'
                             sx={{
@@ -106,7 +106,7 @@ function ToDoList() {
                         >Log Out</Button>
                     </Box>
                     <Box className='text-white text-center mb-4'>
-                        <Typography variant='p' className='display-4'>Welcome {data.name}</Typography>
+                        <Typography variant='p' className='display-4'>Welcome {data.name.toUpperCase()}</Typography>
                     </Box>
                     <Grid container justifyContent='center'>
                         <Grid item md={4} xs={10}>
@@ -130,6 +130,8 @@ function ToDoList() {
                                             label='Enter items'
                                             onChange={(e) => setText(e.target.value)}
                                             value={text}
+                                            fullWidth
+                                            required
                                         ></OutlinedInput>
                                     </FormControl>
                                 </ThemeProvider>
@@ -160,11 +162,15 @@ function ToDoList() {
                                 <Box sx={{ m: 1 }}>
                                     <ul className='list-group' style={{ width: '100%', bgcolor: 'background.paper' }}>
                                         {list.map((e, i) => {
-                                            return <li key={i} className='list-group-item' style={{ display: 'flex', justifyContent: 'space-between', borderColor: '#ccc' }}>
+                                            return <li key={i} className='list-group-item p-3' style={{ display: 'flex', justifyContent: 'space-between', borderColor: '#ccc' }}>
                                                 {e}
                                                 <Box>
-                                                    <Edit onClick={() => editBtn(i)} />
-                                                    <Delete onClick={() => deleteItem(i)} />
+                                                    <IconButton onClick={() => editBtn(i)}>
+                                                        <Edit />
+                                                    </IconButton>
+                                                    <IconButton onClick={() => deleteItem(i)}>
+                                                        <Delete />
+                                                    </IconButton>
                                                 </Box>
                                             </li>
                                         })}

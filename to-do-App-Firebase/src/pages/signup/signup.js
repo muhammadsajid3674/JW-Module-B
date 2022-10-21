@@ -9,16 +9,21 @@ function Signup() {
 
     const navigate = useNavigate()
     // fields data push
-    const [data, setData] = useState({})
+    const [data, setData] = useState({
+        name: '',
+        email: '',
+        password: '',
+    })
+
     const handleChange = (event) => {
         let newInput = { [event.target.name]: event.target.value }
         setData({ ...data, ...newInput });
         // fields data push
     }
     const { email, password, name } = data;
-    console.log(data);
 
     const handleSubmit = () => {
+        //Firebase Auth
         handleSignup({ email, password, name })
             .then((userCredential) => {
                 // Signed in 
@@ -31,7 +36,7 @@ function Signup() {
     }
 
     // Password Field
-    const [values, setValues] = React.useState({
+    const [values, setValues] = useState({
         email: '',
         password: '',
         showPassword: false
@@ -49,8 +54,11 @@ function Signup() {
 
     return (
         <>
-            <Box sx={{ backgroundColor: '#e76f51' }}>
-                <Grid container justifyContent='center' alignItems='center' height='100vh'>
+            <Box sx={{ backgroundColor: '#e76f51', height: '100vh' }}>
+                <Box className='text-center py-3'>
+                    <Typography variant='p' className='display-3 text-white'>Welcome to ToDo App</Typography>
+                </Box>
+                <Grid container justifyContent='center' alignItems='center' height='80vh'>
                     <Grid item md={4} xs={10}>
                         <Box sx={{ boxShadow: '0px 0px 10px rgba(0,0,0,0.5)', p: 5, borderRadius: '10px', backgroundColor: '#fff' }}>
                             <Box
@@ -82,6 +90,9 @@ function Signup() {
                                     type='text'
                                     onChange={(event) => handleChange(event)}
                                     name="name"
+                                    fullWidth
+                                    required
+                                    value={name}
                                 />
                                 <TextField
                                     margin='dense'
@@ -91,6 +102,9 @@ function Signup() {
                                     type='email'
                                     onChange={(event) => handleChange(event)}
                                     name="email"
+                                    fullWidth
+                                    required
+                                    value={email}
                                 />
                                 <FormControl margin='dense' variant='outlined'>
                                     <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
@@ -112,6 +126,9 @@ function Signup() {
                                             </InputAdornment>
                                         }
                                         label='Password'
+                                        fullWidth
+                                        required
+                                        value={password}
                                     ></OutlinedInput>
                                 </FormControl>
                             </Box>
@@ -130,7 +147,6 @@ function Signup() {
                                     }}>Submit</Button>
                             </Box>
                             <Typography variant='subtitle1' className='text-center'>I have an account. <Link to='/login'>Log In</Link></Typography>
-
                         </Box>
                     </Grid>
                 </Grid>

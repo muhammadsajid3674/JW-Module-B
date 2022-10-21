@@ -24,7 +24,7 @@ export function handleSignup(obj) {
                 })
             })
             .catch((error) => {
-                alert(error)
+                alert(error.message)
             })
     });
 };

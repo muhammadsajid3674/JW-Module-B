@@ -9,7 +9,12 @@ function Login() {
 
     const navigate = useNavigate()
     // fields data push
-    const [data, setData] = useState({})
+    const [data, setData] = useState({
+        name: '',
+        email: '',
+        password: '',
+    })
+    
     const handleChange = (event) => {
         let newInput = { [event.target.name]: event.target.value }
         setData({ ...data, ...newInput })
@@ -76,6 +81,8 @@ function Login() {
                                     type='email'
                                     onChange={(event) => handleChange(event)}
                                     name="email"
+                                    fullWidth
+                                    required
                                 />
                                 <FormControl margin='dense' variant='outlined'>
                                     <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
@@ -97,6 +104,8 @@ function Login() {
                                         }
                                         name='password'
                                         label='Password'
+                                        fullWidth
+                                        required
                                     ></OutlinedInput>
                                 </FormControl>
                             </Box>
