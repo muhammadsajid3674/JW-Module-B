@@ -20,7 +20,12 @@ function Signup() {
 
     const handleChange = (event) => {
         let newInput = { [event.target.name]: event.target.value }
-        setData({ ...data, ...newInput });
+        setData({
+            ...data,
+            ...newInput,
+            error: false,
+            helpertext: false
+        })
         // fields data push
     }
     const { email, password, name } = data;
