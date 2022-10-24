@@ -85,7 +85,7 @@ function ToDoList() {
         <>
 
             {isLoader ? <Loader /> :
-                <Box sx={{ backgroundColor: "#3c6e71", height: '100vh' }}>
+                <Box sx={{ backgroundColor: "#3c6e71", minHeight: '100vh' }}>
                     <Box
                         sx={{
                             display: 'flex',

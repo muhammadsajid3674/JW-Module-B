@@ -1,5 +1,5 @@
 import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { Box, Button, FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material'
+import { Box, Button, FormControl, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { handleLogIn } from '../../config/firebaseMethods'
@@ -13,11 +13,18 @@ function Login() {
         name: '',
         email: '',
         password: '',
+        error: false,
+        helpertext: false
     })
-    
+
     const handleChange = (event) => {
         let newInput = { [event.target.name]: event.target.value }
-        setData({ ...data, ...newInput })
+        setData({
+            ...data,
+            ...newInput,
+            error: false,
+            helpertext: false
+        })
     }
     const handleSubmit = () => {
         handleLogIn(data.email, data.password)
@@ -34,7 +41,11 @@ function Login() {
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                alert(errorMessage);
+                // alert(errorMessage);
+                setData({
+                    error: true,
+                    helpertext: error.code
+                })
                 // ..
             });
     }
@@ -83,8 +94,16 @@ function Login() {
                                     name="email"
                                     fullWidth
                                     required
+                                    error={data.error}
+                                    helperText={data.helpertext}
                                 />
-                                <FormControl margin='dense' variant='outlined'>
+                                <FormControl
+                                    margin='dense'
+                                    variant='outlined'
+                                    fullWidth
+                                    required
+                                    error={data.error}
+                                >
                                     <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
                                     <OutlinedInput
                                         id='outlined-adornment-password'
@@ -104,9 +123,8 @@ function Login() {
                                         }
                                         name='password'
                                         label='Password'
-                                        fullWidth
-                                        required
                                     ></OutlinedInput>
+                                    <FormHelperText id="component-error-text">{data.helpertext}</FormHelperText>
                                 </FormControl>
                             </Box>
                             <Box sx={{

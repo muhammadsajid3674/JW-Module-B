@@ -9,24 +9,25 @@ const dataBase = getDatabase(app)
 
 export function handleSignup(obj) {
     let { userName, email, password, contact } = obj;
-    return new Promise((resolve, reject) => {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredentials) => {
-                // User Registered
-                let user = userCredentials
-                console.log(user);
-                let reference = ref(dataBase, `user/${user.user.uid}`);
-                set(reference, obj)
-                .then(() => {
-                    resolve("user is registered")
-                }).catch((error) => {
-                    reject(error)
-                })
-            })
-            .catch((error) => {
-                alert(error.message)
-            })
-    });
+    return createUserWithEmailAndPassword(auth, email, password)
+    // return new Promise((resolve, reject) => {
+    //     createUserWithEmailAndPassword(auth, email, password)
+    //         .then((userCredentials) => {
+    //             // User Registered
+    //             let user = userCredentials
+    //             console.log(user);
+    //             let reference = ref(dataBase, `user/${user.user.uid}`);
+    //             set(reference, obj)
+    //             .then(() => {
+    //                 resolve("user is registered")
+    //             }).catch((error) => {
+    //                 reject(error)
+    //             })
+    //         })
+    //         .catch((error) => {
+    //             alert(error.message)
+    //         })
+    // });
 };
 
 export function handleLogIn(email, password) {

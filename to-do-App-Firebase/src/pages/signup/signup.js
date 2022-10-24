@@ -1,8 +1,9 @@
 import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { Box, Button, FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material'
+import { Box, Button, FormControl, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material'
+import { ref, set } from 'firebase/database'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { handleSignup, sendDataFirestore } from '../../config/firebaseMethods'
+import { dataBase, handleSignup, sendDataFirestore } from '../../config/firebaseMethods'
 import signUpIcon from '../../images/signup-icon.png'
 
 function Signup() {
@@ -13,6 +14,8 @@ function Signup() {
         name: '',
         email: '',
         password: '',
+        error: false,
+        helpertext: false
     })
 
     const handleChange = (event) => {
@@ -25,20 +28,25 @@ function Signup() {
     const handleSubmit = () => {
         //Firebase Auth
         handleSignup({ email, password, name })
-            .then((userCredential) => {
+            .then((userCredentials) => {
                 // Signed in 
-                console.log(userCredential)
+                let user = userCredentials
+                console.log(user);
+                let reference = ref(dataBase, `user/${user.user.uid}`);
+                set(reference, data)
                 navigate('/login')
             })
             .catch((error) => {
                 console.log(error.message)
+                setData({
+                    error: true,
+                    helpertext: error.code
+                })
             });
     }
 
     // Password Field
     const [values, setValues] = useState({
-        email: '',
-        password: '',
         showPassword: false
     })
     const handleClickShowPassword = () => {
@@ -54,7 +62,7 @@ function Signup() {
 
     return (
         <>
-            <Box sx={{ backgroundColor: '#e76f51', height: '100vh' }}>
+            <Box sx={{ backgroundColor: '#e76f51', minHeight: '100vh' }}>
                 <Box className='text-center py-3'>
                     <Typography variant='p' className='display-3 text-white'>Welcome to ToDo App</Typography>
                 </Box>
@@ -92,7 +100,8 @@ function Signup() {
                                     name="name"
                                     fullWidth
                                     required
-                                    value={name}
+                                    error={data.error}
+                                    helperText={data.helpertext}
                                 />
                                 <TextField
                                     margin='dense'
@@ -104,9 +113,17 @@ function Signup() {
                                     name="email"
                                     fullWidth
                                     required
-                                    value={email}
+                                    error={data.error}
+                                    helperText={data.helpertext}
                                 />
-                                <FormControl margin='dense' variant='outlined'>
+                                <FormControl
+                                    margin='dense'
+                                    variant='outlined'
+                                    fullWidth
+                                    required
+                                    value={password}
+                                    error={data.error}
+                                >
                                     <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
                                     <OutlinedInput
                                         id='outlined-adornment-password'
@@ -126,10 +143,9 @@ function Signup() {
                                             </InputAdornment>
                                         }
                                         label='Password'
-                                        fullWidth
-                                        required
-                                        value={password}
+
                                     ></OutlinedInput>
+                                    <FormHelperText id="component-error-text">{data.helpertext}</FormHelperText>
                                 </FormControl>
                             </Box>
                             <Box sx={{
