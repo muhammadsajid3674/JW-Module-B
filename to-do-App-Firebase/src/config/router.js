@@ -12,7 +12,7 @@ function AppRouter() {
         <Routes>
             <Route path='/' element={<Signup/>}/>
             <Route path='login' element={<Login/>}/>
-            <Route path='todoapp' element={<ToDoList/>}/>
+            <Route path='/:id' element={<ToDoList/>}/>
             <Route path='*' element={<NotFound/>}/>
         </Routes>
     </Router>
