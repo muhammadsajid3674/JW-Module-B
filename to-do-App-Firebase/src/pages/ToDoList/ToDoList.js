@@ -3,7 +3,7 @@ import { Delete, Edit, PanoramaSharp, SettingsCellSharp } from '@mui/icons-mater
 import { Box, Button, CircularProgress, createTheme, FormControl, Grid, IconButton, InputLabel, OutlinedInput, ThemeProvider, Typography } from '@mui/material'
 import { useNavigate, useParams } from 'react-router-dom';
 import Loader from '../../components/loader/loader';
-import { deleteAllData, deleteSingleObject, getData, manageUser, pushData } from '../../config/firebaseMethods';
+import { deleteData, getData, manageUser, pushData } from '../../config/firebaseMethods';
 
 
 
@@ -66,14 +66,14 @@ function ToDoList() {
     // Delete All button functionality
     let deleteAll = () => {
         setList([])
-        deleteAllData(`todo/${userID}`)
+        deleteData(`todo/${userID}`)
     }
 
     console.log(list);
 
     // Delete item button functionality
     let deleteItem = (id, listId) => {
-        deleteSingleObject(`todo/${userID}`, listId)
+        deleteData(`todo/${userID}`, listId)
         let listI = list.filter((value, index) => {
             return index !== id
         })

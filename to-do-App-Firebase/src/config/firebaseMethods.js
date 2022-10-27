@@ -120,30 +120,57 @@ function getData(node, userId) {
     });
 }
 
-function deleteAllData(node) {
-    let dbReference = ref(dataBase, `${node}`)
-    return new Promise((resolve, reject) => {
-        set(dbReference, null)
-        .then((res) => {
-            resolve(res);
-        })
-        .catch((err) => {
-            reject(err);
-        })
-    });
-}
+// function deleteAllData(node) {
+//     let dbReference = ref(dataBase, `${node}`)
+//     return new Promise((resolve, reject) => {
+//         set(dbReference, null)
+//         .then((res) => {
+//             resolve(res);
+//         })
+//         .catch((err) => {
+//             reject(err);
+//         })
+//     });
+// }
 
-function deleteSingleObject(node, listKey) {
-    let dbReference = ref(dataBase, `${node}/${listKey}`)
-    return new Promise((resolve, reject) => {
-        set(dbReference, null)
-        .then((res) => {
-            resolve(res);
-        })
-        .catch((err) => {
-            reject(err);
-        })
-    });
+// function deleteSingleObject(node, listKey) {
+//     let dbReference = ref(dataBase, `${node}/${listKey}`)
+//     return new Promise((resolve, reject) => {
+//         set(dbReference, null)
+//         .then((res) => {
+//             resolve(res);
+//         })
+//         .catch((err) => {
+//             reject(err);
+//         })
+//     });
+// }
+function deleteData(node, listId) {
+    if (!listId) {
+        let dbReference = ref(dataBase, `${node}`)
+        return new Promise((resolve, reject) => {
+            set(dbReference, null)
+                .then((res) => {
+                    resolve(res);
+                })
+                .catch((err) => {
+                    reject(err);
+                })
+        });
+    }
+    else {
+        let dbReference = ref(dataBase, `${node}/${listId}`)
+        return new Promise((resolve, reject) => {
+            set(dbReference, null)
+                .then((res) => {
+                    resolve(res);
+                })
+                .catch((err) => {
+                    reject(err);
+                })
+        });
+
+    }
 }
 
 // export function handleGetDatabase() {
@@ -163,4 +190,4 @@ function deleteSingleObject(node, listKey) {
 //     })
 // }
 
-export { handleSignup, handleLogIn, manageUser, pushData, getData, deleteAllData, deleteSingleObject }
+export { handleSignup, handleLogIn, manageUser, pushData, getData, deleteData }
