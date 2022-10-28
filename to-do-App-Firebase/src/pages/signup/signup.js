@@ -1,53 +1,34 @@
 import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { Box, Button, FormControl, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material'
-import { ref, set } from 'firebase/database'
+import { Box, Button, CircularProgress, FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { dataBase, handleSignup, sendDataFirestore } from '../../config/firebaseMethods'
-import signUpIcon from '../../images/signup-icon.png'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { handleSignup } from '../../config/firebaseMethods'
 
 function Signup() {
 
     const navigate = useNavigate()
-    // fields data push
-    const [data, setData] = useState({
-        name: '',
-        email: '',
-        password: '',
-        error: false,
-        helpertext: false
-    })
 
-    const handleChange = (event) => {
-        let newInput = { [event.target.name]: event.target.value }
-        setData({
-            ...data,
-            ...newInput,
-            error: false,
-            helpertext: false
-        })
-        // fields data push
-    }
-    const { email, password, name } = data;
+    const [isLoading, setLoading] = useState(false)
+    // fields data push
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [error, setError] = useState(false)
+    // const [helperText, setHelperText] = useState("")
 
     const handleSubmit = () => {
+        setLoading(true)
         //Firebase Auth
         handleSignup({ email, password, name })
-            .then((userCredentials) => {
-                // Signed in 
-                let user = userCredentials
-                console.log(user);
-                let reference = ref(dataBase, `user/${user.user.uid}`);
-                set(reference, data)
+            .then((success) => {
+                setLoading(false)
                 navigate('/login')
             })
             .catch((error) => {
-                console.log(error.message)
-                setData({
-                    error: true,
-                    helpertext: error.code
-                })
-            });
+                setError(true)
+                setLoading(false)
+                console.log(error);
+            })
     }
 
     // Password Field
@@ -60,9 +41,6 @@ function Signup() {
             showPassword: !values.showPassword
         });
     };
-    const handleMouseDownPassword = (event) => {
-        // event.preventDefault();
-    }
     // Password Field
 
     return (
@@ -82,7 +60,6 @@ function Signup() {
                                 }}
                             >
                                 <Box className='d-flex justify-content-center align-items-center text-center mb-2'>
-                                    <img src={signUpIcon} className='w-25' />
                                     <Typography variant='h4' className='text-center'>Signup</Typography>
                                 </Box>
                                 {/* <FormControl sx={{ m: 1 }} variant='outlined'>
@@ -101,12 +78,11 @@ function Signup() {
                                     label="Username"
                                     variant="outlined"
                                     type='text'
-                                    onChange={(event) => handleChange(event)}
+                                    onChange={(e) => setName(e.target.value)}
                                     name="name"
                                     fullWidth
                                     required
-                                    error={data.error}
-                                    helperText={data.helpertext}
+                                    error={error}
                                 />
                                 <TextField
                                     margin='dense'
@@ -114,33 +90,30 @@ function Signup() {
                                     label="Email"
                                     variant="outlined"
                                     type='email'
-                                    onChange={(event) => handleChange(event)}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     name="email"
                                     fullWidth
                                     required
-                                    error={data.error}
-                                    helperText={data.helpertext}
+                                    error={error}
                                 />
                                 <FormControl
                                     margin='dense'
                                     variant='outlined'
                                     fullWidth
                                     required
-                                    value={password}
-                                    error={data.error}
+                                    error={error}
                                 >
                                     <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
                                     <OutlinedInput
                                         id='outlined-adornment-password'
                                         type={values.showPassword ? 'text' : 'password'}
-                                        onChange={(e) => handleChange(e)}
+                                        onChange={(e) => setPassword(e.target.value)}
                                         name="password"
                                         endAdornment={
                                             <InputAdornment position='end'>
                                                 <IconButton
                                                     aria-label='toggle password visibility'
                                                     onClick={handleClickShowPassword}
-                                                    onMouseDown={handleMouseDownPassword}
                                                     edge='end'
                                                 >
                                                     {values.showPassword ? <VisibilityOff /> : <Visibility />}
@@ -150,22 +123,23 @@ function Signup() {
                                         label='Password'
 
                                     ></OutlinedInput>
-                                    <FormHelperText id="component-error-text">{data.helpertext}</FormHelperText>
                                 </FormControl>
                             </Box>
                             <Box sx={{
                                 textAlign: 'center',
                                 mb: 2
                             }}>
-                                <Button variant='contained'
-                                    onClick={handleSubmit}
-                                    sx={{
-                                        backgroundColor: '#e76f51',
-                                        mt: 1,
-                                        '&:hover': {
-                                            backgroundColor: '#f4a261'
-                                        }
-                                    }}>Submit</Button>
+                                {isLoading ? <CircularProgress /> :
+                                    <Button variant='contained'
+                                        onClick={handleSubmit}
+                                        sx={{
+                                            backgroundColor: '#1d3557',
+                                            mt: 1,
+                                            '&:hover': {
+                                                backgroundColor: '#457b9d'
+                                            }
+                                        }}>Submit</Button>
+                                }
                             </Box>
                             <Typography variant='subtitle1' className='text-center'>I have an account. <Link to='/login'>Log In</Link></Typography>
                         </Box>
