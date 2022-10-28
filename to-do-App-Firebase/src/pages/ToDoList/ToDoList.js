@@ -3,11 +3,7 @@ import { Delete, Edit, PanoramaSharp, SettingsCellSharp } from '@mui/icons-mater
 import { Box, Button, CircularProgress, createTheme, FormControl, Grid, IconButton, InputLabel, OutlinedInput, ThemeProvider, Typography } from '@mui/material'
 import { useNavigate, useParams } from 'react-router-dom';
 import Loader from '../../components/loader/loader';
-<<<<<<< HEAD
 import { deleteAllData, deleteSingleObject, getData, manageUser, pushData } from '../../config/firebaseMethods';
-=======
-import { deleteData, getData, manageUser, pushData } from '../../config/firebaseMethods';
->>>>>>> c1158bb488259faf18075035a812f110eac45351
 
 
 
@@ -58,6 +54,7 @@ function ToDoList() {
         getData(`todo/${id}`).then((res) => {
             setList(res)
             setLoading(false)
+            console.log(list);
         })
             .catch((err) => {
                 setLoading(false)
@@ -70,22 +67,14 @@ function ToDoList() {
     // Delete All button functionality
     let deleteAll = () => {
         setList([])
-<<<<<<< HEAD
         deleteAllData(`todo/${userID}`)
-=======
-        deleteData(`todo/${userID}`)
->>>>>>> c1158bb488259faf18075035a812f110eac45351
     }
 
-    console.log(list);
+
 
     // Delete item button functionality
     let deleteItem = (id, listId) => {
-<<<<<<< HEAD
         deleteSingleObject(`todo/${userID}`, listId)
-=======
-        deleteData(`todo/${userID}`, listId)
->>>>>>> c1158bb488259faf18075035a812f110eac45351
         let listI = list.filter((value, index) => {
             return index !== id
         })
