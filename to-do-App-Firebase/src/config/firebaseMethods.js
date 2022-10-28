@@ -120,6 +120,7 @@ function getData(node, userId) {
     });
 }
 
+<<<<<<< HEAD
 function deleteAllData(node) {
     let dbReference = ref(dataBase, `${node}`)
     return new Promise((resolve, reject) => {
@@ -144,6 +145,59 @@ function deleteSingleObject(node, listKey) {
             reject(err);
         })
     });
+=======
+// function deleteAllData(node) {
+//     let dbReference = ref(dataBase, `${node}`)
+//     return new Promise((resolve, reject) => {
+//         set(dbReference, null)
+//         .then((res) => {
+//             resolve(res);
+//         })
+//         .catch((err) => {
+//             reject(err);
+//         })
+//     });
+// }
+
+// function deleteSingleObject(node, listKey) {
+//     let dbReference = ref(dataBase, `${node}/${listKey}`)
+//     return new Promise((resolve, reject) => {
+//         set(dbReference, null)
+//         .then((res) => {
+//             resolve(res);
+//         })
+//         .catch((err) => {
+//             reject(err);
+//         })
+//     });
+// }
+function deleteData(node, listId) {
+    if (!listId) {
+        let dbReference = ref(dataBase, `${node}`)
+        return new Promise((resolve, reject) => {
+            set(dbReference, null)
+                .then((res) => {
+                    resolve(res);
+                })
+                .catch((err) => {
+                    reject(err);
+                })
+        });
+    }
+    else {
+        let dbReference = ref(dataBase, `${node}/${listId}`)
+        return new Promise((resolve, reject) => {
+            set(dbReference, null)
+                .then((res) => {
+                    resolve(res);
+                })
+                .catch((err) => {
+                    reject(err);
+                })
+        });
+
+    }
+>>>>>>> c1158bb488259faf18075035a812f110eac45351
 }
 
 // export function handleGetDatabase() {
@@ -163,4 +217,8 @@ function deleteSingleObject(node, listKey) {
 //     })
 // }
 
+<<<<<<< HEAD
 export { handleSignup, handleLogIn, manageUser, pushData, getData, deleteAllData, deleteSingleObject }
+=======
+export { handleSignup, handleLogIn, manageUser, pushData, getData, deleteData }
+>>>>>>> c1158bb488259faf18075035a812f110eac45351
