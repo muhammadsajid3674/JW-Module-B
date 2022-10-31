@@ -35,6 +35,7 @@ function ToDoList() {
     const [userID, setUserID] = useState("")
     let [list, setList] = useState([]);
 
+    // add data to dataBase
     let add = () => {
         pushData({
             text: text,
@@ -42,7 +43,7 @@ function ToDoList() {
         },
             `todo/${userID}`)
             .then((res) => {
-                list.push({text:text, userID:userID})
+                list.push({ text: text, userID: userID })
                 setList([...list])
                 setText('')
             })
@@ -50,19 +51,18 @@ function ToDoList() {
                 console.log(err);
             })
     }
+
+    // get data from dataBase
     let getUserData = (id) => {
         getData(`todo/${id}`).then((res) => {
             setList(res)
             setLoading(false)
-            console.log(list);
         })
             .catch((err) => {
                 setLoading(false)
                 console.log(err);
             })
     }
-
-    // // add button functionality
 
     // Delete All button functionality
     let deleteAll = () => {
@@ -81,11 +81,15 @@ function ToDoList() {
         setList(listI)
     }
 
-    // let editBtn = (id) => {
-    //     let newValue = prompt("New Value")
-    //     list[id] = newValue
-    //     setList([...list])
-    // }
+    let editBtn = (id) => {
+        // let newValue = prompt("New Value")
+        // list[id] = newValue
+        // setList([...list]).
+        let listI = list.filter((value, index) => {
+            return setText(value.text)
+
+        })
+    }
     // ToDo Functionality-----------------
 
     useEffect(() => {
@@ -170,16 +174,16 @@ function ToDoList() {
                                     onClick={add}
                                 >Add</Button>
                                 <Button variant="contained" color='info'
-                                        sx={{
-                                            mx: 1,
-                                            backgroundColor: '#d90429',
-                                            '&:hover': {
-                                                backgroundColor: '#fff',
-                                                color: '#d90429'
-                                            }
-                                        }}
-                                        onClick={deleteAll}
-                                    >Delete All</Button>
+                                    sx={{
+                                        mx: 1,
+                                        backgroundColor: '#d90429',
+                                        '&:hover': {
+                                            backgroundColor: '#fff',
+                                            color: '#d90429'
+                                        }
+                                    }}
+                                    onClick={deleteAll}
+                                >Delete All</Button>
                             </Box>
                             <Box sx={{ m: 1, textAlign: 'center' }}>
                                 {isLoading ? <CircularProgress /> :
@@ -188,18 +192,17 @@ function ToDoList() {
                                             return <li key={i} className='list-group-item p-3' style={{ display: 'flex', justifyContent: 'space-between', borderColor: '#ccc' }}>
                                                 {e.text}
                                                 <Box>
-                                                {/* <IconButton onClick={() => editBtn(i)}>
-                                                    <Edit />
-                                                </IconButton> */}
-                                                <IconButton onClick={() => deleteItem(i, e.id)}>
-                                                    <Delete />
-                                                </IconButton>
-                                            </Box>
+                                                    <IconButton onClick={() => editBtn(i)}>
+                                                        <Edit />
+                                                    </IconButton>
+                                                    <IconButton onClick={() => deleteItem(i, e.id)}>
+                                                        <Delete />
+                                                    </IconButton>
+                                                </Box>
                                             </li>
                                         })}
                                     </ul>
                                 }
-
                             </Box>
                         </Box>
                     </Grid>
