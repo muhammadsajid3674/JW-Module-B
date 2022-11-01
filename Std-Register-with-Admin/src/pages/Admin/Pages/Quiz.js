@@ -56,10 +56,10 @@ function Quiz() {
   return (
     <div className='mx-4'>
       <Grid container>
-        <Grid item md={8}>
+        <Grid item md={8} sx={12}>
           <Typography variant="p" className="display-3">Quiz Form</Typography>
           <Grid container className='mt-2' spacing={2}>
-            <Grid item xs={12}>
+            <Grid item md={12}>
               <MuiInput
                 variant='outlined'
                 label='Questions'
@@ -67,7 +67,7 @@ function Quiz() {
                 onChange={(e) => handleChange(e)}
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item md={3}>
               <MuiInput
                 variant='outlined'
                 label='Options'
@@ -75,7 +75,7 @@ function Quiz() {
                 onChange={(e) => setOptionA(e.target.value)}
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item md={3}>
               <MuiInput
                 variant='outlined'
                 label='Options'
@@ -83,7 +83,7 @@ function Quiz() {
                 onChange={(e) => setOptionB(e.target.value)}
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item md={3}>
               <MuiInput
                 variant='outlined'
                 label='Options'
@@ -91,7 +91,7 @@ function Quiz() {
                 onChange={(e) => setOptionC(e.target.value)}
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item md={3}>
               <MuiInput
                 variant='outlined'
                 label='Options'
@@ -99,7 +99,7 @@ function Quiz() {
                 onChange={(e) => setOptionD(e.target.value)}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item md={12}>
               <MuiInput
                 variant='outlined'
                 label='Correct Answer'
@@ -107,7 +107,7 @@ function Quiz() {
                 onChange={(e) => handleChange(e)}
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item md={4}>
               <MuiInput
                 variant='outlined'
                 label='Duration'
@@ -115,7 +115,7 @@ function Quiz() {
                 onChange={(e) => handleChange(e)}
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item md={4}>
               <MuiInput
                 variant='outlined'
                 label='Total Marks'
@@ -123,7 +123,7 @@ function Quiz() {
                 onChange={(e) => handleChange(e)}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item md={12}>
               {formSubmit ? (
                 <CircularProgress />
               ) : (

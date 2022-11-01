@@ -115,7 +115,7 @@ function Login() {
                                         }}>Submit</Button>
                                 }
                             </Box>
-                            <Typography variant='subtitle1' className='text-center'>Need an account? <Link to='/'>Sign Up</Link></Typography>
+                            <Typography variant='subtitle1' className='text-center'><Link to='/'>Register Now</Link></Typography>
                         </Box>
                     </Grid>
                 </Grid>

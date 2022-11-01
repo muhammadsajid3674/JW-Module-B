@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { MuiButton } from '../../components/button/button'
 import MuiSelect from '../../components/Dropdown/Dropdown'
 import { MuiDatepicker, MuiInput } from '../../components/input/input'
+import MuiModal from '../../components/Modal/Modal'
 import { pushData } from '../../config/firebaseMethods'
 import './StdForm.css'
 
@@ -14,6 +15,7 @@ function StdForm() {
     const [data, setData] = useState()
     const [error, setError] = useState(false)
     const [formSubmit, setFormSubmit] = useState(false)
+    const [modal, setModal] = useState(false)
 
     const handleChange = (e) => {
         let newField = { [e.target.name]: e.target.value }
@@ -22,11 +24,11 @@ function StdForm() {
 
     const submitData = () => {
         setFormSubmit(true)
-        console.log(data)
         alert('Do you want to Submit?')
         return pushData(data, 'StdData/')
             .then((res) => {
                 setFormSubmit(false)
+                setModal(true)
                 console.log(res);
             })
             .catch((err) => {
@@ -38,6 +40,12 @@ function StdForm() {
 
     return (
         <>
+        {modal ?  (
+            <MuiModal
+            title='Thank you for submitting the Form.'
+            description='We will contact you later.'
+            />
+        ) : (
             <Box className='formBackground'>
                 <Grid container justifyContent='center' alignItems='center' minHeight="100vh" spacing={3} >
                     <Grid item xs={10} md={6}>
@@ -195,6 +203,7 @@ function StdForm() {
                     </Grid>
                 </Grid>
             </Box>
+        )}
         </>
     )
 }

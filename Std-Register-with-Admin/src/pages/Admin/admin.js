@@ -20,7 +20,23 @@ function Admin() {
         <>
             <Grid container spacing={3}>
                 <Grid item xs={2}>
-                    <SearchAppBar header='Admin' />
+                    <SearchAppBar header='Admin' dataSource={[
+                        {
+                            name:'Students',
+                            to:'',
+                            icon: 'user'
+                        },
+                        {
+                            name:'Quiz',
+                            to:'quiz',
+                            icon: 'table'
+                        },
+                        {
+                            name:'Courses',
+                            to:'courses',
+                            icon: 'chart-line'
+                        },
+                    ]} />
                 </Grid>
                 <Grid item xs={9}>
                     <Routes>
