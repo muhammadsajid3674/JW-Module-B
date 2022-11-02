@@ -1,8 +1,11 @@
-import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { Box, Button, CircularProgress, createTheme, FormControl, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, ThemeProvider, Typography } from '@mui/material'
+import { Box, CircularProgress, createTheme, FormControl, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, ThemeProvider, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import MuiCustomizedButtons from '../../components/button/MuiCustomButtom'
+import { MuiInput, MuiPasswordField } from '../../components/input/input'
 import { handleLogIn } from '../../config/firebaseMethods'
+import loginImg from '../../images/login.png';
+import '../../App.css';
 
 function Login() {
 
@@ -31,95 +34,61 @@ function Login() {
             })
     }
     // fields data push
-
-    // Password Field
-    const [values, setValues] = useState({
-        showPassword: false
-    });
-    const handleClickShowPassword = () => {
-        setValues({
-            ...values,
-            showPassword: !values.showPassword
-        });
-    };
-    // Password Field
     return (
         <>
-            <Box sx={{ backgroundColor: '#457b9d' }}>
-                <Grid container justifyContent='center' alignItems='center' height='100vh'>
-                    <Grid item md={4} xs={10}>
-                        <Box sx={{ boxShadow: '0px 0px 10px rgba(0,0,0,0.5)', p: 5, borderRadius: '10px', backgroundColor: '#fff' }}>
-                            <Box
-                                sx={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    justifyContent: 'space-between'
-                                }}
-                            >
-                                <Box className='d-flex justify-content-center align-items-center text-center mb-2'>
-                                    <Typography variant='h4' className='text-center'>Login</Typography>
-                                </Box>
-                                <TextField
-                                    margin='dense'
-                                    id="outlined-email"
-                                    label="Email"
-                                    variant="outlined"
-                                    type='email'
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    name="email"
-                                    fullWidth
-                                    required
-                                    error={error}
-                                />
-                                <FormControl
-                                    margin='dense'
-                                    variant='outlined'
-                                    fullWidth
-                                    required
-                                    error={error}
-                                >
-                                    <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
-                                    <OutlinedInput
-                                        id='outlined-adornment-password'
-                                        type={values.showPassword ? 'text' : 'password'}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        endAdornment={
-                                            <InputAdornment position='end'>
-                                                <IconButton
-                                                    aria-label='toggle password visibility'
-                                                    onClick={handleClickShowPassword}
-                                                    edge='end'
-                                                >
-                                                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                                                </IconButton>
-                                            </InputAdornment>
-                                        }
-                                        name='password'
-                                        label='Password'
-                                    ></OutlinedInput>
-                                </FormControl>
-                            </Box>
-                            <Box sx={{
-                                textAlign: 'center',
-                                my: 2
-                            }}>
-                                {isLoading ? <CircularProgress /> :
-                                    <Button variant='contained'
-                                        onClick={handleSubmit}
-                                        sx={{
-                                            backgroundColor: '#1d3557',
-                                            mt: 1,
-                                            '&:hover': {
-                                                backgroundColor: '#457b9d'
-                                            }
-                                        }}>Submit</Button>
-                                }
-                            </Box>
-                            <Typography variant='subtitle1' className='text-center'><Link to='/'>Register Now</Link></Typography>
-                        </Box>
-                    </Grid>
+            <Grid container alignItems='center' sx={{ backgroundColor: '#eee'}}>
+                <Grid item md={5} xs={12}>
+                    <Box className='text-center'>
+                        <img src={loginImg} className='img-fluid'/>
+                    </Box>
                 </Grid>
-            </Box>
+                <Grid item md={7} xs={12}>
+                    <Box className='cusHeightLogin' sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', backgroundColor: '#fff', p: 4, minHeight: "100vh"}}>
+                        <Grid container justifyContent='center'>
+                            <Grid item md={6}>
+                                <Box className='text-center mb-2'>
+                                    <Typography variant='h3' className='text-center pb-3'>Login</Typography>
+                                </Box>
+                                <Grid container spacing={3}>
+                                    <Grid item md={12} xs={12}>
+                                        <MuiInput
+                                            label='Email'
+                                            name='email'
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            required={true}
+                                            error={error}
+                                            variant="filled"
+                                        />
+                                    </Grid>
+                                    <Grid item md={12} xs={12}>
+                                        <MuiPasswordField
+                                            label="Password"
+                                            labelId="password-login"
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            required={true}
+                                            error={error}
+                                            variant="filled"
+                                        />
+                                    </Grid>
+                                </Grid>
+                                <Box sx={{
+                                    textAlign: 'center',
+                                    my: 2
+                                }}>
+                                    {isLoading ? <CircularProgress /> :
+                                        <MuiCustomizedButtons
+                                            label="Login"
+                                            className="px-5"
+                                            onClick={handleSubmit}
+                                        />
+                                    }
+                                </Box>
+                                <Typography variant='subtitle1' className='text-center'>Haven't Register? <Link to='/' style={{ color: 'grey' }}>Register Now</Link></Typography>
+                            </Grid>
+                        </Grid>
+                    </Box>
+                </Grid>
+            </Grid>
         </>
     )
 }

@@ -1,143 +1,201 @@
-import { Box, CircularProgress, Grid, Typography } from '@mui/material'
+import { Delete } from '@mui/icons-material'
+import { Box, Checkbox, CircularProgress, Divider, Grid, IconButton, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { MuiButton } from '../../../components/button/button'
-import { MuiInput } from '../../../components/input/input'
+import MuiCustomizedButtons from '../../../components/button/MuiCustomButtom'
+import { FloatingInput, MuiInput } from '../../../components/input/input'
 import { getData, pushData } from '../../../config/firebaseMethods'
 
 function Quiz() {
 
-  const [isLoading, setLoading] = useState(true)
-  const [formSubmit, setFormSubmit] = useState(false)
+  // const [isLoading, setLoading] = useState(true)
   const [data, setData] = useState()
-  const [existedQues, setExistedQues] = useState()
-  const [optionA, setOptionA] = useState("")
-  const [optionB, setOptionB] = useState("")
-  const [optionC, setOptionC] = useState("")
-  const [optionD, setOptionD] = useState("")
+  // const [existedQues, setExistedQues] = useState()
+  const [optionArr, setOptionArr] = useState([])
+  const [option, setOption] = useState("")
+  const [formSubmit, setFormSubmit] = useState(false)
+  const [disabled, setDisabled] = useState(false)
+  const [subQuestion, setSubQuestion] = useState(false)
 
   const handleChange = (e) => {
-    let newField = { [e.target.name]: e.target.value, 'option': [optionA, optionB, optionC, optionD] }
+    let newField = { [e.target.name]: e.target.value }
     setData({ ...data, ...newField })
   }
-
-
-
-  const submitData = () => {
-    setFormSubmit(true)
+  const submitCreateQuiz = () => {
+    setDisabled(true)
+    setSubQuestion(true)
     console.log(data)
-    alert('Do you want to Submit?')
-    return pushData(data, 'QuizQuestions/')
-      .then((res) => {
-        setFormSubmit(false)
-        console.log(res);
-      })
-      .catch((err) => {
-        setFormSubmit(false)
-        console.log(err);
-      })
   }
 
-  const getQuizQuestion = () => {
-    return getData('QuizQuestions/')
-      .then((res) => {
-        setExistedQues(res);
-        setLoading(false)
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+  // Options
+  const AddToOptionARR = () => {
+    setOptionArr([option, ...optionArr])
+    setOption("")
   }
+  let deleteItem = (id) => {
+    let listI = optionArr.filter((value, index) => {
+      return index !== id
+    })
+    setOptionArr(listI)
+  }
+  // Options
 
-  useEffect(() => {
-    getQuizQuestion()
-  }, [])
+  // const submitData = () => {
+  //   setFormSubmit(true)
+  //   alert('Do you want to Submit?')
+  //   return pushData(data, 'QuizQuestions/')
+  //     .then((res) => {
+  //       setFormSubmit(false)
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       setFormSubmit(false)
+  //       console.log(err);
+  //     })
+  // }
+
+  // const getQuizQuestion = () => {
+  //   return getData('QuizQuestions/')
+  //     .then((res) => {
+  //       setExistedQues(res);
+  //       setLoading(false)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     })
+  // }
+
+  // useEffect(() => {
+  //   getQuizQuestion()
+  // }, [])
 
 
   return (
-    <div className='mx-4'>
-      <Grid container>
-        <Grid item md={8} sx={12}>
-          <Typography variant="p" className="display-3">Quiz Form</Typography>
-          <Grid container className='mt-2' spacing={2}>
-            <Grid item md={12}>
-              <MuiInput
-                variant='outlined'
-                label='Questions'
-                name='questions'
-                onChange={(e) => handleChange(e)}
-              />
-            </Grid>
-            <Grid item md={3}>
-              <MuiInput
-                variant='outlined'
-                label='Options'
-                name='options'
-                onChange={(e) => setOptionA(e.target.value)}
-              />
-            </Grid>
-            <Grid item md={3}>
-              <MuiInput
-                variant='outlined'
-                label='Options'
-                name='options'
-                onChange={(e) => setOptionB(e.target.value)}
-              />
-            </Grid>
-            <Grid item md={3}>
-              <MuiInput
-                variant='outlined'
-                label='Options'
-                name='options'
-                onChange={(e) => setOptionC(e.target.value)}
-              />
-            </Grid>
-            <Grid item md={3}>
-              <MuiInput
-                variant='outlined'
-                label='Options'
-                name='options'
-                onChange={(e) => setOptionD(e.target.value)}
-              />
-            </Grid>
-            <Grid item md={12}>
-              <MuiInput
-                variant='outlined'
-                label='Correct Answer'
-                name='correctAns'
-                onChange={(e) => handleChange(e)}
-              />
-            </Grid>
-            <Grid item md={4}>
-              <MuiInput
-                variant='outlined'
-                label='Duration'
-                name='duration'
-                onChange={(e) => handleChange(e)}
-              />
-            </Grid>
-            <Grid item md={4}>
-              <MuiInput
-                variant='outlined'
-                label='Total Marks'
-                name='totalMarks'
-                onChange={(e) => handleChange(e)}
-              />
-            </Grid>
-            <Grid item md={12}>
+    <>
+      <Grid container justifyContent='center' alignItems='center' minHeight="103.2vh" sx={{ backgroundColor: '#eee' }}>
+        <Grid item xs={10} md={10}>
+          <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px' }}>
+            <Grid container spacing={5}>
+              {/* /// Create Quiz /// */}
+              <Grid item md={6} sx={12}>
+                <Typography variant="h3" className="pb-3">Quiz Form</Typography>
+                <Grid container spacing={2}>
+                  <Grid item md={6}>
+                    <FloatingInput
+                      label='Quiz Name'
+                      labelId='quizName-float'
+                      name='quizName'
+                      placeholder='Quiz Name'
+                      disabled={disabled}
+                      onChange={(e) => handleChange(e)}
+                    />
+                  </Grid>
+                  <Grid item md={6}>
+                    <FloatingInput
+                      label='Course Name'
+                      labelId='CourseName-float'
+                      name='CourseName'
+                      placeholder='Course Name'
+                      disabled={disabled}
+                      onChange={(e) => handleChange(e)}
+                    />
+                  </Grid>
+                  <Grid item md={6}>
+                    <FloatingInput
+                      label='Duration'
+                      labelId='duration-float'
+                      name='duration'
+                      placeholder='Duration'
+                      disabled={disabled}
+                      onChange={(e) => handleChange(e)}
+                    />
+                  </Grid>
+                  <Grid item md={6}>
+                    <FloatingInput
+                      label='Total Marks'
+                      labelId='totalMarks-float'
+                      name='totalMarks'
+                      placeholder='Total Marks'
+                      disabled={disabled}
+                      onChange={(e) => handleChange(e)}
+                    />
+                  </Grid>
+                  <Grid item md={6} xs={12}>
+                    <MuiButton
+                      label="Create Quiz"
+                      onClick={submitCreateQuiz}
+                      color='custom'
+                    />
+                  </Grid>
+                </Grid>
+              </Grid>
+              {/* /// Submit Questions /// */ }
+              {subQuestion && < Grid item md={6} sx={12}>
+              <Typography variant="h3" className="pb-3">Add Questions</Typography>
+              <Grid container spacing={2}>
+                <Grid item md={12}>
+                  <FloatingInput
+                    label='Questions'
+                    labelId='questions-float'
+                    name='questions'
+                    placeholder='Questions'
+                    onChange={(e) => handleChange(e)}
+                  />
+                </Grid>
+                <Grid item md={9}>
+                  <FloatingInput
+                    label='Options'
+                    labelId='options-float'
+                    name='options'
+                    placeholder='Options'
+                    onChange={(e) => setOption(e.target.value)}
+                    value={option}
+                  />
+                  {optionArr.map((e, i) => {
+                    return <Typography key={i} variant='p'>
+                      <IconButton onClick={() => deleteItem(i)}>
+                        <Delete />
+                      </IconButton>
+                      <Checkbox />
+                      {e}
+                      <Divider />
+                    </Typography>
+                  })}
+                </Grid>
+                {/* <Typography variant='subtitle2'>Check the Correct Answer</Typography> */}
+                <Grid item md={3}>
+                  <MuiButton
+                    label="Add"
+                    className="mt-1 fs-5"
+                    color="warning"
+                    onClick={AddToOptionARR}
+                  />
+                </Grid>
+                <Grid item md={5} xs={12}>
+                  <MuiButton
+                    label="Submit Question"
+                    onClick={submitCreateQuiz}
+                    color="custom"
+                  />
+                </Grid>
+              </Grid>
+            </Grid>}
+            <Grid item md={12} textAlign='end'>
               {formSubmit ? (
                 <CircularProgress />
               ) : (
                 <MuiButton
-                  variant='contained'
-                  label='Submit'
-                  onClick={submitData}
+                  label="Submit Quiz"
+                  // onClick={submitData}
+                  color="success"
                 />
               )}
             </Grid>
-          </Grid>
         </Grid>
-      </Grid>
-      {isLoading ? (
+      </Box>
+    </Grid>
+      </Grid >
+  {/* {isLoading ? (
         <Box sx={{
           display: 'flex',
           justifyContent: 'center',
@@ -171,9 +229,8 @@ function Quiz() {
             })}
           </table>
         </Box>
-      )
-      }
-    </div>
+      )} */}
+    </>
   )
 }
 

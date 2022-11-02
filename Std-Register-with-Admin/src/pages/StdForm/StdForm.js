@@ -4,8 +4,9 @@ import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { MuiButton } from '../../components/button/button'
+import MuiCustomizedButtons from '../../components/button/MuiCustomButtom'
 import MuiSelect from '../../components/Dropdown/Dropdown'
-import { MuiDatepicker, MuiInput } from '../../components/input/input'
+import { MuiDatepicker, MuiInput, MuiPasswordField } from '../../components/input/input'
 import MuiModal from '../../components/Modal/Modal'
 import { pushData } from '../../config/firebaseMethods'
 import './StdForm.css'
@@ -14,7 +15,7 @@ function StdForm() {
 
     const [data, setData] = useState()
     const [error, setError] = useState(false)
-    const [formSubmit, setFormSubmit] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
 
     const handleChange = (e) => {
@@ -23,16 +24,16 @@ function StdForm() {
     }
 
     const submitData = () => {
-        setFormSubmit(true)
+        setLoading(true)
         alert('Do you want to Submit?')
         return pushData(data, 'StdData/')
             .then((res) => {
-                setFormSubmit(false)
+                setLoading(false)
                 setModal(true)
                 console.log(res);
             })
             .catch((err) => {
-                setFormSubmit(false)
+                setLoading(false)
                 setError(true)
                 console.log(err);
             })
@@ -40,23 +41,16 @@ function StdForm() {
 
     return (
         <>
-        {modal ?  (
-            <MuiModal
-            title='Thank you for submitting the Form.'
-            description='We will contact you later.'
-            />
-        ) : (
-            <Box className='formBackground'>
-                <Grid container justifyContent='center' alignItems='center' minHeight="100vh" spacing={3} >
-                    <Grid item xs={10} md={6}>
-                        <Box sx={{ boxShadow: '0px 0px 10px rgba(0,0,0,0.5)', borderRadius: '10px', backgroundColor: '#fff', p: 4 }}>
-                            <Box className='text-center mb-3'>
-                                <Typography variant='p' className='display-5'>Student Registration Form</Typography>
+            {!modal ? (
+                <Grid container justifyContent='center' alignItems='center' minHeight="103.2vh" spacing={3} sx={{ backgroundColor: '#eee' }}>
+                    <Grid item xs={10} md={9}>
+                        <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px', boxShadow: "0px 0px 10px -1px rgba(0,0,0,0.5)" }}>
+                            <Box className=' mb-3'>
+                                <Typography variant='h4'>Student Registration Form</Typography>
                             </Box>
                             <Grid container spacing={3}>
                                 <Grid item md={6} xs={6}>
                                     <MuiInput
-                                        variant='outlined'
                                         label='First Name'
                                         name='firstName'
                                         onChange={(e) => handleChange(e)}
@@ -66,11 +60,56 @@ function StdForm() {
                                 </Grid>
                                 <Grid item md={6} xs={6}>
                                     <MuiInput
-                                        variant='outlined'
                                         label='Last Name'
                                         name='lastName'
                                         onChange={(e) => handleChange(e)}
                                         required={false}
+                                        error={error}
+                                    />
+                                </Grid>
+                                <Grid item md={6} xs={6}>
+                                    <MuiInput
+                                        label='Email'
+                                        name='email'
+                                        onChange={(e) => handleChange(e)}
+                                        required={true}
+                                        error={error}
+                                    />
+                                </Grid>
+                                <Grid item md={6} xs={6}>
+                                    <MuiPasswordField
+                                        label="Password"
+                                        labelId="password-outlined"
+                                        onChange={(e) => handleChange(e)}
+                                        required={true}
+                                        error={error}
+                                        name='password'
+                                    />
+                                </Grid>
+                                <Grid item md={4} xs={12}>
+                                    <MuiDatepicker
+                                        label='Date of Birth'
+                                        type="date"
+                                        name='date'
+                                        onChange={(e) => handleChange(e)}
+                                        error={error}
+                                    />
+                                </Grid>
+                                <Grid item md={4} xs={6}>
+                                    <MuiInput
+                                        label='Contact'
+                                        name='contact'
+                                        onChange={(e) => handleChange(e)}
+                                        required={true}
+                                        error={error}
+                                    />
+                                </Grid>
+                                <Grid item md={4} xs={6}>
+                                    <MuiInput
+                                        label='CNIC'
+                                        name='cnic'
+                                        onChange={(e) => handleChange(e)}
+                                        required={true}
                                         error={error}
                                     />
                                 </Grid>
@@ -117,36 +156,7 @@ function StdForm() {
                                     />
                                 </Grid>
                                 <Grid item md={4} xs={12}>
-                                    <MuiDatepicker
-                                    label='Date of Birth'
-                                    type="date"
-                                    name='date'
-                                    onChange={(e) => handleChange(e)}
-                                    />
-                                </Grid>
-                                <Grid item md={4} xs={6}>
                                     <MuiInput
-                                        variant='outlined'
-                                        label='Contact'
-                                        name='contact'
-                                        onChange={(e) => handleChange(e)}
-                                        required={true}
-                                        error={error}
-                                    />
-                                </Grid>
-                                <Grid item md={4} xs={6}>
-                                    <MuiInput
-                                        variant='outlined'
-                                        label='CNIC'
-                                        name='cnic'
-                                        onChange={(e) => handleChange(e)}
-                                        required={true}
-                                        error={error}
-                                    />
-                                </Grid>
-                                <Grid item md={12} xs={12}>
-                                    <MuiInput
-                                        variant='outlined'
                                         label='Father Name'
                                         name='fatherName'
                                         onChange={(e) => handleChange(e)}
@@ -156,7 +166,6 @@ function StdForm() {
                                 </Grid>
                                 <Grid item md={4} xs={6}>
                                     <MuiInput
-                                        variant='outlined'
                                         label='Father Contact'
                                         name='fatherContact'
                                         onChange={(e) => handleChange(e)}
@@ -166,7 +175,6 @@ function StdForm() {
                                 </Grid>
                                 <Grid item md={4} xs={6}>
                                     <MuiInput
-                                        variant='outlined'
                                         label='Father CNIC'
                                         name='fatherCnic'
                                         onChange={(e) => handleChange(e)}
@@ -176,7 +184,6 @@ function StdForm() {
                                 </Grid>
                                 <Grid item md={4} xs={12}>
                                     <MuiInput
-                                        variant='outlined'
                                         label='Emergency Contact'
                                         name='emergencyContact'
                                         onChange={(e) => handleChange(e)}
@@ -184,26 +191,29 @@ function StdForm() {
                                         error={error}
                                     />
                                 </Grid>
-                                <Grid item md={12} xs={12} textAlign='center'>
-                                    {formSubmit ? (
+                                <Grid item md={8}></Grid>
+                                <Grid item md={12} xs={12} textAlign='right'>
+                                    {loading ? (
                                         <CircularProgress />
                                     ) : (
-                                        <MuiButton
-                                            variant='contained'
-                                            label='Submit'
+                                        <MuiCustomizedButtons
+                                            label="Submit"
+                                            className="px-5 mb-3"
                                             onClick={submitData}
                                         />
                                     )}
-                                </Grid>
-                                <Grid item md={12} xs={12} textAlign='center'>
-                                    <Typography variant='subtitle1' className='text-center'>Already Registered? <Link to='/login'>Log in</Link></Typography>
+                                    <Typography variant='subtitle1'>Already Registered? <Link to='/login' style={{ color: 'grey' }}>Log in</Link></Typography>
                                 </Grid>
                             </Grid>
                         </Box>
                     </Grid>
                 </Grid>
-            </Box>
-        )}
+            ) : (
+                <MuiModal
+                    title='Thank you for submitting the Form.'
+                    description='We will contact you later.'
+                />
+            )}
         </>
     )
 }

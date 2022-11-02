@@ -1,6 +1,5 @@
 import { Box, CircularProgress, Grid, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import Loader from '../../../components/loader/loader'
 import { getData } from '../../../config/firebaseMethods'
 
 function RegisterStd() {
@@ -31,7 +30,7 @@ function RegisterStd() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        minHeight: '100vh'        
+        minHeight: '80vh'        
       }}>
         <CircularProgress/>
       </Box> ) : (
@@ -40,9 +39,11 @@ function RegisterStd() {
         <table className="table table-bordered w-90 table-striped mt-2" style={{ fontSize: '0.8rem' }}>
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th>#</th>
               <th>First Name</th>
               <th>Last Name</th>
+              <th>Email</th>
+              <th>Password</th>
               <th>Courses</th>
               <th>Section</th>
               <th>Date Of Birth</th>
@@ -57,9 +58,11 @@ function RegisterStd() {
           {registerStd.map((e, i) => {
             return <tbody key={i}>
               <tr>
-                <td scope='row'>{i}</td>
+                <td>{i}</td>
                 <td>{e.firstName}</td>
                 <td>{e.lastName}</td>
+                <td>{e.email}</td>
+                <td>{e.password}</td>
                 <td>{e.courses}</td>
                 <td>{e.section}</td>
                 <td>{e.date}</td>

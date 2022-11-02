@@ -1,6 +1,7 @@
 import { Grid } from '@mui/material'
 import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import MuiSideNav from '../../components/sidebarNav/MuiSideBar'
 import SearchAppBar from '../../components/sidebarNav/sidebarNav'
 import { manageUser } from '../../config/firebaseMethods'
 import Courses from './Pages/Courses'
@@ -18,34 +19,27 @@ function Admin() {
     }, [])
     return (
         <>
-            <Grid container spacing={3}>
-                <Grid item xs={2}>
-                    <SearchAppBar header='Admin' dataSource={[
-                        {
-                            name:'Students',
-                            to:'',
-                            icon: 'user'
-                        },
-                        {
-                            name:'Quiz',
-                            to:'quiz',
-                            icon: 'table'
-                        },
-                        {
-                            name:'Courses',
-                            to:'courses',
-                            icon: 'chart-line'
-                        },
-                    ]} />
-                </Grid>
-                <Grid item xs={9}>
-                    <Routes>
-                        <Route path='' element={<RegisterStd />} />
-                        <Route path='quiz' element={<Quiz />} />
-                        <Route path='courses' element={<Courses />} />
-                    </Routes>
-                </Grid>
-            </Grid>
+            <MuiSideNav
+                header="Admin Panel"
+                dataSource={[
+                    {
+                        name:'Students List',
+                        to:'',
+                    },
+                    {
+                        name:'Quiz Form',
+                        to:'quiz',
+                    },
+                    {
+                        name:'Courses Form',
+                        to:'courses',
+                    },
+                ]} />
+            <Routes>
+                <Route path='' element={<RegisterStd />} />
+                <Route path='quiz' element={<Quiz />} />
+                <Route path='courses' element={<Courses />} />
+            </Routes>
         </>
     )
 }

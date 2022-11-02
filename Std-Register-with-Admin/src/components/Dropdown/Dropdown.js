@@ -1,13 +1,27 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
+import { createTheme, FormControl, InputLabel, MenuItem, Select, ThemeProvider } from '@mui/material'
 import React from 'react'
 
+const theme = createTheme({
+    palette: {
+        custom: {
+            light: '#e76f51',
+            main: '#e76f51',
+            dark: '#e76f51',
+            contrastText: '#fff',
+        }
+    },
+});
+
 function MuiSelect(props) {
-    const { label, onChange, value, name, error, fullWidth, id, labelId, dataSource, required } = props
+    const { label, onChange, value,variant, color, name, error, fullWidth, id, labelId, dataSource, required } = props
     return (
         <>
-            <FormControl fullWidth required={required}>
+        <ThemeProvider theme={theme}>
+            <FormControl fullWidth required={required} color={color ?? 'custom'} variant={variant ?? 'standard'}>
                 <InputLabel id={labelId}>{label}</InputLabel>
                 <Select
+                    variant={variant ?? 'standard'}
+                    color={color ?? 'custom'}
                     labelId={labelId}
                     id={id}
                     label={label}
@@ -20,6 +34,7 @@ function MuiSelect(props) {
                     })}
                 </Select>
             </FormControl>
+        </ThemeProvider>
         </>
     )
 }
