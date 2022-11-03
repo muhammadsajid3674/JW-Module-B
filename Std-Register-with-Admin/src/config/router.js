@@ -4,6 +4,7 @@ import Admin from '../pages/Admin/admin'
 import Login from '../pages/login/login'
 import Signup from '../pages/signup/signup'
 import StdForm from '../pages/StdForm/StdForm'
+import StdPanel from '../pages/Student/StudentPanel'
 
 function AppRouter() {
   return (
@@ -14,6 +15,7 @@ function AppRouter() {
             <Route path='login' element={<Login/>}/>
             <Route path='signup' element={<Signup/>}/>
             <Route path='admin/:id/*' element={<Admin/>}/>
+            <Route path='std/:id/*' element={<StdPanel/>}/>
         </Routes>
     </Router>
     </>

@@ -1,21 +1,34 @@
-import React from 'react'
-import StdProfile from './pages/Profile'
+import React, { useEffect } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import MuiSideNav from '../../components/sidebarNav/MuiSideBar'
+import { manageUser } from '../../config/firebaseMethods'
+import StdQuiz from './pages/Quiz'
 
-function StudentPanel() {
+function StdPanel() {
+    useEffect(() => {
+        manageUser()
+            .then((res) => {
+            })
+            .catch((err) => {
+                alert(err);
+            })
+    }, [])
     return (
         <>
-            <Grid container spacing={3}>
-                <Grid item>
-                    <SearchAppBar header='Student' />
-                </Grid>
-                <Grid item xs={9}>
-                    <Routes>
-                        <Route path='' element={<StdProfile />} />
-                    </Routes>
-                </Grid>
-            </Grid>
+            <MuiSideNav
+                header="Student Panel"
+                cusColor='custom'
+                dataSource={[
+                    {
+                        name:'Quiz',
+                        to:'',
+                    },
+                ]} />
+            <Routes>
+                <Route path='' element={<StdQuiz />} />
+            </Routes>
         </>
     )
 }
 
-export default StudentPanel
+export default StdPanel

@@ -1,7 +1,8 @@
-import { Box, CircularProgress, Grid, Typography } from '@mui/material'
+import { Box, CircularProgress, FormControlLabel, Grid, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import Checkbox from '@mui/material/Checkbox';
 import { MuiButton } from '../../../components/button/button'
-import { MuiInput } from '../../../components/input/input'
+import { FloatingInput, MuiInput } from '../../../components/input/input'
 import { getData, pushData } from '../../../config/firebaseMethods'
 
 function Course() {
@@ -9,10 +10,10 @@ function Course() {
   const [isLoading, setLoading] = useState(true)
   const [formSubmit, setFormSubmit] = useState(false)
   const [data, setData] = useState()
-  const [existedCourse, setCourse] = useState()
+  const [existedCourse, setCourse] = useState([])
 
   const handleChange = (e) => {
-    let newField = { [e.target.name]: e.target.value}
+    let newField = { [e.target.name]: e.target.value }
     setData({ ...data, ...newField })
   }
 
@@ -41,6 +42,7 @@ function Course() {
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false)
       })
   }
 
@@ -49,124 +51,142 @@ function Course() {
   }, [])
 
   return (
-    <div className='mx-4'>
-      <Grid container>
-        <Grid item md={8}>
-          <Typography variant="p" className="display-3">Course Form</Typography>
-          <Grid container className='mt-2' spacing={2}>
-            <Grid item xs={12}>
-              <MuiInput
-                variant='outlined'
-                label='Course Name'
-                name='courseName'
-                onChange={(e) => handleChange(e)}
-              />
+    <>
+      <Grid container justifyContent='center' alignItems='center' minHeight="100vh" sx={{ backgroundColor: '#eee', py: 10 }}>
+        <Grid item xs={10} md={10}>
+          <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px' }}>
+            <Grid item md={10}>
+              <Typography variant="p" className="display-3">Course Form</Typography>
+              <Grid container className='mt-2' spacing={2}>
+                <Grid item md={6}>
+                  <FloatingInput
+                    label='Course Name'
+                    labelId='courseName-float'
+                    name='courseName'
+                    placeholder='Course Name'
+                    onChange={(e) => handleChange(e)}
+                  />
+                </Grid>
+                <Grid item md={6}>
+                  <FloatingInput
+                    label='Course Duration'
+                    labelId='courseDuration-float'
+                    name='courseDuration'
+                    placeholder='Course Duration'
+                    onChange={(e) => handleChange(e)}
+                  />
+                </Grid>
+                <Grid item md={6}>
+                  <FloatingInput
+                    label='No Of Quiz'
+                    labelId='noOfQuiz-float'
+                    name='noOfQuiz'
+                    placeholder='No Of Quiz'
+                    onChange={(e) => handleChange(e)}
+                  />
+                </Grid>
+                <Grid item md={6}>
+                  <FloatingInput
+                    label='Fee In Rupees'
+                    labelId='feeInRupees-float'
+                    name='feeInRupees'
+                    placeholder='Fee In Rupees'
+                    onChange={(e) => handleChange(e)}
+                  />
+                </Grid>
+                <Grid item md={6}>
+                  <FloatingInput
+                    label='Lead Trainer'
+                    labelId='leadTrainer-float'
+                    name='leadTrainer'
+                    placeholder='Lead Trainer'
+                    onChange={(e) => handleChange(e)}
+                  />
+                </Grid>
+                <Grid item md={6}>
+                  <FloatingInput
+                    label='Assistant Trainers'
+                    labelId='assistantTrainers-float'
+                    name='assistantTrainers'
+                    placeholder='Assistant Trainers'
+                    onChange={(e) => handleChange(e)}
+                  />
+                </Grid>
+                <Grid item md={4}>
+                  <FormControlLabel
+                    control={<Checkbox/>}
+                    label="Is Form Open"
+                    name='isFormOpen'
+                    onChange={(e) => handleChange(e)}
+                  />
+                </Grid>
+                <Grid item md={12}>
+                  {formSubmit ? (
+                    <CircularProgress />
+                  ) : (
+                    <MuiButton
+                      variant='contained'
+                      label='Submit'
+                      onClick={submitData}
+                    />
+                  )}
+                </Grid>
+                <Grid container justifyContent='center'>
+                  <Grid item xs={10} md={12}>
+                    <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px' }}>
+                      {isLoading ? (
+                        <Box sx={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}>
+                          <CircularProgress />
+                        </Box>
+                      ) : (
+                        <Box>
+                          <Typography variant="p" className="display-3">Course List</Typography>
+                          <table className="table table-bordered w-90 table-striped mt-2" style={{ fontSize: '0.8rem' }}>
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th>Course Name</th>
+                                <th>Course Duration</th>
+                                <th>Is Form Open</th>
+                                <th>No of Quiz</th>
+                                <th>Fee in Rupee</th>
+                                <th>Lead Trainer</th>
+                                <th>Assistant Trainer</th>
+                              </tr>
+                            </thead>
+                            {existedCourse.map((e, i) => {
+                              return <tbody key={i}>
+                                <tr>
+                                  <td scope='row'>{i}</td>
+                                  <td>{e.courseName}</td>
+                                  <td>{e.courseDuration}</td>
+                                  <td>{e.isFormOpen}</td>
+                                  <td>{e.noOfQuiz}</td>
+                                  <td>{e.feeInRupees}</td>
+                                  <td>{e.leadTrainer}</td>
+                                  <td>{e.assistantTrainers}</td>
+                                </tr>
+                              </tbody>
+                            })}
+                          </table>
+                        </Box>
+                      )}
+                    </Box>
+                  </Grid>
+                </Grid >
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <MuiInput
-                variant='outlined'
-                label='Course Duration'
-                name='courseDuration'
-                onChange={(e) => handleChange(e)}
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <MuiInput
-                variant='outlined'
-                label='Is Form Open'
-                name='isFormOpen'
-                onChange={(e) => handleChange(e)}
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <MuiInput
-                variant='outlined'
-                label='No Of Quiz'
-                name='noOfQuiz'
-                onChange={(e) => handleChange(e)}
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <MuiInput
-                variant='outlined'
-                label='Fee In Rupees'
-                name='feeInRupees'
-                onChange={(e) => handleChange(e)}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <MuiInput
-                variant='outlined'
-                label='Lead Trainer'
-                name='leadTrainer'
-                onChange={(e) => handleChange(e)}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <MuiInput
-                variant='outlined'
-                label='Assistant Trainers'
-                name='assistantTrainers'
-                onChange={(e) => handleChange(e)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              {formSubmit ? (
-                <CircularProgress />
-              ) : (
-                <MuiButton
-                  variant='contained'
-                  label='Submit'
-                  onClick={submitData}
-                />
-              )}
-            </Grid>
-          </Grid>
+          </Box>
         </Grid>
-      </Grid>
-      {isLoading ? (
-        <Box sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-          <CircularProgress />
-        </Box>
-      ) : (
-        <Box>
-          <Typography variant="p" className="display-3">Course List</Typography>
-          <table className="table table-bordered w-90 table-striped mt-2" style={{ fontSize: '0.8rem' }}>
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th>Course Name</th>
-                <th>Course Duration</th>
-                <th>Is Form Open</th>
-                <th>No of Quiz</th>
-                <th>Fee in Rupee</th>
-                <th>Lead Trainer</th>
-                <th>Assistant Trainer</th>
-              </tr>
-            </thead>
-            {existedCourse.map((e, i) => {
-              return <tbody key={i}>
-                <tr>
-                  <td scope='row'>{i}</td>
-                  <td>{e.courseName}</td>
-                  <td>{e.courseDuration}</td>
-                  <td>{e.isFormOpen}</td>
-                  <td>{e.noOfQuiz}</td>
-                  <td>{e.feeInRupees}</td>
-                  <td>{e.leadTrainer}</td>
-                  <td>{e.assistantTrainers}</td>
-                </tr>
-              </tbody>
-            })}
-          </table>
-        </Box>
-      )
-      }
-    </div>
+      </Grid >
+
+
+
+    </>
   )
 }
 

@@ -72,9 +72,14 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 const darkTheme = createTheme({
     palette: {
-        mode: 'dark',
         primary: {
-            main: '#1976d2',
+            main: '#212529',
+        },
+        custom: {
+            main: '#e76f51',
+        },
+        light: {
+            main: '#fff',
         },
     },
 });
@@ -91,16 +96,16 @@ export default function MuiSideNav(props) {
         setOpen(false);
     };
 
-    const { header, dataSource } = props
+    const { header, dataSource, cusColor } = props
 
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
             <ThemeProvider theme={darkTheme}>
-                <AppBar position="fixed" open={open} color='primary'>
+                <AppBar position="fixed" open={open} color={cusColor}>
                     <Toolbar>
                         <IconButton
-                            color="inherit"
+                            color="light"
                             aria-label="open drawer"
                             onClick={handleDrawerOpen}
                             edge="start"
@@ -108,7 +113,7 @@ export default function MuiSideNav(props) {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "#fff" }}>
                             {header}
                         </Typography>
                         <Button color="inherit"><Link to='/login' style={{ textDecoration: 'none', color: '#fff' }}>Logout</Link></Button>

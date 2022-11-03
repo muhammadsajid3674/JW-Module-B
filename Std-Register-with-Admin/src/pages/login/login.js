@@ -25,12 +25,13 @@ function Login() {
                 if (success.id == 'Cffzm9LLe3eKdvzqgZWXTWz7Hb43') {
                     navigate(`/admin/Cffzm9LLe3eKdvzqgZWXTWz7Hb43`)
                 } else {
-                    navigate(`/${success.id}`)
+                    navigate(`/std/${success.id}`)
                 }
             })
             .catch((error) => {
                 setError(true)
                 setLoading(false)
+                console.log(error)
             })
     }
     // fields data push

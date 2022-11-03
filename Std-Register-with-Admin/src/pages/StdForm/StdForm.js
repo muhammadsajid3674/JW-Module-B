@@ -5,10 +5,10 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { MuiButton } from '../../components/button/button'
 import MuiCustomizedButtons from '../../components/button/MuiCustomButtom'
-import MuiSelect from '../../components/Dropdown/Dropdown'
+import { MuiSelect } from '../../components/Dropdown/Dropdown'
 import { MuiDatepicker, MuiInput, MuiPasswordField } from '../../components/input/input'
 import MuiModal from '../../components/Modal/Modal'
-import { pushData } from '../../config/firebaseMethods'
+import { handleSignup, pushData } from '../../config/firebaseMethods'
 import './StdForm.css'
 
 function StdForm() {
@@ -26,17 +26,28 @@ function StdForm() {
     const submitData = () => {
         setLoading(true)
         alert('Do you want to Submit?')
-        return pushData(data, 'StdData/')
-            .then((res) => {
-                setLoading(false)
-                setModal(true)
-                console.log(res);
-            })
-            .catch((err) => {
-                setLoading(false)
-                setError(true)
-                console.log(err);
-            })
+        console.log(data);
+        // return pushData(data, 'StdData/')
+        //     .then((res) => {
+        //         setLoading(false)
+        //         setModal(true)
+        //         console.log(res);
+        //     })
+        //     .catch((err) => {
+        //         setLoading(false)
+        //         setError(true)
+        //         console.log(err);
+        //     })
+        return handleSignup(data)
+        .then((success) => {
+            setLoading(false)
+            console.log(success);
+        })
+        .catch((error) => {
+            setError(true)
+            setLoading(false)
+            console.log(error);
+        })
     }
 
     return (

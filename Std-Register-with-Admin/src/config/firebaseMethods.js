@@ -7,7 +7,7 @@ const auth = getAuth(app)
 const dataBase = getDatabase(app)
 
 function handleSignup(obj) {
-    let { userName, email, password, contact } = obj;
+    let { email, password } = obj;
 
     return new Promise((resolve, reject) => {
         createUserWithEmailAndPassword(auth, email, password)
@@ -36,11 +36,10 @@ function handleLogIn(obj) {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredentials) => {
                 let user = userCredentials.user
-
                 let reference = ref(dataBase, `user/${user.uid}`)
                 onValue(reference, (data) => {
                     let status = data.exists()
-                    console.log(status)
+                    // console.log(status)
                     if (status) {
                         resolve(data.val())
                         // console.log(data.val())
