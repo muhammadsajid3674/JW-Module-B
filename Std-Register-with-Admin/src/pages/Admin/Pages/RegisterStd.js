@@ -8,7 +8,7 @@ function RegisterStd() {
   const [isLoading, setLoading] = useState(true)
 
   const getRegisterSTD = () => {
-    return getData('StdData/')
+    return getData('user/')
       .then((res) => {
         setRegisterStd(res);
         setLoading(false)

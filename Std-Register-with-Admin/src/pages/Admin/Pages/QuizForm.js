@@ -10,25 +10,23 @@ import { getData, pushData } from '../../../config/firebaseMethods'
 function Quiz() {
 
   const [isLoading, setLoading] = useState(true)
-  const [data, setData] = useState()
-  const [existedQues, setExistedQues] = useState()
+  const [formSubmit, setFormSubmit] = useState(false)
+  const [questionForm, setQuestionForm] = useState(false)
+  const [disabled, setDisabled] = useState(false)
+
+  const [data, setData] = useState({})
+  const [existedQues, setExistedQues] = useState({})
 
   const [option, setOption] = useState("")
+  const [question, setQuestion] = useState("")
   const [optionArr, setOptionArr] = useState([])
-  const [questions, setQuestions] = useState()
+  const [quesObj, setQuesObj] = useState({})
+  const [correctAns, setCorrectAns] = useState({})
 
-  const [questionForm, setQuestionForm] = useState(false)
-  const [formSubmit, setFormSubmit] = useState(false)
-  const [disabled, setDisabled] = useState(false)
 
   const handleChange = (e) => {
     let newField = { [e.target.name]: e.target.value }
     setData({ ...data, ...newField })
-  }
-  
-  const handleChangeQuiz = (e) => {
-    let newField = { [e.target.name]: e.target.value, options: [optionArr] }
-    setQuestions({ ...questions, ...newField })
   }
 
   const CreateQuiz = () => {
@@ -37,10 +35,17 @@ function Quiz() {
     console.log(data)
   }
 
+  const addQuestion = () => {
+    quesObj.question = question
+    quesObj.option = optionArr
+    quesObj.correctAns = correctAns
+    setOptionArr([])
+    console.log(quesObj)
+  }
+
   // Options
   const AddToOptionARR = () => {
-    optionArr.push(option)
-    setOptionArr([...optionArr])
+    setOptionArr([...optionArr, option])
     setOption("")
     console.log(optionArr)
   }
@@ -52,25 +57,21 @@ function Quiz() {
   }
   // Options
 
-
-
-  const addQuestion = () => {
-    console.log(questions)
+  const submitQuiz = () => {
+    data.quiz = quesObj
+    setFormSubmit(true)
+    alert('Do you want to Submit?')
+    console.log(data)
+    // return pushData(data, 'QuizQuestions/')
+    //   .then((res) => {
+    //     setFormSubmit(false)
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     setFormSubmit(false)
+    //     console.log(err);
+    //   })
   }
-
-  // const submitData = () => {
-  //   setFormSubmit(true)
-  //   alert('Do you want to Submit?')
-  //   return pushData(data, 'QuizQuestions/')
-  //     .then((res) => {
-  //       setFormSubmit(false)
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       setFormSubmit(false)
-  //       console.log(err);
-  //     })
-  // }
 
   const getQuizQuestion = () => {
     return getData('QuizQuestions/')
@@ -172,8 +173,8 @@ function Quiz() {
                       labelId='questions-float'
                       name='questions'
                       placeholder='Questions'
-                      // onChange={(e) => setQues(e.target.value)}
-                      onChange={(e) => handleChangeQuiz(e)}
+                      onChange={(e) => setQuestion(e.target.value)}
+                    // onChange={(e) => handleChangeQuiz(e)}
                     />
                   </Grid>
                   <Grid item md={9}>
@@ -185,14 +186,15 @@ function Quiz() {
                       onChange={(e) => setOption(e.target.value)}
                       value={option}
                     />
-                    {optionArr.map((e, i) => {
+                    {optionArr.map((elem, i) => {
                       return <Box key={i}>
                         <IconButton onClick={() => deleteItem(i)}>
                           <Delete />
                         </IconButton>
                         <FormControlLabel
                           control={<Checkbox />}
-                          label={e}
+                          label={elem}
+                          onChange={(e) => setCorrectAns(elem)}
                         />
                         <Divider />
                       </Box>
@@ -221,7 +223,7 @@ function Quiz() {
                   ) : (
                     <MuiButton
                       label="Submit Quiz"
-                      // onClick={submitQuiz}
+                      onClick={submitQuiz}
                       color="success"
                     />
                   )}

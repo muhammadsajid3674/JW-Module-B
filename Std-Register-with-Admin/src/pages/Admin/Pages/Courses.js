@@ -9,8 +9,9 @@ function Course() {
 
   const [isLoading, setLoading] = useState(true)
   const [formSubmit, setFormSubmit] = useState(false)
-  const [data, setData] = useState()
+  const [data, setData] = useState({})
   const [existedCourse, setCourse] = useState([])
+  const [formCheck, setFormCheck] = useState(false)
 
   const handleChange = (e) => {
     let newField = { [e.target.name]: e.target.value }
@@ -20,13 +21,12 @@ function Course() {
 
 
   const submitData = () => {
+    data.isFormOpen = formCheck.toString()
     setFormSubmit(true)
-    console.log(data)
     alert('Do you want to Submit?')
     return pushData(data, 'Courses/')
       .then((res) => {
         setFormSubmit(false)
-        console.log(res);
       })
       .catch((err) => {
         setFormSubmit(false)
@@ -39,6 +39,7 @@ function Course() {
       .then((res) => {
         setCourse(res);
         setLoading(false)
+        console.log(res)
       })
       .catch((err) => {
         console.log(err);
@@ -117,7 +118,7 @@ function Course() {
                     control={<Checkbox/>}
                     label="Is Form Open"
                     name='isFormOpen'
-                    onChange={(e) => handleChange(e)}
+                    onChange={(e) => setFormCheck(e.target.checked)}
                   />
                 </Grid>
                 <Grid item md={12}>
@@ -183,9 +184,6 @@ function Course() {
           </Box>
         </Grid>
       </Grid >
-
-
-
     </>
   )
 }

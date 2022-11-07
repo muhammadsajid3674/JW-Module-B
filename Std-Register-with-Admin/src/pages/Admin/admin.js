@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import MuiSideNav from '../../components/sidebarNav/MuiSideBar'
 import { manageUser } from '../../config/firebaseMethods'
 import Courses from './Pages/Courses'
+import CreateResult from './Pages/CreateResult'
 import Quiz from './Pages/QuizForm'
 import RegisterStd from './Pages/RegisterStd'
 
@@ -33,11 +34,16 @@ function Admin() {
                         name:'Courses Form',
                         to:'courses',
                     },
+                    {
+                        name:'Create Results',
+                        to:'createResult',
+                    },
                 ]} />
             <Routes>
                 <Route path='' element={<RegisterStd />} />
                 <Route path='quiz' element={<Quiz />} />
                 <Route path='courses' element={<Courses />} />
+                <Route path='createResult' element={<CreateResult/>}/>
             </Routes>
         </>
     )

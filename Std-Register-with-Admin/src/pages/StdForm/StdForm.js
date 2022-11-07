@@ -3,12 +3,12 @@ import { Box } from '@mui/system'
 import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { MuiButton } from '../../components/button/button'
 import MuiCustomizedButtons from '../../components/button/MuiCustomButtom'
 import { MuiSelect } from '../../components/Dropdown/Dropdown'
 import { MuiDatepicker, MuiInput, MuiPasswordField } from '../../components/input/input'
 import MuiModal from '../../components/Modal/Modal'
-import { handleSignup, pushData } from '../../config/firebaseMethods'
+import { SetDate } from '../../config/core/helperMethod'
+import { handleSignup } from '../../config/firebaseMethods'
 import './StdForm.css'
 
 function StdForm() {
@@ -24,9 +24,23 @@ function StdForm() {
     }
 
     const submitData = () => {
+        data.registrationDate = SetDate(new Date());
+        data.isFeeSubmitted = false;
+        data.isApproved = false;
+        data.isActive = false;
         setLoading(true)
         alert('Do you want to Submit?')
-        console.log(data);
+        return handleSignup(data)
+            .then((success) => {
+                setModal(true)
+                setLoading(false)
+                console.log(success);
+            })
+            .catch((error) => {
+                setError(true)
+                setLoading(false)
+                console.log(error);
+            })
         // return pushData(data, 'StdData/')
         //     .then((res) => {
         //         setLoading(false)
@@ -38,16 +52,6 @@ function StdForm() {
         //         setError(true)
         //         console.log(err);
         //     })
-        return handleSignup(data)
-        .then((success) => {
-            setLoading(false)
-            console.log(success);
-        })
-        .catch((error) => {
-            setError(true)
-            setLoading(false)
-            console.log(error);
-        })
     }
 
     return (

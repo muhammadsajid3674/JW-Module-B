@@ -3,6 +3,7 @@ import { Button, Container, Grid, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { grey } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import './Home.css';
 
 
@@ -17,8 +18,13 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 function Home() {
+
+    
+  const { scrollYProgress } = useScroll()
+
     return (
         <>
+            <motion.div className='progress-bar' style={{ scaleX: scrollYProgress }} />
             <Grid container justifyContent='center' sx={{
                 backgroundColor: '#F5FBFF',
                 padding: '80px 0'
@@ -75,10 +81,10 @@ function Home() {
                         padding: '20px 0'
                     }}>
                         <Grid item md={12}>
-                        <Box>
-                            <Typography variant='subtitle2'>TESTIMONIALS</Typography>
-                            <Typography variant='h3'>Success stories</Typography>
-                        </Box>
+                            <Box>
+                                <Typography variant='subtitle2'>TESTIMONIALS</Typography>
+                                <Typography variant='h3'>Success stories</Typography>
+                            </Box>
                         </Grid>
                         <Grid item md={5}>
                             <Box sx={{ lineHeight: 2.5 }}>

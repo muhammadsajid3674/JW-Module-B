@@ -19,7 +19,6 @@ import ListItemText from '@mui/material/ListItemText';
 import { Button } from '@mui/material';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
-import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import { Link } from 'react-router-dom';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 
@@ -148,7 +147,7 @@ export default function MuiSideNav(props) {
                             <ListItem disablePadding>
                                 <ListItemButton>
                                     <ListItemIcon>
-                                        {i === 0 ? <ListAltIcon /> : i === 1 ? <QuestionAnswerIcon /> : <LocalLibraryIcon />}
+                                    {i % 2 === 0 ? <ListAltIcon /> : <QuestionAnswerIcon />}
                                     </ListItemIcon>
                                     <ListItemText primary={e.name} />
                                 </ListItemButton>
