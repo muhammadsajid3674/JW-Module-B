@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import MuiSideNav from '../../components/sidebarNav/MuiSideBar'
 import { manageUser } from '../../config/firebaseMethods'
 import Courses from './Pages/Courses'
@@ -8,12 +8,14 @@ import Quiz from './Pages/QuizForm'
 import RegisterStd from './Pages/RegisterStd'
 
 function Admin() {
+    const navigate = useNavigate()
+
     useEffect(() => {
         manageUser()
             .then((res) => {
             })
             .catch((err) => {
-                alert(err);
+                console.log(err);
             })
     }, [])
     return (

@@ -1,5 +1,5 @@
 import app from "./firebaseConfig";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'
 import { getDatabase, onValue, push, ref, remove, set } from "firebase/database";
 
 
@@ -57,6 +57,18 @@ function handleLogIn(obj) {
             })
 
     })
+}
+
+function handleLogOut() {
+    return new Promise((resolve, reject) => {
+        signOut(auth)
+        .then((res) => {
+            resolve(res)
+        })
+        .catch((err) => {
+            reject(err)
+        })
+    });
 }
 
 function manageUser() {
@@ -166,4 +178,4 @@ function deleteData(node, listId) {
 //     })
 // }
 
-export { handleSignup, handleLogIn, manageUser, pushData, getData, deleteData }
+export { handleSignup, handleLogIn, manageUser, pushData, getData, deleteData, handleLogOut }

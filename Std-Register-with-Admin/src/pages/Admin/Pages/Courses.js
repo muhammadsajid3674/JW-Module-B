@@ -39,7 +39,6 @@ function Course() {
       .then((res) => {
         setCourse(res);
         setLoading(false)
-        console.log(res)
       })
       .catch((err) => {
         console.log(err);
@@ -59,7 +58,7 @@ function Course() {
             <Grid item md={10}>
               <Typography variant="p" className="display-3">Course Form</Typography>
               <Grid container className='mt-2' spacing={2}>
-                <Grid item md={6}>
+                <Grid item xs={10} md={6}>
                   <FloatingInput
                     label='Course Name'
                     labelId='courseName-float'
@@ -68,7 +67,7 @@ function Course() {
                     onChange={(e) => handleChange(e)}
                   />
                 </Grid>
-                <Grid item md={6}>
+                <Grid item xs={10} md={6}>
                   <FloatingInput
                     label='Course Duration'
                     labelId='courseDuration-float'
@@ -77,7 +76,7 @@ function Course() {
                     onChange={(e) => handleChange(e)}
                   />
                 </Grid>
-                <Grid item md={6}>
+                <Grid item xs={10} md={6}>
                   <FloatingInput
                     label='No Of Quiz'
                     labelId='noOfQuiz-float'
@@ -86,7 +85,7 @@ function Course() {
                     onChange={(e) => handleChange(e)}
                   />
                 </Grid>
-                <Grid item md={6}>
+                <Grid item xs={10} md={6}>
                   <FloatingInput
                     label='Fee In Rupees'
                     labelId='feeInRupees-float'
@@ -95,7 +94,7 @@ function Course() {
                     onChange={(e) => handleChange(e)}
                   />
                 </Grid>
-                <Grid item md={6}>
+                <Grid item xs={10} md={6}>
                   <FloatingInput
                     label='Lead Trainer'
                     labelId='leadTrainer-float'
@@ -104,7 +103,7 @@ function Course() {
                     onChange={(e) => handleChange(e)}
                   />
                 </Grid>
-                <Grid item md={6}>
+                <Grid item xs={10} md={6}>
                   <FloatingInput
                     label='Assistant Trainers'
                     labelId='assistantTrainers-float'
@@ -113,9 +112,9 @@ function Course() {
                     onChange={(e) => handleChange(e)}
                   />
                 </Grid>
-                <Grid item md={4}>
+                <Grid item xs={10} md={4}>
                   <FormControlLabel
-                    control={<Checkbox/>}
+                    control={<Checkbox />}
                     label="Is Form Open"
                     name='isFormOpen'
                     onChange={(e) => setFormCheck(e.target.checked)}
@@ -126,14 +125,14 @@ function Course() {
                     <CircularProgress />
                   ) : (
                     <MuiButton
-                      variant='contained'
+                      color="custom"
                       label='Submit'
                       onClick={submitData}
                     />
                   )}
                 </Grid>
                 <Grid container justifyContent='center'>
-                  <Grid item xs={10} md={12}>
+                  <Grid item xs={12} md={12}>
                     <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px' }}>
                       {isLoading ? (
                         <Box sx={{
@@ -146,34 +145,36 @@ function Course() {
                       ) : (
                         <Box>
                           <Typography variant="p" className="display-3">Course List</Typography>
-                          <table className="table table-bordered w-90 table-striped mt-2" style={{ fontSize: '0.8rem' }}>
-                            <thead>
-                              <tr>
-                                <th scope="col">#</th>
-                                <th>Course Name</th>
-                                <th>Course Duration</th>
-                                <th>Is Form Open</th>
-                                <th>No of Quiz</th>
-                                <th>Fee in Rupee</th>
-                                <th>Lead Trainer</th>
-                                <th>Assistant Trainer</th>
-                              </tr>
-                            </thead>
-                            {existedCourse.map((e, i) => {
-                              return <tbody key={i}>
+                          <Box sx={{ overflowX: 'scroll' }}>
+                            <table className="table table-bordered w-90 table-striped mt-2" style={{ fontSize: '0.8rem' }}>
+                              <thead>
                                 <tr>
-                                  <td scope='row'>{i}</td>
-                                  <td>{e.courseName}</td>
-                                  <td>{e.courseDuration}</td>
-                                  <td>{e.isFormOpen}</td>
-                                  <td>{e.noOfQuiz}</td>
-                                  <td>{e.feeInRupees}</td>
-                                  <td>{e.leadTrainer}</td>
-                                  <td>{e.assistantTrainers}</td>
+                                  <th scope="col">#</th>
+                                  <th>Course Name</th>
+                                  <th>Course Duration</th>
+                                  <th>Is Form Open</th>
+                                  <th>No of Quiz</th>
+                                  <th>Fee in Rupee</th>
+                                  <th>Lead Trainer</th>
+                                  <th>Assistant Trainer</th>
                                 </tr>
-                              </tbody>
-                            })}
-                          </table>
+                              </thead>
+                              {existedCourse.map((e, i) => {
+                                return <tbody key={i}>
+                                  <tr>
+                                    <td scope='row'>{i}</td>
+                                    <td>{e.courseName}</td>
+                                    <td>{e.courseDuration}</td>
+                                    <td>{e.isFormOpen}</td>
+                                    <td>{e.noOfQuiz}</td>
+                                    <td>{e.feeInRupees}</td>
+                                    <td>{e.leadTrainer}</td>
+                                    <td>{e.assistantTrainers}</td>
+                                  </tr>
+                                </tbody>
+                              })}
+                            </table>
+                          </Box>
                         </Box>
                       )}
                     </Box>
