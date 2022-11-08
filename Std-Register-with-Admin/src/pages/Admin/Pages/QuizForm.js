@@ -61,7 +61,6 @@ function Quiz() {
     data.quiz = quesObj
     setFormSubmit(true)
     alert('Do you want to Submit?')
-    console.log(data)
     // return pushData(data, 'QuizQuestions/')
     //   .then((res) => {
     //     setFormSubmit(false)
@@ -99,7 +98,7 @@ function Quiz() {
               <Grid item md={6} sx={12}>
                 <Typography variant="h3" className="pb-3">Quiz Form</Typography>
                 <Grid container spacing={2}>
-                  <Grid item md={6}>
+                  <Grid item xs={10} md={6}>
                     <FloatingInput
                       label='Quiz Name'
                       labelId='quizName-float'
@@ -109,7 +108,7 @@ function Quiz() {
                       onChange={(e) => handleChange(e)}
                     />
                   </Grid>
-                  <Grid item md={6}>
+                  <Grid item xs={10} md={6}>
                     <FloatingSelect
                       label='Course Name'
                       labelId='courseName-float'
@@ -134,7 +133,7 @@ function Quiz() {
                       ]}
                     />
                   </Grid>
-                  <Grid item md={6}>
+                  <Grid item xs={10} md={6}>
                     <FloatingInput
                       label='Duration'
                       labelId='duration-float'
@@ -144,7 +143,7 @@ function Quiz() {
                       onChange={(e) => handleChange(e)}
                     />
                   </Grid>
-                  <Grid item md={6}>
+                  <Grid item xs={10} md={6}>
                     <FloatingInput
                       label='Total Marks'
                       labelId='totalMarks-float'
@@ -154,7 +153,7 @@ function Quiz() {
                       onChange={(e) => handleChange(e)}
                     />
                   </Grid>
-                  <Grid item md={6} xs={12}>
+                  <Grid item xs={10} md={6}>
                     <MuiButton
                       label="Create Quiz"
                       onClick={CreateQuiz}
@@ -167,7 +166,7 @@ function Quiz() {
               {questionForm && < Grid item md={6} sx={12}>
                 <Typography variant="h3" className="pb-3">Add Questions</Typography>
                 <Grid container spacing={2}>
-                  <Grid item md={12}>
+                  <Grid item xs={10} md={12}>
                     <FloatingInput
                       label='Questions'
                       labelId='questions-float'
@@ -177,7 +176,7 @@ function Quiz() {
                     // onChange={(e) => handleChangeQuiz(e)}
                     />
                   </Grid>
-                  <Grid item md={9}>
+                  <Grid item xs={8} md={9}>
                     <FloatingInput
                       label='Options'
                       labelId='options-float'
@@ -201,7 +200,7 @@ function Quiz() {
                     })}
                   </Grid>
                   {/* <Typography variant='subtitle2'>Check the Correct Answer</Typography> */}
-                  <Grid item md={3}>
+                  <Grid item xs={4} md={3}>
                     <MuiButton
                       label="Add"
                       className="mt-1 fs-5"
@@ -209,7 +208,7 @@ function Quiz() {
                       onClick={AddToOptionARR}
                     />
                   </Grid>
-                  <Grid item md={5} xs={12}>
+                  <Grid item xs={10} md={5}>
                     <MuiButton
                       label="Submit Question"
                       onClick={addQuestion}
@@ -217,7 +216,7 @@ function Quiz() {
                     />
                   </Grid>
                 </Grid>
-                <Grid item md={12} textAlign='end'>
+                <Grid item xs={10} md={12} textAlign='end'>
                   {formSubmit ? (
                     <CircularProgress />
                   ) : (
@@ -231,7 +230,7 @@ function Quiz() {
               </Grid>}
             </Grid>
             <Grid container>
-              <Grid item xs={10} md={10}>
+              <Grid item xs={12} md={10}>
                 <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px' }}>
                   {isLoading ? (
                     <Box sx={{

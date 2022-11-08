@@ -87,10 +87,9 @@ function CreateResult() {
                 <Grid item xs={10} md={10}>
                     <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px' }}>
                         <Grid item md={10}>
-
                             <Typography variant="p" className="display-3">Create Result</Typography>
-                            <Grid container className='mt-2' spacing={2}>
-                                <Grid item md={6}>
+                            <Grid container className='mt-2' alignItems='center' spacing={2}>
+                                <Grid item xs={10} md={6}>
                                     <FloatingSelect
                                         label='Course'
                                         labelId='course-float'
@@ -114,18 +113,18 @@ function CreateResult() {
                                         ]}
                                     />
                                 </Grid>
-                                <Grid item md={6}>
+                                <Grid item  xs={10} md={1}>
                                     <MuiSwitch
                                         label='Course Status'
                                         onChange={(e) => setCourseStatus(e.value.checked)}
                                     />
                                 </Grid>
-                                <Grid item md={12}>
+                                <Grid item md={2}>
                                     {/* {formSubmit ? (
                     <CircularProgress />
                   ) : ( */}
                                     <MuiButton
-                                        variant='contained'
+                                        color="custom"
                                         label='Submit'
                                         onClick={submitForm}
                                     />
@@ -134,8 +133,8 @@ function CreateResult() {
                             </Grid>
                         </Grid>
                         <Grid container>
-                            <Grid item md={6}>
-                                <Typography variant="p" className="display-3">Questions List</Typography>
+                            <Grid item xs={12} md={6}>
+                                <Typography variant="p" className="display-3">Results List</Typography>
                                 <table className="table table-bordered w-90 table-striped mt-2" style={{ fontSize: '0.8rem' }}>
                                     <thead>
                                         <tr>

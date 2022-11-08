@@ -19,8 +19,9 @@ import ListItemText from '@mui/material/ListItemText';
 import { Button } from '@mui/material';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import { handleLogOut } from '../../config/firebaseMethods';
 
 const drawerWidth = 240;
 
@@ -84,6 +85,7 @@ const darkTheme = createTheme({
 });
 
 export default function MuiSideNav(props) {
+    const navigate = useNavigate()
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -94,6 +96,16 @@ export default function MuiSideNav(props) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    const logOut = () => {
+        return handleLogOut()
+            .then((res) => {
+                navigate('/login')
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
 
     const { header, dataSource, cusColor } = props
 
@@ -115,7 +127,7 @@ export default function MuiSideNav(props) {
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: "#fff" }}>
                             {header}
                         </Typography>
-                        <Button color="inherit"><Link to='/login' style={{ textDecoration: 'none', color: '#fff' }}>Logout</Link></Button>
+                        <Button color="inherit" onClick={logOut}>Logout</Button>
                     </Toolbar>
                 </AppBar>
             </ThemeProvider>
@@ -147,7 +159,7 @@ export default function MuiSideNav(props) {
                             <ListItem disablePadding>
                                 <ListItemButton>
                                     <ListItemIcon>
-                                    {i % 2 === 0 ? <ListAltIcon /> : <QuestionAnswerIcon />}
+                                        {i % 2 === 0 ? <ListAltIcon /> : <QuestionAnswerIcon />}
                                     </ListItemIcon>
                                     <ListItemText primary={e.name} />
                                 </ListItemButton>
