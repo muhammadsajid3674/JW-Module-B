@@ -1,6 +1,8 @@
 import { Box, CircularProgress, Grid, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { getData } from '../../../config/firebaseMethods'
+import LineChart from '../../../components/LineChart/LineChart';
+import CusDataTable from '../../../components/CusDataTable/CusDataTable';
 
 function RegisterStd() {
 
@@ -25,69 +27,126 @@ function RegisterStd() {
 
   return (
     <>
-      <Grid container justifyContent='center' alignItems='center' minHeight="100vh" sx={{ backgroundColor: '#eee', py: 10 }}>
-        <Grid item xs={10} md={10}>
-          <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px' }}>
-            {isLoading ?
-              (<Box sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                minHeight: '80vh'
-              }}>
-                <CircularProgress />
-              </Box>) : (
-                <>
-                  <Typography variant="p" className="display-3">Student List</Typography>
-                  <Box sx={{ overflowX: 'scroll' }}>
-                    <table className="table table-bordered w-90 table-striped mt-2" style={{ fontSize: '0.8rem' }}>
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Email</th>
-                          <th>Password</th>
-                          <th>Courses</th>
-                          <th>Section</th>
-                          <th>Date Of Birth</th>
-                          <th>Contact</th>
-                          <th>CNIC</th>
-                          <th>Father Name</th>
-                          <th>Father CNIC</th>
-                          <th>Father Contact</th>
-                          <th>Emergency Contact</th>
-                        </tr>
-                      </thead>
-                      {registerStd.map((e, i) => {
-                        return <tbody key={i}>
-                          <tr>
-                            <td>{i}</td>
-                            <td>{e.firstName}</td>
-                            <td>{e.lastName}</td>
-                            <td>{e.email}</td>
-                            <td>{e.password}</td>
-                            <td>{e.courses}</td>
-                            <td>{e.section}</td>
-                            <td>{e.date}</td>
-                            <td>{e.contact}</td>
-                            <td>{e.cnic}</td>
-                            <td>{e.fatherName}</td>
-                            <td>{e.fatherCnic}</td>
-                            <td>{e.fatherContact}</td>
-                            <td>{e.emergencyContact}</td>
-                          </tr>
-                        </tbody>
-                      })}
-                    </table>
-                  </Box>
-                </>
-              )
-            }
-          </Box>
+      <Grid container justifyContent='center' minHeight="100vh" spacing={3}>
+        <Grid item xs={12} md={10}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={12}>
+              <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px' }}>
+                <Typography variant='p' className='display-4'>Overview</Typography>
+                <Grid container spacing={3} sx={{ my: 1 }}>
+                  <Grid item xs={12} md={4}>
+                    <Grid container className='text-white shadow rounded' justifyContent='center' alignItems='center' style={{ backgroundColor: '#003566' }}>
+                      <Grid item className='display-3'>
+                        <i className="fa-solid fa-user"></i>
+                      </Grid>
+                      <Grid item className='py-4 px-3'>
+                        <span className='fs-1'>{registerStd.length}</span>
+                        <p className='text-dark-50'>Registered Students</p>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Grid container className='text-white shadow rounded' justifyContent='center' alignItems='center' style={{ backgroundColor: '#003566' }}>
+                      <Grid item className='display-3'>
+                        <i className="fa-solid fa-comment"></i>
+                      </Grid>
+                      <Grid item className='py-4 px-3'>
+                        <span className='fs-1'>10</span>
+                        <p className='text-dark-50'>Courses</p>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Grid container className='text-white shadow rounded' justifyContent='center' alignItems='center' style={{ backgroundColor: '#003566' }}>
+                      <Grid item className='display-3'>
+                        <i className="fa-solid fa-question"></i>
+                      </Grid>
+                      <Grid item className='py-4 px-3'>
+                        <span className='fs-1'>15</span>
+                        <p className='text-dark-50'>Quizzes</p>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Grid >
+            <Grid item xs={12} md={12} className='chirandiTable'>
+              <Box sx={{ backgroundColor: '#fff', p: 4, my: 2, borderRadius: '5px' }}>
+                <Typography variant="p" className="display-4">Student List</Typography>
+                {isLoading ?
+                  (<Box sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    minHeight: '80vh'
+                  }}>
+                    <CircularProgress />
+                  </Box>) : (
+                      <Box sx={{ overflowX: 'scroll' }}>
+                        <CusDataTable
+                        dataSource={registerStd}
+                        colValue={[
+                          {
+                            key: 'firstName',
+                            name: 'First Name'
+                          },
+                          {
+                            key: 'lastName',
+                            name: 'Last Name'
+                          },
+                          {
+                            key: 'email',
+                            name: 'Email'
+                          },
+                          {
+                            key: 'password',
+                            name: 'Password'
+                          },
+                          {
+                            key: 'courses',
+                            name: 'Courses'
+                          },
+                          {
+                            key: 'section',
+                            name: 'Section'
+                          },
+                          {
+                            key: 'date',
+                            name: 'Date Of Birth'
+                          },
+                          {
+                            key: 'contact',
+                            name: 'Contact'
+                          },
+                          {
+                            key: 'cnic',
+                            name: 'CNIC'
+                          },
+                          {
+                            key: 'fatherName',
+                            name: 'Father Name'
+                          },
+                          {
+                            key: 'fatherCnic',
+                            name: 'Father CNIC'
+                          },
+                          {
+                            key: 'fatherContact',
+                            name: 'Father Contact'
+                          },
+                          {
+                            key: 'emergencyContact',
+                            name: 'Emergency Contact'
+                          },
+                        ]}
+                      />
+                      </Box>
+                  )}
+              </Box>
+            </Grid>
+          </Grid>
         </Grid>
-      </Grid >
-
+      </Grid>
     </>
   )
 }

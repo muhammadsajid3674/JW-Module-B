@@ -6,9 +6,9 @@ import './input.css';
 const theme = createTheme({
     palette: {
         custom: {
-            light: '#e76f51',
-            main: '#e76f51',
-            dark: '#e76f51',
+            light: '#1a2e35',
+            main: '#1a2e35',
+            dark: '#1a2e35',
             contrastText: '#fff',
         }
     },

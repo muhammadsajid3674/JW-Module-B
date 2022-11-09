@@ -2,4 +2,7 @@
     .cusHeightLogin{
         min-height: 53.3vh !important;
     }
+    .chirandiTable{
+        display: none;
+    }
   }

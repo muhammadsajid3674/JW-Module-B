@@ -136,17 +136,9 @@ function StdForm() {
                                         onChange={(e) => handleChange(e)}
                                         required={true}
                                         error={error}
-                                        dataSource={[
-                                            {
-                                                option: 'Web & Mobile App Hybrid'
-                                            },
-                                            {
-                                                option: 'MERN Stack Developer'
-                                            },
-                                            {
-                                                option: 'Digital Marketing'
-                                            },
-                                        ]}
+                                        nodeName='Courses'
+                                        displayValue='courseName'
+                                        fieldValue='courseName'
                                     />
                                 </Grid>
                                 <Grid item md={6} xs={12}>

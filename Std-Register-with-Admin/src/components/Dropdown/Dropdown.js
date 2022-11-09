@@ -1,5 +1,7 @@
+import { ContactSupportOutlined } from '@mui/icons-material';
 import { createTheme, FormControl, InputLabel, MenuItem, Select, ThemeProvider } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { getData } from '../../config/firebaseMethods';
 
 const theme = createTheme({
     palette: {
@@ -13,7 +15,29 @@ const theme = createTheme({
 });
 
 function MuiSelect(props) {
-    const { label, onChange, value, variant, color, name, error, fullWidth, id, labelId, dataSource, required } = props
+
+    const { label, onChange, value, variant, color, name, error, fullWidth, id, labelId, nodeName, dataSource, required, displayValue, fieldValue } = props
+
+    const [dataBaseSource, setDataBaseSource] = useState(dataSource)
+
+    const selectValueDb = () => {
+        if (nodeName) {
+            return getData(nodeName)
+                .then((res) => {
+                    setDataBaseSource(res)
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
+    }
+
+    useEffect(() => {
+        selectValueDb()
+    }, [])
+
+
+
     return (
         <>
             <ThemeProvider theme={theme}>
@@ -27,11 +51,12 @@ function MuiSelect(props) {
                         label={label}
                         onChange={onChange}
                         name={name}
-                        error={error}
-                    >
-                        {dataSource.map((e, i) => {
-                            return <MenuItem value={e.option} key={i}>{e.option}</MenuItem>
-                        })}
+                        error={error}>
+                        {dataBaseSource && dataBaseSource.length > 0 ? dataBaseSource.map((e, i) => {
+                            return <MenuItem key={i} value={e[fieldValue ? fieldValue : 'id']}>
+                                {e[displayValue ? displayValue : 'option']}
+                            </MenuItem>
+                        }) : null}
                     </Select>
                 </FormControl>
             </ThemeProvider>
@@ -41,14 +66,35 @@ function MuiSelect(props) {
 
 function FloatingSelect(props) {
 
-    const { label, onChange, value, variant, color, name, error, fullWidth, id, labelId, dataSource,disabled, required } = props
+    const { label, onChange, disabled, value, variant, color, name, error, fullWidth, id, labelId, nodeName, dataSource, required, displayValue, fieldValue } = props
+
+    const [dataBaseSource, setDataBaseSource] = useState(dataSource)
+
+    const selectValueDb = () => {
+        if (nodeName) {
+            return getData(nodeName)
+                .then((res) => {
+                    setDataBaseSource(res)
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
+    }
+
+    useEffect(() => {
+        selectValueDb()
+    }, [])
+
 
     return <div className="form-floating">
         <select className="form-select" id={labelId} onChange={onChange} name={name} disabled={disabled} aria-label="Floating label select example">
             <option defaultValue>Choose..</option>
-            {dataSource.map((e, i) => {
-                return <option value={e.option} key={i}>{e.option}</option>
-            })}
+            {dataBaseSource && dataBaseSource.length > 0 ? dataBaseSource.map((e, i) => {
+                return <option key={i} value={e[fieldValue ? fieldValue : 'id']}>
+                    {e[displayValue ? displayValue : 'option']}
+                </option>
+            }) : null}
         </select>
         <label htmlFor={labelId}>{label}</label>
     </div>

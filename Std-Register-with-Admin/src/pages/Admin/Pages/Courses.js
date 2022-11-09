@@ -4,6 +4,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { MuiButton } from '../../../components/button/button'
 import { FloatingInput, MuiInput } from '../../../components/input/input'
 import { getData, pushData } from '../../../config/firebaseMethods'
+import CusDataTable from '../../../components/CusDataTable/CusDataTable';
 
 function Course() {
 
@@ -52,7 +53,7 @@ function Course() {
 
   return (
     <>
-      <Grid container justifyContent='center' alignItems='center' minHeight="100vh" sx={{ backgroundColor: '#eee', py: 10 }}>
+      <Grid container justifyContent='center' minHeight="100vh">
         <Grid item xs={10} md={10}>
           <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px' }}>
             <Grid item md={10}>
@@ -131,9 +132,9 @@ function Course() {
                     />
                   )}
                 </Grid>
-                <Grid container justifyContent='center'>
+                <Grid container justifyContent='center' spacing={2}>
                   <Grid item xs={12} md={12}>
-                    <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px' }}>
+                      <Typography variant="p" className="display-4">Course List</Typography>
                       {isLoading ? (
                         <Box sx={{
                           display: 'flex',
@@ -144,40 +145,43 @@ function Course() {
                         </Box>
                       ) : (
                         <Box>
-                          <Typography variant="p" className="display-3">Course List</Typography>
                           <Box sx={{ overflowX: 'scroll' }}>
-                            <table className="table table-bordered w-90 table-striped mt-2" style={{ fontSize: '0.8rem' }}>
-                              <thead>
-                                <tr>
-                                  <th scope="col">#</th>
-                                  <th>Course Name</th>
-                                  <th>Course Duration</th>
-                                  <th>Is Form Open</th>
-                                  <th>No of Quiz</th>
-                                  <th>Fee in Rupee</th>
-                                  <th>Lead Trainer</th>
-                                  <th>Assistant Trainer</th>
-                                </tr>
-                              </thead>
-                              {existedCourse.map((e, i) => {
-                                return <tbody key={i}>
-                                  <tr>
-                                    <td scope='row'>{i}</td>
-                                    <td>{e.courseName}</td>
-                                    <td>{e.courseDuration}</td>
-                                    <td>{e.isFormOpen}</td>
-                                    <td>{e.noOfQuiz}</td>
-                                    <td>{e.feeInRupees}</td>
-                                    <td>{e.leadTrainer}</td>
-                                    <td>{e.assistantTrainers}</td>
-                                  </tr>
-                                </tbody>
-                              })}
-                            </table>
+                            <CusDataTable
+                              dataSource={existedCourse}
+                              colValue={[
+                                {
+                                  key: 'courseName',
+                                  name: 'Course Name'
+                                },
+                                {
+                                  key: 'courseDuration',
+                                  name: 'Course Duration'
+                                },
+                                {
+                                  key: 'isFormOpen',
+                                  name: 'Is Form Open'
+                                },
+                                {
+                                  key: 'noOfQuiz',
+                                  name: 'No of Quiz'
+                                },
+                                {
+                                  key: 'feeInRupees',
+                                  name: 'Fee in Rupee'
+                                },
+                                {
+                                  key: 'leadTrainer',
+                                  name: 'Lead Trainer'
+                                },
+                                {
+                                  key: 'assistantTrainers',
+                                  name: 'Assistant Trainer'
+                                },
+                              ]}
+                            />
                           </Box>
                         </Box>
                       )}
-                    </Box>
                   </Grid>
                 </Grid >
               </Grid>

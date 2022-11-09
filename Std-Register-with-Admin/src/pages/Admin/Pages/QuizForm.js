@@ -3,6 +3,7 @@ import { Box, Checkbox, CircularProgress, Divider, FormControlLabel, Grid, IconB
 import React, { useEffect, useState } from 'react'
 import { MuiButton } from '../../../components/button/button'
 import MuiCustomizedButtons from '../../../components/button/MuiCustomButtom'
+import CusDataTable from '../../../components/CusDataTable/CusDataTable'
 import { FloatingSelect } from '../../../components/Dropdown/Dropdown'
 import { FloatingInput, MuiInput } from '../../../components/input/input'
 import { getData, pushData } from '../../../config/firebaseMethods'
@@ -90,7 +91,7 @@ function Quiz() {
 
   return (
     <>
-      <Grid container justifyContent='center' alignItems='center' minHeight="100vh" sx={{ backgroundColor: '#eee', py: 10 }}>
+      <Grid container justifyContent='center' minHeight="100vh">
         <Grid item xs={10} md={10}>
           <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px' }}>
             <Grid container spacing={5}>
@@ -116,21 +117,10 @@ function Quiz() {
                       onChange={(e) => handleChange(e)}
                       required={true}
                       disabled={disabled}
-                      // error={error}
-                      dataSource={[
-                        {
-                          id: 'WM',
-                          option: 'Web & Mobile App Hybrid'
-                        },
-                        {
-                          id: 'MERN',
-                          option: 'MERN Stack Developer'
-                        },
-                        {
-                          id: 'DM',
-                          option: 'Digital Marketing'
-                        },
-                      ]}
+                      nodeName='Courses'
+                      displayValue='courseName'
+                      fieldValue='courseName'
+                    // error={error}
                     />
                   </Grid>
                   <Grid item xs={10} md={6}>
@@ -231,43 +221,40 @@ function Quiz() {
             </Grid>
             <Grid container>
               <Grid item xs={12} md={10}>
-                <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px' }}>
-                  {isLoading ? (
-                    <Box sx={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                      <CircularProgress />
-                    </Box>
-                  ) : (
-                    <Box>
-                      <Typography variant="p" className="display-3">Questions List</Typography>
-                      <table className="table table-bordered w-90 table-striped mt-2" style={{ fontSize: '0.8rem' }}>
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th>Questions</th>
-                            <th>Options</th>
-                            <th>Duration</th>
-                            <th>Total Marks</th>
-                          </tr>
-                        </thead>
-                        {existedQues.map((e, i) => {
-                          return <tbody key={i}>
-                            <tr>
-                              <td scope='row'>{i}</td>
-                              <td>{e.questions}</td>
-                              <td>{e.option.join(', ')}</td>
-                              <td>{e.duration}</td>
-                              <td>{e.totalMarks}</td>
-                            </tr>
-                          </tbody>
-                        })}
-                      </table>
-                    </Box>
-                  )}
-                </Box>
+                <Typography variant="p" className="display-4">Questions List</Typography>
+                {isLoading ? (
+                  <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                    <CircularProgress />
+                  </Box>
+                ) : (
+                  <Box>
+                    <CusDataTable
+                      dataSource={existedQues}
+                      colValue={[
+                        {
+                          key: 'questions',
+                          name: 'Questions'
+                        },
+                        {
+                          key: 'option',
+                          name: 'Options'
+                        },
+                        {
+                          key: 'duration',
+                          name: 'Duration'
+                        },
+                        {
+                          key: 'totalMarks',
+                          name: 'Total Marks'
+                        },
+                      ]}
+                    />
+                  </Box>
+                )}
               </Grid>
             </Grid >
           </Box>

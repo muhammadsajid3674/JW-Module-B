@@ -83,7 +83,7 @@ function CreateResult() {
 
     return (
         <>
-            <Grid container justifyContent='center' alignItems='center' minHeight="100vh" sx={{ backgroundColor: '#eee', py: 10 }}>
+            <Grid container justifyContent='center' minHeight="100vh">
                 <Grid item xs={10} md={10}>
                     <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px' }}>
                         <Grid item md={10}>
