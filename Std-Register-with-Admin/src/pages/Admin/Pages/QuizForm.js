@@ -19,8 +19,8 @@ function Quiz() {
   const [existedQues, setExistedQues] = useState({})
 
   const [option, setOption] = useState("")
-  const [question, setQuestion] = useState("")
   const [optionArr, setOptionArr] = useState([])
+  const [quesModal, setQuesModal] = useState([])
   const [quesObj, setQuesObj] = useState({})
   const [correctAns, setCorrectAns] = useState({})
 
@@ -37,18 +37,16 @@ function Quiz() {
   }
 
   const addQuestion = () => {
-    quesObj.question = question
     quesObj.option = optionArr
     quesObj.correctAns = correctAns
+    setQuesModal([...quesModal, quesObj])
     setOptionArr([])
-    console.log(quesObj)
   }
-
+  
   // Options
   const AddToOptionARR = () => {
     setOptionArr([...optionArr, option])
     setOption("")
-    console.log(optionArr)
   }
   let deleteItem = (id) => {
     let listI = optionArr.filter((value, index) => {
@@ -57,25 +55,27 @@ function Quiz() {
     setOptionArr(listI)
   }
   // Options
-
+  
   const submitQuiz = () => {
-    data.quiz = quesObj
+    data.quizQues = quesModal
+    console.log(data)
     setFormSubmit(true)
     alert('Do you want to Submit?')
-    // return pushData(data, 'QuizQuestions/')
-    //   .then((res) => {
-    //     setFormSubmit(false)
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     setFormSubmit(false)
-    //     console.log(err);
-    //   })
+    return pushData(data, 'QuizQuestions/')
+      .then((res) => {
+        setFormSubmit(false)
+        console.log(res);
+      })
+      .catch((err) => {
+        setFormSubmit(false)
+        console.log(err);
+      })
   }
 
   const getQuizQuestion = () => {
     return getData('QuizQuestions/')
       .then((res) => {
+        console.log(res)
         setExistedQues(res);
         setLoading(false)
       })
@@ -162,8 +162,7 @@ function Quiz() {
                       labelId='questions-float'
                       name='questions'
                       placeholder='Questions'
-                      onChange={(e) => setQuestion(e.target.value)}
-                    // onChange={(e) => handleChangeQuiz(e)}
+                      onChange={(e) => setQuesObj({...quesObj, question: e.target.value})} 
                     />
                   </Grid>
                   <Grid item xs={8} md={9}>

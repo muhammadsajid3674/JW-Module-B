@@ -84,6 +84,7 @@ function RegisterStd() {
                   </Box>) : (
                       <Box sx={{ overflowX: 'scroll' }}>
                         <CusDataTable
+                        onClickRow={(e) => console.log(e)}
                         dataSource={registerStd}
                         colValue={[
                           {
