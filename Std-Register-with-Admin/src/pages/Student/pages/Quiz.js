@@ -71,7 +71,7 @@ function StdQuiz() {
 
   return (
     <>
-      <Grid container justifyContent='center' alignItems='center' minHeight="100vh" sx={{ backgroundColor: '#eee', py: 10 }}>
+      <Grid container justifyContent='center'>
         <Grid item xs={10} md={10}>
           <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px' }}>
             {/* {result || indexNo == quizData.length ? <Grid className='results'><Typography className='resultsChild' textAlign='center' variant='h3' component='h3'>Your score is {score} and you complete the quiz in {minutes} Minutes and {seconds} Seconds</Typography></Grid> */}
