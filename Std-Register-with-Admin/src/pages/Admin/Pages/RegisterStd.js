@@ -70,7 +70,7 @@ function RegisterStd() {
                 </Grid>
               </Box>
             </Grid >
-            <Grid item xs={12} md={12} className='chirandiTable'>
+            <Grid item xs={12} md={12}>
               <Box sx={{ backgroundColor: '#fff', p: 4, my: 2, borderRadius: '5px' }}>
                 <Typography variant="p" className="display-4">Student List</Typography>
                 {isLoading ?
@@ -82,8 +82,8 @@ function RegisterStd() {
                   }}>
                     <CircularProgress />
                   </Box>) : (
-                      <Box sx={{ overflowX: 'scroll' }}>
-                        <CusDataTable
+                    <Box sx={{ overflowX: 'scroll' }}>
+                      <CusDataTable
                         onClickRow={(e) => console.log(e)}
                         dataSource={registerStd}
                         colValue={[
@@ -123,25 +123,9 @@ function RegisterStd() {
                             key: 'cnic',
                             name: 'CNIC'
                           },
-                          {
-                            key: 'fatherName',
-                            name: 'Father Name'
-                          },
-                          {
-                            key: 'fatherCnic',
-                            name: 'Father CNIC'
-                          },
-                          {
-                            key: 'fatherContact',
-                            name: 'Father Contact'
-                          },
-                          {
-                            key: 'emergencyContact',
-                            name: 'Emergency Contact'
-                          },
                         ]}
                       />
-                      </Box>
+                    </Box>
                   )}
               </Box>
             </Grid>

@@ -11,7 +11,7 @@ const style = {
     transform: 'translate(-50%, -50%)',
     width: 400,
     backgroundColor: '#fff',
-    border: '2px solid #e76f51',
+    border: '2px solid #0c4b74',
     p: 4,
 };
 
@@ -26,7 +26,7 @@ export default function MuiModal(props) {
         <div>
             <Modal
                 sx={{
-                    backgroundColor: '#e76f51',
+                    backgroundColor: '#0c4b74',
                 }}
                 open='true'
                 onClose={handleClose}

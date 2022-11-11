@@ -6,9 +6,9 @@ import { getData } from '../../config/firebaseMethods';
 const theme = createTheme({
     palette: {
         custom: {
-            light: '#e76f51',
-            main: '#e76f51',
-            dark: '#e76f51',
+            light: '#0c4b74',
+            main: '#0c4b74',
+            dark: '#0c4b74',
             contrastText: '#fff',
         }
     },

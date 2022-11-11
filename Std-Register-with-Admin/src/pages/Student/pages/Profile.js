@@ -42,7 +42,7 @@ function StdProfile() {
         </Box>
       ) : (
         <Grid container justifyContent='center' alignItems='center' minHeight='80vh'>
-          <Grid item md={8} sx={12}>
+          <Grid item md={8}>
             <Box className='shadow' sx={{ backgroundColor: '#fff', p: 5, borderRadius: '5px' }}>
               <Grid container alignItems='center'>
                 <Grid item md={3}>
@@ -50,7 +50,7 @@ function StdProfile() {
                     <img src={std} className='img-fluid' />
                   </Box>
                 </Grid>
-                <Grid item md={4}>
+                <Grid item md={7}>
                   <Box className="text-center">
                     <Typography variant='h3' className='fw-bold'>{`${firstName} ${lastName}`}</Typography>
                     <Typography variant='body1'>{courses}</Typography>

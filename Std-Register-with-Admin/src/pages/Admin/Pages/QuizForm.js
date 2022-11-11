@@ -80,6 +80,7 @@ function Quiz() {
         setLoading(false)
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err);
       })
   }
@@ -92,11 +93,11 @@ function Quiz() {
   return (
     <>
       <Grid container justifyContent='center' minHeight="100vh">
-        <Grid item xs={10} md={10}>
+        <Grid item xs={12} md={10}>
           <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px' }}>
             <Grid container spacing={5}>
               {/* /// Create Quiz /// */}
-              <Grid item md={6} sx={12}>
+              <Grid item md={6}>
                 <Typography variant="h3" className="pb-3">Quiz Form</Typography>
                 <Grid container spacing={2}>
                   <Grid item xs={10} md={6}>
@@ -153,7 +154,7 @@ function Quiz() {
                 </Grid>
               </Grid>
               {/* /// Submit Questions /// */}
-              {questionForm && < Grid item md={6} sx={12}>
+              {questionForm && < Grid item md={6}>
                 <Typography variant="h3" className="pb-3">Add Questions</Typography>
                 <Grid container spacing={2}>
                   <Grid item xs={10} md={12}>
@@ -197,7 +198,7 @@ function Quiz() {
                       onClick={AddToOptionARR}
                     />
                   </Grid>
-                  <Grid item xs={10} md={5}>
+                  <Grid item xs={10} md={5} sx={{ mb: 2 }}>
                     <MuiButton
                       label="Submit Question"
                       onClick={addQuestion}
@@ -205,7 +206,7 @@ function Quiz() {
                     />
                   </Grid>
                 </Grid>
-                <Grid item xs={10} md={12} textAlign='end'>
+                <Grid item xs={10} md={12} className='text-md-end'>
                   {formSubmit ? (
                     <CircularProgress />
                   ) : (
@@ -219,7 +220,7 @@ function Quiz() {
               </Grid>}
             </Grid>
             <Grid container>
-              <Grid item xs={12} md={10}>
+              <Grid item md={10}>
                 <Typography variant="p" className="display-4">Questions List</Typography>
                 {isLoading ? (
                   <Box sx={{
@@ -230,9 +231,10 @@ function Quiz() {
                     <CircularProgress />
                   </Box>
                 ) : (
-                  <Box>
+                  <Box sx={{ overflowX: 'scroll' }}>
                     <CusDataTable
                       dataSource={existedQues}
+                      onClickRow={(e) => console.log(e)}
                       colValue={[
                         {
                           key: 'questions',

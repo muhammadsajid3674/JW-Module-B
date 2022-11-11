@@ -3,10 +3,10 @@ import TextField from '@mui/material/TextField';
 
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
-    color: '#e76f51',
+    color: '#0c4b74',
   },
   '& .MuiInput-underline:after': {
-    borderBottomColor: '#e76f51',
+    borderBottomColor: '#0c4b74',
   },
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
@@ -16,7 +16,7 @@ const CssTextField = styled(TextField)({
       borderColor: '#000',
     },
     '&.Mui-focused fieldset': {
-      borderColor: '#e76f51',
+      borderColor: '#0c4b74',
     },
   },
 });

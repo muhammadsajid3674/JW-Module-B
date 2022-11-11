@@ -142,7 +142,7 @@ export default function StdLayout() {
                         <Typography className='text-dark' variant="h6" component="div" sx={{ flexGrow: 1, color: "#fff" }}>
                             Student Panel
                         </Typography>
-                        <MuiButton color='custom' onClick={logOut} label='Logout'/>
+                        <MuiButton color='customStd' onClick={logOut} label='Logout' />
                     </Toolbar>
                 </AppBar>
             </ThemeProvider>
@@ -151,6 +151,7 @@ export default function StdLayout() {
                     width: drawerWidth,
                     flexShrink: 0,
                     '& .MuiDrawer-paper': {
+                        backgroundColor: '#0c4b74',
                         width: drawerWidth,
                         boxSizing: 'border-box',
                     },
@@ -160,7 +161,7 @@ export default function StdLayout() {
                 open={open}
             >
                 <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>
+                    <IconButton className='text-light' onClick={handleDrawerClose}>
                         {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>
                 </DrawerHeader>
@@ -169,10 +170,10 @@ export default function StdLayout() {
                     {menuLinks.map((x, i) => (
                         <ListItem key={i} disablePadding>
                             <ListItemButton onClick={() => clickNavigate(x.routeName)}>
-                                <ListItemIcon>
+                                <ListItemIcon className='text-light'>
                                     <i className={x.iconClass}></i>
                                 </ListItemIcon>
-                                <ListItemText primary={x.displayName} />
+                                <ListItemText className='text-light' primary={x.displayName} />
                             </ListItemButton>
                         </ListItem>
                     ))}

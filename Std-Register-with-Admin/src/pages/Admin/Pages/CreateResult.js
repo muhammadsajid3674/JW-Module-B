@@ -3,6 +3,7 @@ import { Box } from '@mui/system';
 import React from 'react'
 import { useState } from 'react'
 import { MuiButton } from '../../../components/button/button';
+import CusDataTable from '../../../components/CusDataTable/CusDataTable';
 import { FloatingSelect } from '../../../components/Dropdown/Dropdown';
 import MuiSwitch from '../../../components/Switch/MuiSwitch';
 
@@ -135,28 +136,27 @@ function CreateResult() {
                         <Grid container>
                             <Grid item xs={12} md={6}>
                                 <Typography variant="p" className="display-3">Results List</Typography>
-                                <table className="table table-bordered w-90 table-striped mt-2" style={{ fontSize: '0.8rem' }}>
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th>Name</th>
-                                            <th>Marks</th>
-                                            <th>Roll Num</th>
-                                            <th>Result</th>
-                                        </tr>
-                                    </thead>
-                                    {resultData.map((e, i) => {
-                                        return <tbody key={i}>
-                                            <tr>
-                                                <td scope='row'>{i + 1}</td>
-                                                <td>{e.name}</td>
-                                                <td>{e.marks}</td>
-                                                <td>{e.rollNum}</td>
-                                                <td>{e.result}</td>
-                                            </tr>
-                                        </tbody>
-                                    })}
-                                </table>
+                                <CusDataTable
+                                dataSource={resultData}
+                                colValue={[
+                                    {
+                                        key: 'name',
+                                        name: 'Name'
+                                    },
+                                    {
+                                        key: 'marks',
+                                        name: 'Marks'
+                                    },
+                                    {
+                                        key: 'rollNum',
+                                        name: 'Roll Num'
+                                    },
+                                    {
+                                        key: 'result',
+                                        name: 'Result'
+                                    },
+                                ]}
+                                />
                             </Grid>
                         </Grid>
                     </Box>
