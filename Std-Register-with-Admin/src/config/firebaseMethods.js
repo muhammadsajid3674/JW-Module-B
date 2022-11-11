@@ -30,6 +30,32 @@ function handleSignup(obj) {
     });
 };
 
+// Student Signup
+function handleStdSignup(obj) {
+    let { email, password, courses } = obj;
+
+    return new Promise((resolve, reject) => {
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredentials) => {
+                // User Registered
+                let user = userCredentials.user
+                // console.log(user);
+                let reference = ref(dataBase, `user/${user.uid}`);
+                obj.id = user.uid
+                obj.rollNo = `${new Date().getFullYear()}${courses}${user.uid.slice(user.uid.length - 6)}`
+                set(reference, obj)
+                    .then(() => {
+                        resolve("user is registered")
+                    }).catch((error) => {
+                        reject(error)
+                    })
+            })
+            .catch((error) => {
+                reject(error.message)
+            })
+    });
+};
+
 function handleLogIn(obj) {
     let { email, password } = obj;
     return new Promise((resolve, reject) => {
@@ -178,4 +204,4 @@ function deleteData(node, listId) {
 //     })
 // }
 
-export { handleSignup, handleLogIn, manageUser, pushData, getData, deleteData, handleLogOut }
+export { handleSignup, handleLogIn, manageUser, pushData, getData, deleteData, handleLogOut, handleStdSignup }

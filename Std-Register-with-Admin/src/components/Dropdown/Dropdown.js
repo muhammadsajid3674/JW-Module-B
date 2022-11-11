@@ -53,7 +53,7 @@ function MuiSelect(props) {
                         name={name}
                         error={error}>
                         {dataBaseSource && dataBaseSource.length > 0 ? dataBaseSource.map((e, i) => {
-                            return <MenuItem key={i} value={e[fieldValue ? fieldValue : 'id']}>
+                            return <MenuItem key={i} value={e[fieldValue ? fieldValue : 'code']}>
                                 {e[displayValue ? displayValue : 'option']}
                             </MenuItem>
                         }) : null}
@@ -91,7 +91,7 @@ function FloatingSelect(props) {
         <select className="form-select" id={labelId} onChange={onChange} name={name} disabled={disabled} aria-label="Floating label select example">
             <option defaultValue>Choose..</option>
             {dataBaseSource && dataBaseSource.length > 0 ? dataBaseSource.map((e, i) => {
-                return <option key={i} value={e[fieldValue ? fieldValue : 'id']}>
+                return <option key={i} value={e[fieldValue ? fieldValue : 'option']}>
                     {e[displayValue ? displayValue : 'option']}
                 </option>
             }) : null}

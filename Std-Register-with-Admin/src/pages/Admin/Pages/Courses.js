@@ -59,7 +59,7 @@ function Course() {
             <Grid item md={10}>
               <Typography variant="p" className="display-3">Course Form</Typography>
               <Grid container className='mt-2' spacing={2}>
-                <Grid item xs={10} md={6}>
+                <Grid item xs={10} md={4}>
                   <FloatingInput
                     label='Course Name'
                     labelId='courseName-float'
@@ -68,12 +68,21 @@ function Course() {
                     onChange={(e) => handleChange(e)}
                   />
                 </Grid>
-                <Grid item xs={10} md={6}>
+                <Grid item xs={10} md={4}>
                   <FloatingInput
                     label='Course Duration'
                     labelId='courseDuration-float'
                     name='courseDuration'
                     placeholder='Course Duration'
+                    onChange={(e) => handleChange(e)}
+                  />
+                </Grid>
+                <Grid item xs={10} md={4}>
+                  <FloatingInput
+                    label='Course Code'
+                    labelId='courseCode-float'
+                    name='code'
+                    placeholder='Course Code'
                     onChange={(e) => handleChange(e)}
                   />
                 </Grid>

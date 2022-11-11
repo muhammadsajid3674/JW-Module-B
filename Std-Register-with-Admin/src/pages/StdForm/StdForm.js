@@ -8,12 +8,12 @@ import { MuiSelect } from '../../components/Dropdown/Dropdown'
 import { MuiDatepicker, MuiInput, MuiPasswordField } from '../../components/input/input'
 import MuiModal from '../../components/Modal/Modal'
 import { SetDate } from '../../config/core/helperMethod'
-import { handleSignup } from '../../config/firebaseMethods'
+import { handleSignup, handleStdSignup } from '../../config/firebaseMethods'
 import './StdForm.css'
 
 function StdForm() {
 
-    const [data, setData] = useState()
+    const [data, setData] = useState({})
     const [error, setError] = useState(false)
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
@@ -28,9 +28,11 @@ function StdForm() {
         data.isFeeSubmitted = false;
         data.isApproved = false;
         data.isActive = false;
+
+        console.log(data);
         setLoading(true)
         alert('Do you want to Submit?')
-        return handleSignup(data)
+        return handleStdSignup(data)
             .then((success) => {
                 setModal(true)
                 setLoading(false)
@@ -138,7 +140,7 @@ function StdForm() {
                                         error={error}
                                         nodeName='Courses'
                                         displayValue='courseName'
-                                        fieldValue='courseName'
+                                        fieldValue='code'
                                     />
                                 </Grid>
                                 <Grid item md={6} xs={12}>
@@ -151,12 +153,15 @@ function StdForm() {
                                         error={error}
                                         dataSource={[
                                             {
+                                                code: 'a',
                                                 option: 'A'
                                             },
                                             {
+                                                code: 'b',
                                                 option: 'B'
                                             },
                                             {
+                                                code: 'c',
                                                 option: 'C'
                                             },
                                         ]}
