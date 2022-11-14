@@ -28,6 +28,15 @@ function Course() {
     return pushData(data, 'Courses/')
       .then((res) => {
         setFormSubmit(false)
+        setData({
+          courseName: '',
+          courseDuration: '',
+          code: '',
+          noOfQuiz: '',
+          feeInRupees: '',
+          leadTrainer: '',
+          assistantTrainers: ''
+        })
       })
       .catch((err) => {
         setFormSubmit(false)
@@ -66,6 +75,7 @@ function Course() {
                     name='courseName'
                     placeholder='Course Name'
                     onChange={(e) => handleChange(e)}
+                    value={data.courseName}
                   />
                 </Grid>
                 <Grid item xs={10} md={4}>
@@ -141,58 +151,56 @@ function Course() {
                     />
                   )}
                 </Grid>
-                <Grid container justifyContent='center' spacing={2}>
-                  <Grid item xs={12} md={12}>
-                      <Typography variant="p" className="display-4">Course List</Typography>
-                      {isLoading ? (
-                        <Box sx={{
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                        }}>
-                          <CircularProgress />
-                        </Box>
-                      ) : (
-                        <Box>
-                          <Box sx={{ overflowX: 'scroll' }}>
-                            <CusDataTable
-                              dataSource={existedCourse}
-                              colValue={[
-                                {
-                                  key: 'courseName',
-                                  name: 'Course Name'
-                                },
-                                {
-                                  key: 'courseDuration',
-                                  name: 'Course Duration'
-                                },
-                                {
-                                  key: 'isFormOpen',
-                                  name: 'Is Form Open'
-                                },
-                                {
-                                  key: 'noOfQuiz',
-                                  name: 'No of Quiz'
-                                },
-                                {
-                                  key: 'feeInRupees',
-                                  name: 'Fee in Rupee'
-                                },
-                                {
-                                  key: 'leadTrainer',
-                                  name: 'Lead Trainer'
-                                },
-                                {
-                                  key: 'assistantTrainers',
-                                  name: 'Assistant Trainer'
-                                },
-                              ]}
-                            />
-                          </Box>
-                        </Box>
-                      )}
-                  </Grid>
-                </Grid >
+                <Grid item md={12}>
+                  <Typography variant="p" className="display-4">Course List</Typography>
+                  {isLoading ? (
+                    <Box sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                      <CircularProgress />
+                    </Box>
+                  ) : (
+                    <Box>
+                      <Box sx={{ overflowX: 'scroll' }}>
+                        <CusDataTable
+                          dataSource={existedCourse}
+                          colValue={[
+                            {
+                              key: 'courseName',
+                              name: 'Course Name'
+                            },
+                            {
+                              key: 'courseDuration',
+                              name: 'Course Duration'
+                            },
+                            {
+                              key: 'isFormOpen',
+                              name: 'Is Form Open'
+                            },
+                            {
+                              key: 'noOfQuiz',
+                              name: 'No of Quiz'
+                            },
+                            {
+                              key: 'feeInRupees',
+                              name: 'Fee in Rupee'
+                            },
+                            {
+                              key: 'leadTrainer',
+                              name: 'Lead Trainer'
+                            },
+                            {
+                              key: 'assistantTrainers',
+                              name: 'Assistant Trainer'
+                            },
+                          ]}
+                        />
+                      </Box>
+                    </Box>
+                  )}
+                </Grid>
               </Grid>
             </Grid>
           </Box>

@@ -1,6 +1,7 @@
 import app from "./firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'
 import { getDatabase, onValue, push, ref, remove, set } from "firebase/database";
+import { useEffect } from "react";
 
 
 const auth = getAuth(app)
@@ -30,7 +31,7 @@ function handleSignup(obj) {
     });
 };
 
-// Student Signup
+////////////////////// Student Signup
 function handleStdSignup(obj) {
     let { email, password, courses } = obj;
 
@@ -55,6 +56,7 @@ function handleStdSignup(obj) {
             })
     });
 };
+////////////////////// Student Signup
 
 function handleLogIn(obj) {
     let { email, password } = obj;
@@ -88,12 +90,12 @@ function handleLogIn(obj) {
 function handleLogOut() {
     return new Promise((resolve, reject) => {
         signOut(auth)
-        .then((res) => {
-            resolve(res)
-        })
-        .catch((err) => {
-            reject(err)
-        })
+            .then((res) => {
+                resolve(res)
+            })
+            .catch((err) => {
+                reject(err)
+            })
     });
 }
 

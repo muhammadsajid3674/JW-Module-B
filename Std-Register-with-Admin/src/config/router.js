@@ -15,7 +15,7 @@ function AppRouter() {
             <Route path='/' element={<StdForm/>}/>
             <Route path='login' element={<Login/>}/>
             <Route path='signup' element={<Signup/>}/>
-            <Route path='admin/:id/*' element={<Admin/>}/>
+            <Route path='admin/*' element={<Admin/>}/>
             <Route path='std/:id/*' element={<StdPanel/>}/>
             <Route path='/*' element={<NotFound/>}/>
         </Routes>

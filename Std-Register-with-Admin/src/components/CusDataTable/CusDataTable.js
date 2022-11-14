@@ -43,7 +43,7 @@ function CusDataTable(props) {
                                 <tr className='table-light' scope='row'>
                                     <th>1</th>
                                     {colValue && colValue.length > 0 ? colValue.map((x, i) => {
-                                        return <td>Data Not Found</td>
+                                        return <td key={i}>Data Not Found</td>
                                     }) : null}
                                 </tr>
                             )}

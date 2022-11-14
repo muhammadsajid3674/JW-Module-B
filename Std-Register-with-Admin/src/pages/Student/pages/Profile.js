@@ -12,7 +12,20 @@ function StdProfile() {
 
   const { firstName, lastName, email, courses, section, contact, cnic, fatherName, fatherContact } = stdData
 
-  useEffect(() => {
+  const [stdCourse, setStdCourse] = useState('')
+
+  const getCourseValue = () => {
+    return getData('Courses/')
+      .then((res) => {
+        let courseValue = res.find((e, i) => e.courses == courses)
+        setStdCourse(courseValue.courseName)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  const currentStdData = () => {
     manageUser()
       .then((res) => {
         return getData(`user/`, res)
@@ -27,6 +40,11 @@ function StdProfile() {
       .catch((err) => {
         console.log(err);
       })
+  }
+
+  useEffect(() => {
+    currentStdData()
+    getCourseValue()
   }, [])
 
   return (
@@ -52,8 +70,8 @@ function StdProfile() {
                 </Grid>
                 <Grid item md={7}>
                   <Box className="text-center">
-                    <Typography variant='h3' className='fw-bold'>{`${firstName} ${lastName}`}</Typography>
-                    <Typography variant='body1'>{courses}</Typography>
+                    <Typography variant='h3' className='fw-bold'>{`${firstName.charAt(0).toUpperCase() + firstName.slice(1)} ${lastName.charAt(0).toUpperCase() + lastName.slice(1)}`}</Typography>
+                    <Typography variant='body1'>{stdCourse}</Typography>
 
                   </Box>
                 </Grid>
@@ -61,7 +79,7 @@ function StdProfile() {
                   <Grid container justifyContent='center' spacing={3}>
                     <Grid item md={8} xs={6}>
                       <Typography variant='h6' className='fw-bold'>Name:</Typography>
-                      <Typography variant='body1'>{`${firstName} ${lastName}`}</Typography>
+                      <Typography variant='body1'>{`${firstName.charAt(0).toUpperCase() + firstName.slice(1)} ${lastName.charAt(0).toUpperCase() + lastName.slice(1)}`}</Typography>
                     </Grid>
                     <Grid item md={4} xs={6}>
                       <Typography variant='h6' className='fw-bold'>Email:</Typography>
@@ -69,7 +87,7 @@ function StdProfile() {
                     </Grid>
                     <Grid item md={8} xs={6}>
                       <Typography variant='h6' className='fw-bold'>Course:</Typography>
-                      <Typography variant='body1'>{courses}</Typography>
+                      <Typography variant='body1'>{stdCourse}</Typography>
                     </Grid>
                     <Grid item md={4} xs={6}>
                       <Typography variant='h6' className='fw-bold'>Section:</Typography>

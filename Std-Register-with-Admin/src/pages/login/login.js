@@ -22,10 +22,10 @@ function Login() {
         handleLogIn({ email, password })
             .then((success) => {
                 setLoading(false)
-                if (success.id == 'Cffzm9LLe3eKdvzqgZWXTWz7Hb43') {
-                    navigate(`/admin/Cffzm9LLe3eKdvzqgZWXTWz7Hb43`)
+                if (success.category == 'student') {
+                    navigate(`/std/${success.rollNo}`)
                 } else {
-                    navigate(`/std/${success.id}`)
+                    navigate(`/admin`)
                 }
             })
             .catch((error) => {

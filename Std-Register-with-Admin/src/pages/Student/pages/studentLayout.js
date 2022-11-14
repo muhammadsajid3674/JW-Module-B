@@ -20,8 +20,10 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { handleLogOut } from '../../../config/firebaseMethods';
 import { MuiButton } from '../../../components/button/button';
-import StdQuiz from './Quiz';
 import StdProfile from './Profile';
+import Results from './Results';
+import SelectQuiz from './SelectQuiz';
+import Quiz from './StartQuiz';
 
 const drawerWidth = 240;
 
@@ -80,9 +82,14 @@ export default function StdLayout() {
             iconClass: "fa-solid fa-user"
         },
         {
-            displayName: "Quizzes",
-            routeName: "quizzes",
+            displayName: "Select Quiz",
+            routeName: "selectQuiz",
             iconClass: "fa-solid fa-question"
+        },
+        {
+            displayName: "Results",
+            routeName: "results",
+            iconClass: "fa-solid fa-square-poll-vertical"
         },
     ]);
 
@@ -179,11 +186,13 @@ export default function StdLayout() {
                     ))}
                 </List>
             </Drawer>
-            <Main open={open} sx={{ backgroundColor: '#eee', minHeight: '100vh' }}>
+            <Main open={open} sx={{ backgroundColor: '#ced4da', minHeight: '100vh' }}>
                 <DrawerHeader />
                 <Routes>
                     <Route path='' element={<StdProfile />} />
-                    <Route path='quizzes' element={<StdQuiz />} />
+                    <Route path='selectQuiz' element={<SelectQuiz />} />
+                    <Route path='results' element={<Results/>}/>
+                    <Route path='selectQuiz/startQuiz' element={<Quiz/>}/>
                 </Routes>
             </Main>
         </Box>

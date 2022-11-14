@@ -237,12 +237,12 @@ function Quiz() {
                       onClickRow={(e) => console.log(e)}
                       colValue={[
                         {
-                          key: 'questions',
-                          name: 'Questions'
+                          key: 'courseName',
+                          name: 'Course Name'
                         },
                         {
-                          key: 'option',
-                          name: 'Options'
+                          key: 'quizName',
+                          name: 'Quiz Name'
                         },
                         {
                           key: 'duration',

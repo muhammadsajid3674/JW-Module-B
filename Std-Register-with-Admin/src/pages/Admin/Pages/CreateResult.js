@@ -6,6 +6,7 @@ import { MuiButton } from '../../../components/button/button';
 import CusDataTable from '../../../components/CusDataTable/CusDataTable';
 import { FloatingSelect } from '../../../components/Dropdown/Dropdown';
 import MuiSwitch from '../../../components/Switch/MuiSwitch';
+import { pushData } from '../../../config/firebaseMethods';
 
 function CreateResult() {
 
@@ -78,7 +79,14 @@ function CreateResult() {
     let submitForm = () => {
         data.isShowResult = courseStatus;
         data.result = resultData;
-        console.log(data);
+        console.log(data)
+        return pushData(data, 'Results')
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
     };
 
 
@@ -98,26 +106,15 @@ function CreateResult() {
                                         onChange={(e) => setData({ ...data, course: e.target.value })}
                                         required={true}
                                         // error={error}
-                                        dataSource={[
-                                            {
-                                                id: 'WM',
-                                                option: 'Web & Mobile App Hybrid'
-                                            },
-                                            {
-                                                id: 'MERN',
-                                                option: 'MERN Stack Developer'
-                                            },
-                                            {
-                                                id: 'DM',
-                                                option: 'Digital Marketing'
-                                            },
-                                        ]}
+                                       nodeName='Courses'
+                                       displayValue='courseName'
+                                       fieldValue='courseName'
                                     />
                                 </Grid>
                                 <Grid item  xs={10} md={1}>
                                     <MuiSwitch
                                         label='Course Status'
-                                        onChange={(e) => setCourseStatus(e.value.checked)}
+                                        onChange={(e) => setCourseStatus(e.target.checked)}
                                     />
                                 </Grid>
                                 <Grid item md={2}>

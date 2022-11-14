@@ -24,16 +24,22 @@ const theme = createTheme({
             main: '#0c4b74',
             dark: '#0c4b74',
             contrastText: '#fff',
+          },
+        light: {
+            light: '#eee',
+            main: '#eee',
+            dark: '#eee',
+            contrastText: '#fff',
           }
     },
 });
 
 export function MuiButton(props) {
-    const { label, onClick, type, value, variant, className, color } = props;
+    const { label, onClick, type, value, variant, className, color, size } = props;
 
     return <>
         <ThemeProvider theme={ theme }>
-            <Button color={color} className={className} onClick={onClick} variant={variant ?? 'contained'} value={value}>{label}</Button>
+            <Button color={color} className={className} onClick={onClick} variant={variant ?? 'contained'} size={size} value={value}>{label}</Button>
         </ThemeProvider>
     </>
 

@@ -28,8 +28,7 @@ function StdForm() {
         data.isFeeSubmitted = false;
         data.isApproved = false;
         data.isActive = false;
-
-        console.log(data);
+        data.category = 'student';
         setLoading(true)
         alert('Do you want to Submit?')
         return handleStdSignup(data)
@@ -43,17 +42,6 @@ function StdForm() {
                 setLoading(false)
                 console.log(error);
             })
-        // return pushData(data, 'StdData/')
-        //     .then((res) => {
-        //         setLoading(false)
-        //         setModal(true)
-        //         console.log(res);
-        //     })
-        //     .catch((err) => {
-        //         setLoading(false)
-        //         setError(true)
-        //         console.log(err);
-        //     })
     }
 
     return (
