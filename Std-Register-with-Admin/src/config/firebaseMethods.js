@@ -32,7 +32,7 @@ function handleSignup(obj) {
 };
 
 ////////////////////// Student Signup
-function handleStdSignup(obj) {
+function handleStdSignup(obj, nodeName) {
     let { email, password, courses } = obj;
 
     return new Promise((resolve, reject) => {
@@ -41,7 +41,7 @@ function handleStdSignup(obj) {
                 // User Registered
                 let user = userCredentials.user
                 // console.log(user);
-                let reference = ref(dataBase, `user/${user.uid}`);
+                let reference = ref(dataBase, `${nodeName}/${user.uid}`);
                 obj.id = user.uid
                 obj.rollNo = `${new Date().getFullYear()}${courses}${user.uid.slice(user.uid.length - 6)}`
                 set(reference, obj)
@@ -58,13 +58,13 @@ function handleStdSignup(obj) {
 };
 ////////////////////// Student Signup
 
-function handleLogIn(obj) {
+function handleLogIn(obj, nodeName) {
     let { email, password } = obj;
     return new Promise((resolve, reject) => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredentials) => {
                 let user = userCredentials.user
-                let reference = ref(dataBase, `user/${user.uid}`)
+                let reference = ref(dataBase, `${nodeName}/${user.uid}`)
                 onValue(reference, (data) => {
                     let status = data.exists()
                     // console.log(status)

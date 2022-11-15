@@ -31,7 +31,7 @@ function StdForm() {
         data.category = 'student';
         setLoading(true)
         alert('Do you want to Submit?')
-        return handleStdSignup(data)
+        return handleStdSignup(data, 'Students')
             .then((success) => {
                 setModal(true)
                 setLoading(false)

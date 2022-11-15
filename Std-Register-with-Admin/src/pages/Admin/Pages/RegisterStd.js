@@ -10,7 +10,7 @@ function RegisterStd() {
   const [isLoading, setLoading] = useState(true)
 
   const getRegisterSTD = () => {
-    return getData('user/')
+    return getData('Students/')
       .then((res) => {
         setRegisterStd(res);
         setLoading(false)

@@ -12,23 +12,10 @@ function StdProfile() {
 
   const { firstName, lastName, email, courses, section, contact, cnic, fatherName, fatherContact } = stdData
 
-  const [stdCourse, setStdCourse] = useState('')
-
-  const getCourseValue = () => {
-    return getData('Courses/')
-      .then((res) => {
-        let courseValue = res.find((e, i) => e.courses == courses)
-        setStdCourse(courseValue.courseName)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
   const currentStdData = () => {
     manageUser()
       .then((res) => {
-        return getData(`user/`, res)
+        return getData(`Students/`, res)
           .then((success) => {
             setLoading(false)
             setStdData(success)
@@ -44,7 +31,6 @@ function StdProfile() {
 
   useEffect(() => {
     currentStdData()
-    getCourseValue()
   }, [])
 
   return (
@@ -71,7 +57,7 @@ function StdProfile() {
                 <Grid item md={7}>
                   <Box className="text-center">
                     <Typography variant='h3' className='fw-bold'>{`${firstName.charAt(0).toUpperCase() + firstName.slice(1)} ${lastName.charAt(0).toUpperCase() + lastName.slice(1)}`}</Typography>
-                    <Typography variant='body1'>{stdCourse}</Typography>
+                    <Typography variant='body1'>{courses}</Typography>
 
                   </Box>
                 </Grid>
@@ -87,7 +73,7 @@ function StdProfile() {
                     </Grid>
                     <Grid item md={8} xs={6}>
                       <Typography variant='h6' className='fw-bold'>Course:</Typography>
-                      <Typography variant='body1'>{stdCourse}</Typography>
+                      <Typography variant='body1'>{courses}</Typography>
                     </Grid>
                     <Grid item md={4} xs={6}>
                       <Typography variant='h6' className='fw-bold'>Section:</Typography>

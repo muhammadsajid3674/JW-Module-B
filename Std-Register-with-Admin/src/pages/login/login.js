@@ -19,7 +19,7 @@ function Login() {
 
     const handleSubmit = () => {
         setLoading(true)
-        handleLogIn({ email, password })
+        handleLogIn({ email, password }, 'Students')
             .then((success) => {
                 setLoading(false)
                 if (success.category == 'student') {

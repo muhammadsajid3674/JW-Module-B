@@ -38,7 +38,7 @@ function Results() {
 
     return (
         <>
-            <Grid container justifyContent='center' minHeight="100vh">
+            <Grid container justifyContent='center' minHeight="auto">
                 <Grid item xs={10} md={10}>
                     <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px' }}>
                         <Grid container spacing={2}>
@@ -89,7 +89,6 @@ function Results() {
                                 <table>
                                     <tbody>
                                         <tr className='table-light' scope='row'>
-                                            <th>1</th>
                                             {resultTableData && resultTableData.length > 0 ? resultTableData.map((x, i) => {
                                                 return <td>Data Not Found</td>
                                             }) : null}
