@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { getData, manageUser } from '../../../config/firebaseMethods'
 import std from '../../../images/avatar.png'
+import graph from '../../../images/result-graph.png'
 
 function StdProfile() {
 
@@ -45,63 +46,62 @@ function StdProfile() {
           <CircularProgress />
         </Box>
       ) : (
-        <Grid container justifyContent='center' alignItems='center' minHeight='80vh'>
-          <Grid item md={8}>
+        <Grid container justifyContent='center' minHeight='80vh' spacing={2}>
+          <Grid item md={10}>
             <Box className='shadow' sx={{ backgroundColor: '#fff', p: 5, borderRadius: '5px' }}>
-              <Grid container alignItems='center'>
+              <Grid container alignItems='center' spacing={5}>
+                <Grid item md={2}>
+                  <img src={std} className='img-fluid' />
+                </Grid>
+                <Grid item>
+                  <Typography variant='h3' className='display-3'>{`${firstName.charAt(0).toUpperCase() + firstName.slice(1)} ${lastName.charAt(0).toUpperCase() + lastName.slice(1)}`}</Typography>
+                  <Typography variant='body1'>Welcome to your profile.</Typography>
+                </Grid>
+              </Grid>
+            </Box>
+          </Grid>
+          <Grid item md={6}>
+            <Box className='shadow' sx={{ backgroundColor: '#fff', p: 5, borderRadius: '5px' }}>
+              <Grid container spacing={2}>
+                <Grid item md={5}>
+                  <Typography className='fw-bold' variant='h6'>PERSONAL INFORMATION</Typography>
+                </Grid>
                 <Grid item md={3}>
-                  <Box className="text-center">
-                    <img src={std} className='img-fluid' />
-                  </Box>
+                  <Typography className='fw-bold mb-2' variant='h6'>Name:</Typography>
+                  <Typography className='fw-bold mb-2' variant='h6'>Email:</Typography>
+                  <Typography className='fw-bold mb-2' variant='h6'>Course:</Typography>
+                  <Typography className='fw-bold mb-2' variant='h6'>Section:</Typography>
+                  <Typography className='fw-bold mb-2' variant='h6'>Contact:</Typography>
+                  <Typography className='fw-bold mb-2' variant='h6'>CNIC:</Typography>
                 </Grid>
-                <Grid item md={7}>
-                  <Box className="text-center">
-                    <Typography variant='h3' className='fw-bold'>{`${firstName.charAt(0).toUpperCase() + firstName.slice(1)} ${lastName.charAt(0).toUpperCase() + lastName.slice(1)}`}</Typography>
-                    <Typography variant='body1'>{courses}</Typography>
-
-                  </Box>
+                <Grid item md={3}>
+                  <Typography className='mb-2' variant='h6'>{`${firstName.charAt(0).toUpperCase() + firstName.slice(1)} ${lastName.charAt(0).toUpperCase() + lastName.slice(1)}`}</Typography>
+                  <Typography className='mb-2' variant='h6'>{email}</Typography>
+                  <Typography className='mb-2' variant='h6'>{courses}</Typography>
+                  <Typography className='mb-2' variant='h6'>{section}</Typography>
+                  <Typography className='mb-2' variant='h6'>{contact}</Typography>
+                  <Typography className='mb-2' variant='h6'>{cnic}</Typography>
                 </Grid>
-                <Grid item md={10}>
-                  <Grid container justifyContent='center' spacing={3}>
-                    <Grid item md={8} xs={6}>
-                      <Typography variant='h6' className='fw-bold'>Name:</Typography>
-                      <Typography variant='body1'>{`${firstName.charAt(0).toUpperCase() + firstName.slice(1)} ${lastName.charAt(0).toUpperCase() + lastName.slice(1)}`}</Typography>
-                    </Grid>
-                    <Grid item md={4} xs={6}>
-                      <Typography variant='h6' className='fw-bold'>Email:</Typography>
-                      <Typography variant='body1'>{email}</Typography>
-                    </Grid>
-                    <Grid item md={8} xs={6}>
-                      <Typography variant='h6' className='fw-bold'>Course:</Typography>
-                      <Typography variant='body1'>{courses}</Typography>
-                    </Grid>
-                    <Grid item md={4} xs={6}>
-                      <Typography variant='h6' className='fw-bold'>Section:</Typography>
-                      <Typography variant='body1'>{section}</Typography>
-                    </Grid>
-                    <Grid item md={8} xs={6}>
-                      <Typography variant='h6' className='fw-bold'>Contact:</Typography>
-                      <Typography variant='body1'>{contact}</Typography>
-                    </Grid>
-                    <Grid item md={4} xs={6}>
-                      <Typography variant='h6' className='fw-bold'>CNIC:</Typography>
-                      <Typography variant='body1'>{cnic}</Typography>
-                    </Grid>
-                    <Grid item md={8} xs={6}>
-                      <Typography variant='h6' className='fw-bold'>Father Name:</Typography>
-                      <Typography variant='body1'>{fatherName}</Typography>
-                    </Grid>
-                    <Grid item md={4} xs={6}>
-                      <Typography variant='h6' className='fw-bold'>Father Contact:</Typography>
-                      <Typography variant='body1'>{fatherContact}</Typography>
-                    </Grid>
-                  </Grid>
+              </Grid>
+            </Box>
+          </Grid>
+          <Grid item md={4}>
+            <Box className='shadow' sx={{ backgroundColor: '#fff', p: 5, borderRadius: '5px' }}>
+              <Grid container spacing={2}>
+                <Grid item md={6}>
+                  <Typography variant='h4'>My Results:</Typography>
+                  <Typography variant='subtitle1'>Total number of courses you attend.</Typography>
+                  <Typography variant='h5'>1</Typography>
+                </Grid>
+                <Grid item md={6}>
+                  <img className='img-fluid' src={graph}/>
                 </Grid>
               </Grid>
             </Box>
           </Grid>
         </Grid>
       )}
+      {/*  */}
     </>
   )
 }

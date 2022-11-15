@@ -204,7 +204,7 @@ export default function AdminLayout() {
                     ))}
                 </List>
             </Drawer>
-            <Main open={open} sx={{ backgroundColor: '#eee' }}>
+            <Main open={open} sx={{ backgroundColor: '#ced4da' }}>
                 <DrawerHeader />
                 <Routes>
                     <Route path='' element={<RegisterStd />} />

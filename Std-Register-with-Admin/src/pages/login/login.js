@@ -1,4 +1,4 @@
-import { Box, CircularProgress, createTheme, FormControl, FormHelperText, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, ThemeProvider, Typography } from '@mui/material'
+import { Box, CircularProgress, Grid, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import MuiCustomizedButtons from '../../components/button/MuiCustomButtom'
@@ -22,9 +22,9 @@ function Login() {
         handleLogIn({ email, password }, 'Students')
             .then((success) => {
                 setLoading(false)
-                if (success.category == 'student') {
+                if (success.category === 'student') {
                     navigate(`/std/${success.rollNo}`)
-                } else if(success.category == 'admin') {
+                } else if(success.category === 'admin') {
                     navigate(`/admin`)
                 }
             })

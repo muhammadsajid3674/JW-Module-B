@@ -7,6 +7,8 @@ import CusDataTable from '../../../components/CusDataTable/CusDataTable';
 function RegisterStd() {
 
   const [registerStd, setRegisterStd] = useState([])
+  const [course, setCourse] = useState([])
+  const [quizzes, setQuizzes] = useState([])
   const [isLoading, setLoading] = useState(true)
 
   const getRegisterSTD = () => {
@@ -19,9 +21,29 @@ function RegisterStd() {
         console.log(err);
       })
   }
+  const getCourses = () => {
+    return getData('Courses/')
+      .then((res) => {
+        setCourse(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+  const getQuizzes = () => {
+    return getData('QuizQuestions/')
+      .then((res) => {
+        setQuizzes(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
 
   useEffect(() => {
     getRegisterSTD()
+    getCourses()
+    getQuizzes()
   }, [])
 
 
@@ -33,37 +55,37 @@ function RegisterStd() {
             <Grid item xs={12} md={12}>
               <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px' }}>
                 <Typography variant='p' className='display-4'>Overview</Typography>
-                <Grid container spacing={3} sx={{ my: 1 }}>
-                  <Grid item xs={12} md={4}>
-                    <Grid container className='text-white shadow rounded' justifyContent='center' alignItems='center' style={{ backgroundColor: '#003566' }}>
+                <Grid container spacing={3}>
+                  <Grid item xs={12} md={3}>
+                    <Grid container className='text-white shadow rounded' justifyContent='space-around' alignItems='center' sx={{ backgroundColor: '#b2282d', px: 2 }}>
+                      <Grid item className='py-4 px-3'>
+                        <span className='fs-1'>{registerStd.length}</span>
+                        <p className='text-dark-50'>Students</p>
+                      </Grid>
                       <Grid item className='display-3'>
                         <i className="fa-solid fa-user"></i>
                       </Grid>
-                      <Grid item className='py-4 px-3'>
-                        <span className='fs-1'>{registerStd.length}</span>
-                        <p className='text-dark-50'>Registered Students</p>
-                      </Grid>
                     </Grid>
                   </Grid>
-                  <Grid item xs={12} md={4}>
-                    <Grid container className='text-white shadow rounded' justifyContent='center' alignItems='center' style={{ backgroundColor: '#003566' }}>
+                  <Grid item xs={12} md={3}>
+                    <Grid container className='text-white shadow rounded' justifyContent='space-around' alignItems='center' sx={{ backgroundColor: '#3c887e', px: 2 }}>
+                      <Grid item className='py-4 px-3'>
+                        <span className='fs-1'>{course.length}</span>
+                        <p className='text-dark-50'>Courses</p>
+                      </Grid>
                       <Grid item className='display-3'>
                         <i className="fa-solid fa-comment"></i>
                       </Grid>
-                      <Grid item className='py-4 px-3'>
-                        <span className='fs-1'>10</span>
-                        <p className='text-dark-50'>Courses</p>
-                      </Grid>
                     </Grid>
                   </Grid>
-                  <Grid item xs={12} md={4}>
-                    <Grid container className='text-white shadow rounded' justifyContent='center' alignItems='center' style={{ backgroundColor: '#003566' }}>
+                  <Grid item xs={12} md={3}>
+                    <Grid container className='text-white shadow rounded' justifyContent='space-around' alignItems='center' sx={{ backgroundColor: '#333333', px: 2 }}>
+                      <Grid item className='py-4 px-3'>
+                        <span className='fs-1'>{quizzes.length}</span>
+                        <p className='text-dark-50'>Quizzes</p>
+                      </Grid>
                       <Grid item className='display-3'>
                         <i className="fa-solid fa-question"></i>
-                      </Grid>
-                      <Grid item className='py-4 px-3'>
-                        <span className='fs-1'>15</span>
-                        <p className='text-dark-50'>Quizzes</p>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -104,12 +126,12 @@ function RegisterStd() {
                             name: 'Password'
                           },
                           {
-                            key: 'courses',
-                            name: 'Courses'
+                            key: 'category',
+                            name: 'Category'
                           },
                           {
-                            key: 'section',
-                            name: 'Section'
+                            key: 'courses',
+                            name: 'Courses'
                           },
                           {
                             key: 'date',
