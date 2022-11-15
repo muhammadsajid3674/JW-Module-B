@@ -24,7 +24,7 @@ function Login() {
                 setLoading(false)
                 if (success.category == 'student') {
                     navigate(`/std/${success.rollNo}`)
-                } else {
+                } else if(success.category == 'admin') {
                     navigate(`/admin`)
                 }
             })

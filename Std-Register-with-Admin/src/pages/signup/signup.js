@@ -11,13 +11,14 @@ function Signup() {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [category, setCategory] = useState("admin")
     const [error, setError] = useState(false)
     // const [helperText, setHelperText] = useState("")
 
     const handleSubmit = () => {
         setLoading(true)
         //Firebase Auth
-        handleSignup({ email, password, name })
+        handleSignup({ email, password, name, category }, 'Students')
             .then((success) => {
                 setLoading(false)
                 console.log(success);

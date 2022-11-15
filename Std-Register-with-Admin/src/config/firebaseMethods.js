@@ -7,7 +7,7 @@ import { useEffect } from "react";
 const auth = getAuth(app)
 const dataBase = getDatabase(app)
 
-function handleSignup(obj) {
+function handleSignup(obj, nodeName) {
     let { email, password } = obj;
 
     return new Promise((resolve, reject) => {
@@ -16,7 +16,7 @@ function handleSignup(obj) {
                 // User Registered
                 let user = userCredentials.user
                 // console.log(user);
-                let reference = ref(dataBase, `user/${user.uid}`);
+                let reference = ref(dataBase, `${nodeName}/${user.uid}`);
                 obj.id = user.uid
                 set(reference, obj)
                     .then(() => {
