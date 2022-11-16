@@ -56,7 +56,7 @@ function RegisterStd() {
               <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px' }}>
                 <Typography variant='p' className='display-4'>Overview</Typography>
                 <Grid container spacing={3}>
-                  <Grid item xs={12} md={3}>
+                  <Grid item xs={12} md={4}>
                     <Grid container className='text-white shadow rounded' justifyContent='space-around' alignItems='center' sx={{ backgroundColor: '#b2282d', px: 2 }}>
                       <Grid item className='py-4 px-3'>
                         <span className='fs-1'>{registerStd.length}</span>
@@ -67,7 +67,7 @@ function RegisterStd() {
                       </Grid>
                     </Grid>
                   </Grid>
-                  <Grid item xs={12} md={3}>
+                  <Grid item xs={12} md={4}>
                     <Grid container className='text-white shadow rounded' justifyContent='space-around' alignItems='center' sx={{ backgroundColor: '#3c887e', px: 2 }}>
                       <Grid item className='py-4 px-3'>
                         <span className='fs-1'>{course.length}</span>
@@ -78,7 +78,7 @@ function RegisterStd() {
                       </Grid>
                     </Grid>
                   </Grid>
-                  <Grid item xs={12} md={3}>
+                  <Grid item xs={12} md={4}>
                     <Grid container className='text-white shadow rounded' justifyContent='space-around' alignItems='center' sx={{ backgroundColor: '#333333', px: 2 }}>
                       <Grid item className='py-4 px-3'>
                         <span className='fs-1'>{quizzes.length}</span>

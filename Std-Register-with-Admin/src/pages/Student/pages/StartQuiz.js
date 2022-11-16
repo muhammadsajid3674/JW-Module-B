@@ -50,7 +50,7 @@ function Quiz() {
         <>
             <Grid container justifyContent='center' alignItems='center' minHeight="80vh">
                 <Grid item xs={10} md={8}>
-                    <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px', height: '50vh' }}>
+                    <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px', height: 'auto' }}>
                         <Box className='d-flex align-items-center justify-content-between border-bottom mb-3'>
                             <Typography variant='span' className='fs-3 fw-bold'>{quizDetails.quizName}</Typography>
                             <Typography variant='h4'>{minutes < 10 ? "0" + minutes : minutes} : {seconds < 10 ? "0" + seconds : seconds}</Typography>
