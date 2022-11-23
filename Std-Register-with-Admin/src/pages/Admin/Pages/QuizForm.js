@@ -48,6 +48,7 @@ function Quiz() {
     setOptionArr([...optionArr, option])
     setOption("")
   }
+  
   let deleteItem = (id) => {
     let listI = optionArr.filter((value, index) => {
       return index !== id

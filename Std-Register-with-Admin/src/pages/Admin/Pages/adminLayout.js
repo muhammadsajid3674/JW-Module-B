@@ -16,8 +16,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import ListAltIcon from '@mui/icons-material/ListAlt';
-import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import Courses from './Courses';
 import CreateResult from './CreateResult';
 import Quiz from './QuizForm';
@@ -28,6 +26,8 @@ import Countries from './Countries';
 import City from './City';
 import { handleLogOut } from '../../../config/firebaseMethods';
 import { MuiButton } from '../../../components/button/button';
+import TrainerReg from './trainer';
+import FormControl from './FormControl';
 
 const drawerWidth = 240;
 
@@ -94,6 +94,16 @@ export default function AdminLayout() {
             displayName: "Courses",
             routeName: "courses",
             iconClass: "fa-solid fa-comment"
+        },
+        {
+            displayName: "Form Control",
+            routeName: "FormControl",
+            iconClass: "fa-solid fa-circle-info"
+        },
+        {
+            displayName: "Trainer Registration",
+            routeName: "trainerReg",
+            iconClass: "fa-solid fa-user"
         },
         {
             displayName: "Create Result",
@@ -210,6 +220,8 @@ export default function AdminLayout() {
                     <Route path='' element={<RegisterStd />} />
                     <Route path='quiz' element={<Quiz />} />
                     <Route path='courses' element={<Courses />} />
+                    <Route path='FormControl' element={<FormControl />} />
+                    <Route path='trainerReg' element={<TrainerReg/>}/>
                     <Route path='createResult' element={<CreateResult />} />
                     <Route path='countries' element={<Countries />} />
                     <Route path='city' element={<City />} />

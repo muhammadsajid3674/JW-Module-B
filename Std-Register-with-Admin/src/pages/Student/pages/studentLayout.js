@@ -24,6 +24,7 @@ import StdProfile from './Profile';
 import Results from './Results';
 import SelectQuiz from './SelectQuiz';
 import Quiz from './StartQuiz';
+import Announcement from './announcement';
 
 const drawerWidth = 240;
 
@@ -85,6 +86,11 @@ export default function StdLayout() {
             displayName: "Select Quiz",
             routeName: "selectQuiz",
             iconClass: "fa-solid fa-question"
+        },
+        {
+            displayName: "Announcement",
+            routeName: "announcement",
+            iconClass: "fa-solid fa-circle-info"
         },
         {
             displayName: "Results",
@@ -191,6 +197,7 @@ export default function StdLayout() {
                 <Routes>
                     <Route path='' element={<StdProfile />} />
                     <Route path='selectQuiz' element={<SelectQuiz />} />
+                    <Route path='announcement' element={<Announcement />} />
                     <Route path='results' element={<Results/>}/>
                     <Route path='selectQuiz/startQuiz' element={<Quiz/>}/>
                 </Routes>

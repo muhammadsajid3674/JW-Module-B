@@ -1,7 +1,6 @@
 import { Box, CircularProgress, Grid, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { getData } from '../../../config/firebaseMethods'
-import LineChart from '../../../components/LineChart/LineChart';
 import CusDataTable from '../../../components/CusDataTable/CusDataTable';
 
 function RegisterStd() {
@@ -54,8 +53,10 @@ function RegisterStd() {
           <Grid container spacing={3}>
             <Grid item xs={12} md={12}>
               <Box sx={{ backgroundColor: '#fff', p: 4, borderRadius: '5px' }}>
-                <Typography variant='p' className='display-4'>Overview</Typography>
                 <Grid container spacing={3}>
+                  <Grid item md={12}>
+                    <Typography variant='p' className='display-4'>Overview</Typography>
+                  </Grid>
                   <Grid item xs={12} md={4}>
                     <Grid container className='text-white shadow rounded' justifyContent='space-around' alignItems='center' sx={{ backgroundColor: '#b2282d', px: 2 }}>
                       <Grid item className='py-4 px-3'>
@@ -99,8 +100,6 @@ function RegisterStd() {
                   (<Box sx={{
                     display: 'flex',
                     justifyContent: 'center',
-                    alignItems: 'center',
-                    minHeight: '80vh'
                   }}>
                     <CircularProgress />
                   </Box>) : (
