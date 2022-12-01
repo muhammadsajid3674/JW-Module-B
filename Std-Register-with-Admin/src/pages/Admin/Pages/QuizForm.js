@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { MuiButton } from '../../../components/button/button'
 import MuiCustomizedButtons from '../../../components/button/MuiCustomButtom'
 import CusDataTable from '../../../components/CusDataTable/CusDataTable'
+import MuiDataTable from '../../../components/CusDataTable/MuiDataTable'
 import { FloatingSelect } from '../../../components/Dropdown/Dropdown'
 import { FloatingInput, MuiInput } from '../../../components/input/input'
 import { getData, pushData } from '../../../config/firebaseMethods'
@@ -42,13 +43,13 @@ function Quiz() {
     setQuesModal([...quesModal, quesObj])
     setOptionArr([])
   }
-  
+
   // Options
   const AddToOptionARR = () => {
     setOptionArr([...optionArr, option])
     setOption("")
   }
-  
+
   let deleteItem = (id) => {
     let listI = optionArr.filter((value, index) => {
       return index !== id
@@ -56,7 +57,7 @@ function Quiz() {
     setOptionArr(listI)
   }
   // Options
-  
+
   const submitQuiz = () => {
     data.quizQues = quesModal
     console.log(data)
@@ -164,7 +165,7 @@ function Quiz() {
                       labelId='questions-float'
                       name='questions'
                       placeholder='Questions'
-                      onChange={(e) => setQuesObj({...quesObj, question: e.target.value})} 
+                      onChange={(e) => setQuesObj({ ...quesObj, question: e.target.value })}
                     />
                   </Grid>
                   <Grid item xs={8} md={9}>
@@ -232,30 +233,28 @@ function Quiz() {
                     <CircularProgress />
                   </Box>
                 ) : (
-                  <Box sx={{ overflowX: 'scroll' }}>
-                    <CusDataTable
-                      dataSource={existedQues}
-                      onClickRow={(e) => console.log(e)}
-                      colValue={[
-                        {
-                          key: 'courseName',
-                          name: 'Course Name'
-                        },
-                        {
-                          key: 'quizName',
-                          name: 'Quiz Name'
-                        },
-                        {
-                          key: 'duration',
-                          name: 'Duration'
-                        },
-                        {
-                          key: 'totalMarks',
-                          name: 'Total Marks'
-                        },
-                      ]}
-                    />
-                  </Box>
+                  <MuiDataTable
+                    dataSource={existedQues}
+                    onClickRow={(e) => console.log(e)}
+                    colValue={[
+                      {
+                        key: 'courseName',
+                        name: 'Course Name'
+                      },
+                      {
+                        key: 'quizName',
+                        name: 'Quiz Name'
+                      },
+                      {
+                        key: 'duration',
+                        name: 'Duration'
+                      },
+                      {
+                        key: 'totalMarks',
+                        name: 'Total Marks'
+                      },
+                    ]}
+                  />
                 )}
               </Grid>
             </Grid >

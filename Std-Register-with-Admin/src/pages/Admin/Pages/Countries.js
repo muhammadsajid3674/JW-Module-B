@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { MuiButton } from '../../../components/button/button'
 import CusDataTable from '../../../components/CusDataTable/CusDataTable'
+import MuiDataTable from '../../../components/CusDataTable/MuiDataTable'
 import { FloatingInput } from '../../../components/input/input'
 import { getData, pushData } from '../../../config/firebaseMethods'
 
@@ -108,27 +109,23 @@ function Countries() {
                       <CircularProgress />
                     </Box>
                   ) : (
-                    <Box>
-                      <Box sx={{ overflowX: 'scroll' }}>
-                        <CusDataTable
-                          dataSource={existedCountry}
-                          colValue={[
-                            {
-                              key: 'country',
-                              name: 'Country'
-                            },
-                            {
-                              key: 'countryCode',
-                              name: 'Country Code'
-                            },
-                            {
-                              key: 'currency',
-                              name: 'Currency'
-                            },
-                          ]}
-                        />
-                      </Box>
-                    </Box>
+                    <MuiDataTable
+                      dataSource={existedCountry}
+                      colValue={[
+                        {
+                          key: 'country',
+                          name: 'Country'
+                        },
+                        {
+                          key: 'countryCode',
+                          name: 'Country Code'
+                        },
+                        {
+                          key: 'currency',
+                          name: 'Currency'
+                        },
+                      ]}
+                    />
                   )}
                 </Grid>
               </Grid >

@@ -4,6 +4,7 @@ import React from 'react'
 import { useState } from 'react'
 import { MuiButton } from '../../../components/button/button';
 import CusDataTable from '../../../components/CusDataTable/CusDataTable';
+import MuiDataTable from '../../../components/CusDataTable/MuiDataTable';
 import { FloatingSelect } from '../../../components/Dropdown/Dropdown';
 import MuiSwitch from '../../../components/Switch/MuiSwitch';
 import { pushData } from '../../../config/firebaseMethods';
@@ -133,7 +134,7 @@ function CreateResult() {
                         <Grid container>
                             <Grid item xs={12} md={6}>
                                 <Typography variant="p" className="display-3">Results List</Typography>
-                                <CusDataTable
+                                <MuiDataTable
                                 dataSource={resultData}
                                 colValue={[
                                     {

@@ -5,6 +5,7 @@ import { MuiButton } from '../../../components/button/button'
 import { FloatingInput, MuiInput } from '../../../components/input/input'
 import { getData, pushData } from '../../../config/firebaseMethods'
 import CusDataTable from '../../../components/CusDataTable/CusDataTable';
+import MuiDataTable from '../../../components/CusDataTable/MuiDataTable';
 
 function Course() {
 
@@ -162,43 +163,39 @@ function Course() {
                       <CircularProgress />
                     </Box>
                   ) : (
-                    <Box>
-                      <Box sx={{ overflowX: 'scroll' }}>
-                        <CusDataTable
-                          dataSource={existedCourse}
-                          colValue={[
-                            {
-                              key: 'courseName',
-                              name: 'Course Name'
-                            },
-                            {
-                              key: 'courseDuration',
-                              name: 'Course Duration'
-                            },
-                            {
-                              key: 'isFormOpen',
-                              name: 'Is Form Open'
-                            },
-                            {
-                              key: 'noOfQuiz',
-                              name: 'No of Quiz'
-                            },
-                            {
-                              key: 'feeInRupees',
-                              name: 'Fee in Rupee'
-                            },
-                            {
-                              key: 'leadTrainer',
-                              name: 'Lead Trainer'
-                            },
-                            {
-                              key: 'assistantTrainers',
-                              name: 'Assistant Trainer'
-                            },
-                          ]}
-                        />
-                      </Box>
-                    </Box>
+                    <MuiDataTable
+                      dataSource={existedCourse}
+                      colValue={[
+                        {
+                          key: 'courseName',
+                          name: 'Course Name'
+                        },
+                        {
+                          key: 'courseDuration',
+                          name: 'Course Duration'
+                        },
+                        {
+                          key: 'isFormOpen',
+                          name: 'Is Form Open'
+                        },
+                        {
+                          key: 'noOfQuiz',
+                          name: 'No of Quiz'
+                        },
+                        {
+                          key: 'feeInRupees',
+                          name: 'Fee in Rupee'
+                        },
+                        {
+                          key: 'leadTrainer',
+                          name: 'Lead Trainer'
+                        },
+                        {
+                          key: 'assistantTrainers',
+                          name: 'Assistant Trainer'
+                        },
+                      ]}
+                    />
                   )}
                 </Grid>
               </Grid>

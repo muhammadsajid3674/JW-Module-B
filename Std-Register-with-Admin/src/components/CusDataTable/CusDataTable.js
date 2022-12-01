@@ -1,7 +1,6 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
-import { Tooltip } from 'bootstrap';
 
 function CusDataTable(props) {
 

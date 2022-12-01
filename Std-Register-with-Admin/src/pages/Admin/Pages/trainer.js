@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { MuiButton } from '../../../components/button/button'
 import CusDataTable from '../../../components/CusDataTable/CusDataTable'
+import MuiDataTable from '../../../components/CusDataTable/MuiDataTable'
 import { FloatingSelect } from '../../../components/Dropdown/Dropdown'
 import { FloatingInput } from '../../../components/input/input'
 import { getData, pushData } from '../../../config/firebaseMethods'
@@ -147,37 +148,35 @@ const TrainerReg = () => {
                                             <CircularProgress />
                                         </Box>
                                     ) : (
-                                        <Box sx={{ overflowX: 'scroll' }}>
-                                            <CusDataTable
-                                                dataSource={existedCourse}
-                                                colValue={[
-                                                    {
-                                                        key: 'firstName',
-                                                        name: 'First Name'
-                                                    },
-                                                    {
-                                                        key: 'lastName',
-                                                        name: 'Last Name'
-                                                    },
-                                                    {
-                                                        key: 'cnic',
-                                                        name: 'CNIC'
-                                                    },
-                                                    {
-                                                        key: 'qualification',
-                                                        name: 'Qualification'
-                                                    },
-                                                    {
-                                                        key: 'contact',
-                                                        name: 'Contact'
-                                                    },
-                                                    {
-                                                        key: 'courseAllowed',
-                                                        name: 'Course Allowed'
-                                                    },
-                                                ]}
-                                            />
-                                        </Box>
+                                        <MuiDataTable
+                                            dataSource={existedCourse}
+                                            colValue={[
+                                                {
+                                                    key: 'firstName',
+                                                    name: 'First Name'
+                                                },
+                                                {
+                                                    key: 'lastName',
+                                                    name: 'Last Name'
+                                                },
+                                                {
+                                                    key: 'cnic',
+                                                    name: 'CNIC'
+                                                },
+                                                {
+                                                    key: 'qualification',
+                                                    name: 'Qualification'
+                                                },
+                                                {
+                                                    key: 'contact',
+                                                    name: 'Contact'
+                                                },
+                                                {
+                                                    key: 'courseAllowed',
+                                                    name: 'Course Allowed'
+                                                },
+                                            ]}
+                                        />
                                     )}
                                 </Grid>
                             </Grid>

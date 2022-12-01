@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { MuiButton } from '../../../components/button/button'
 import CusDataTable from '../../../components/CusDataTable/CusDataTable'
+import MuiDataTable from '../../../components/CusDataTable/MuiDataTable'
 import { FloatingSelect, MuiSelect } from '../../../components/Dropdown/Dropdown'
 import { FloatingInput } from '../../../components/input/input'
 import { getData, pushData } from '../../../config/firebaseMethods'
@@ -110,28 +111,24 @@ function Cities() {
                       <CircularProgress />
                     </Box>
                   ) : (
-                    <Box>
-                      <Box sx={{ overflowX: 'scroll' }}>
-                        <CusDataTable
-                          dataSource={existedCities}
-                          colValue={[
-                            {
-                              key: 'country',
-                              name: 'Country'
-                            },
-                            {
-                              key: 'city',
-                              name: 'City'
-                            },
-                            {
-                              key: 'cityCode',
-                              name: 'City Code'
-                            },
+                    <MuiDataTable
+                      dataSource={existedCities}
+                      colValue={[
+                        {
+                          key: 'country',
+                          name: 'Country'
+                        },
+                        {
+                          key: 'city',
+                          name: 'City'
+                        },
+                        {
+                          key: 'cityCode',
+                          name: 'City Code'
+                        },
 
-                          ]}
-                        />
-                      </Box>
-                    </Box>
+                      ]}
+                    />
                   )}
                 </Grid>
               </Grid >

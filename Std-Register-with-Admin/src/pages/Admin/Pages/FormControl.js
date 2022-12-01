@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { MuiButton } from '../../../components/button/button'
 import CusDataTable from '../../../components/CusDataTable/CusDataTable'
+import MuiDataTable from '../../../components/CusDataTable/MuiDataTable'
 import { FloatingSelect } from '../../../components/Dropdown/Dropdown'
 import { MuiDatepicker } from '../../../components/input/input'
 import { getData, pushData } from '../../../config/firebaseMethods'
@@ -125,8 +126,7 @@ const FormControl = () => {
                       <CircularProgress />
                     </Box>
                   ) : (
-                      <Box sx={{ overflowX: 'scroll' }}>
-                        <CusDataTable
+                        <MuiDataTable
                           dataSource={ExistedFormControl}
                           colValue={[
                             {
@@ -151,7 +151,6 @@ const FormControl = () => {
                             }
                           ]}
                         />
-                      </Box>
                   )}
                 </Grid>
               </Grid>

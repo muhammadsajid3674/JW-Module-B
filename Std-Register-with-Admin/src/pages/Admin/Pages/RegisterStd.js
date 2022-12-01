@@ -2,6 +2,7 @@ import { Box, CircularProgress, Grid, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { getData } from '../../../config/firebaseMethods'
 import CusDataTable from '../../../components/CusDataTable/CusDataTable';
+import MuiDataTable from '../../../components/CusDataTable/MuiDataTable';
 
 function RegisterStd() {
 
@@ -103,50 +104,48 @@ function RegisterStd() {
                   }}>
                     <CircularProgress />
                   </Box>) : (
-                    <Box sx={{ overflowX: 'scroll' }}>
-                      <CusDataTable
-                        onClickRow={(e) => console.log(e)}
-                        dataSource={registerStd}
-                        colValue={[
-                          {
-                            key: 'firstName',
-                            name: 'First Name'
-                          },
-                          {
-                            key: 'lastName',
-                            name: 'Last Name'
-                          },
-                          {
-                            key: 'email',
-                            name: 'Email'
-                          },
-                          {
-                            key: 'password',
-                            name: 'Password'
-                          },
-                          {
-                            key: 'category',
-                            name: 'Category'
-                          },
-                          {
-                            key: 'courses',
-                            name: 'Courses'
-                          },
-                          {
-                            key: 'date',
-                            name: 'Date Of Birth'
-                          },
-                          {
-                            key: 'contact',
-                            name: 'Contact'
-                          },
-                          {
-                            key: 'cnic',
-                            name: 'CNIC'
-                          },
-                        ]}
-                      />
-                    </Box>
+                    <MuiDataTable
+                      onClickRow={(e) => console.log(e)}
+                      dataSource={registerStd}
+                      colValue={[
+                        {
+                          key: 'firstName',
+                          name: 'First Name'
+                        },
+                        {
+                          key: 'lastName',
+                          name: 'Last Name'
+                        },
+                        {
+                          key: 'email',
+                          name: 'Email'
+                        },
+                        {
+                          key: 'password',
+                          name: 'Password'
+                        },
+                        {
+                          key: 'category',
+                          name: 'Category'
+                        },
+                        {
+                          key: 'courses',
+                          name: 'Courses'
+                        },
+                        {
+                          key: 'date',
+                          name: 'Date Of Birth'
+                        },
+                        {
+                          key: 'contact',
+                          name: 'Contact'
+                        },
+                        {
+                          key: 'cnic',
+                          name: 'CNIC'
+                        },
+                      ]}
+                    />
                   )}
               </Box>
             </Grid>
