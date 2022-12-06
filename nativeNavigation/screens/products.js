@@ -1,20 +1,59 @@
-import React from 'react'
-import { Image, Text, TouchableOpacity, View } from 'react-native'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { ActivityIndicator, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import styles from '../stylesheet'
 
-const Products = () => {
+const Products = ({ navigation }) => {
+
+    const [isLoading, setLoader] = useState(true)
+    const [productList, setProductList] = useState([]);
+    let getData = () => {
+        let api = 'https://fakestoreapi.com/products';
+        axios
+            .get(api)
+            .then(res => {
+                setLoader(false)
+                setProductList(res.data);
+            })
+            .catch(err => {
+                setLoader(false)
+                console.log(err);
+            });
+    };
+
+    let move = (productDetails) => {
+        navigation.navigate('Product', productDetails)
+    }
+
+    useEffect(() => {
+        getData()
+    }, [])
+
+
     return (
-        <View style={styles.container}>
-            <TouchableOpacity style={styles.productParent}>
-                <View style={styles.product}>
-                    <Image source={{ uri: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg' }} style={styles.productImg} resizeMode='contain' />
-                    <View style={styles.featuredDetails}>
-                        <Text style={styles.featuredTxt}>Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops</Text>
-                        <Text style={[styles.featuredTxt, {fontSize: 20}]}>$109.95</Text>
-                    </View>
-                </View>
-            </TouchableOpacity>
-        </View>
+        <>
+            <View style={styles.container}>
+                {isLoading ? (
+                    <ActivityIndicator size='large' />
+                ) : (
+                    <ScrollView>
+                        <View style={styles.productContainer}>
+                        {productList.map((e, i) => {
+                            return <TouchableOpacity style={styles.productParent} onPress={() => move(e)} key={i}>
+                                <View style={styles.product}>
+                                    <Image source={{ uri: e.image }} style={styles.productImg} resizeMode='contain' />
+                                    <View style={styles.featuredDetails}>
+                                        <Text style={styles.featuredTxt}>{e.title}</Text>
+                                        <Text style={[styles.featuredTxt, { fontSize: 20 }]}>${e.price}</Text>
+                                    </View>
+                                </View>
+                            </TouchableOpacity>
+                        })}
+                        </View>
+                    </ScrollView>
+                )}
+            </View>
+        </>
     )
 }
 
