@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "196360690322",
+    "project_id": "native-todo-app-f101f",
+    "storage_bucket": "native-todo-app-f101f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196360690322:android:12d75b8e6075115870244b",
+        "android_client_info": {
+          "package_name": "com.nativetodofirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "196360690322-ngunktvj6gishbar4ftf2i4pvsrvpvu2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_iBIsis1XL8ace_2NYz4JO67dZoLcxJ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "196360690322-ngunktvj6gishbar4ftf2i4pvsrvpvu2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
