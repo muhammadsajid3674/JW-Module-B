@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1025002562843",
+    "project_id": "geo-location-f1a67",
+    "storage_bucket": "geo-location-f1a67.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1025002562843:android:bc3e67ce4bb3e910f71fbe",
+        "android_client_info": {
+          "package_name": "com.nativegeolocation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1025002562843-hvac88vo02relr77f2trl98lcpd42mdj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrfs9xdDCUYMksAla97hMdBpFbwwhVBig"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1025002562843-hvac88vo02relr77f2trl98lcpd42mdj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
