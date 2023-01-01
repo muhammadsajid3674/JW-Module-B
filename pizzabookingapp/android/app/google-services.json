@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "117906026260",
+    "project_id": "pizza-booking-app",
+    "storage_bucket": "pizza-booking-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117906026260:android:9ab0e5a4efece212335c01",
+        "android_client_info": {
+          "package_name": "com.pizzabookingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "117906026260-j3851mek9g3d50j7ooo8t1c1kj1923t5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtg50gisQGUjk-ovV6p5J-CN3WWfxpRn4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "117906026260-j3851mek9g3d50j7ooo8t1c1kj1923t5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
