@@ -5,7 +5,7 @@ import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
 
 const colors = {
-    primary: '#1B2763',
+    primary: '#ef4136',
     secondary: '#1b2e35'
 }
 
@@ -21,6 +21,7 @@ const Registration = ({ navigation }) => {
 
     let createUser = () => {
         setLoading(true)
+        modal.category = 'booker'
         auth().createUserWithEmailAndPassword(email, password)
             .then((res) => {
                 modal.id = database().ref('User/').push().key;

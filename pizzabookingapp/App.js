@@ -1,10 +1,12 @@
 import React from 'react'
 import AppNavigator from './config/AppNavigator'
-import Map from './screens/Map'
+import AddPizza from './screens/admin/AddPizza'
+import Home from './screens/Home'
+import Product from './screens/Product'
 
 export default function App() {
   return (
-    // <AppNavigator/>
-    <Map/>
+    <AppNavigator/>
+    // <AddPizza/>
   )
 }

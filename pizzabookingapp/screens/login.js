@@ -4,14 +4,16 @@ import auth from '@react-native-firebase/auth';
 import { ABInput, ABInputPassword } from '../components/ABInput';
 
 const colors = {
-    primary: '#1B2763',
+    primary: '#ef4136',
     secondary: '#1b2e35'
 }
 
 const Login = ({ navigation }) => {
 
-    const [modal, setModal] = useState({})
-    let { fullName, email, password } = modal
+    const [modal, setModal] = useState({
+        email: '',
+        password: '',
+    })
     const [isLoading, setLoading] = useState(false)
     const handleChange = (key, value) => {
         const newField = { [key]: value }
@@ -20,10 +22,26 @@ const Login = ({ navigation }) => {
 
     let pushData = () => {
         setLoading(true)
-        auth().signInWithEmailAndPassword(email, password)
-        .then((res) => {
-            navigation.navigate('map');
-            setLoading(false)
+        auth().signInWithEmailAndPassword(modal.email, modal.password)
+            .then((res) => {
+                if (res.user.uid == '9m2SRuwExbYhNErnsPivdHHZ1Kl1') {
+                    setModal({
+                        email: '',
+                        password: '',
+                    })
+                    navigation.navigate('Admin');
+                    setLoading(false)
+                    console.log(res);
+                }
+                else {
+                    setModal({
+                        email: '',
+                        password: '',
+                    })
+                    navigation.navigate('Home');
+                    setLoading(false)
+                    console.log(res);
+                }
             })
             .catch((err) => {
                 console.log(err);
@@ -36,7 +54,7 @@ const Login = ({ navigation }) => {
             <View style={{ paddingHorizontal: 25 }}>
                 <Text style={styles.headerTxt}>Login</Text>
                 <ABInput onChange={(e) => handleChange('email', e)} icon='alternate-email' placeholder='Email ID' />
-                <ABInputPassword onChange={(e) => handleChange('password', e)}  icon='lock' placeholder='Enter Password' />
+                <ABInputPassword onChange={(e) => handleChange('password', e)} icon='lock' placeholder='Enter Password' />
                 <TouchableOpacity style={styles.customButton} onPress={pushData}>
                     {isLoading ? (
                         <ActivityIndicator color='white' />

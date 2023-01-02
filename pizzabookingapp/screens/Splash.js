@@ -7,19 +7,19 @@ export default function Splash({navigation}) {
     return (
         <View style={styles.container}>
             <ImageBackground source={splashImage} resizeMode="cover" style={styles.image}>
-                <Text style={[styles.text, styles.headerSpacing]}>Find the Ideal slot for you.</Text>
+                <Text style={[styles.text, styles.headerSpacing]}>GET THE FASTEST DELIVERY</Text>
                 <View style={{ alignItems: 'center' }}>
                 <View style={styles.ref}>
-                        <Text style={{color: '#fff', fontWeight: '500', fontSize: 20}}>Get a great ride on great price.</Text>
+                        <Text style={styles.refTxt}>Order pizza and get delivery in Fastest Time in Town.</Text>
                     </View>
                     <View style={styles.startParent}>
                         <Text style={styles.startText}>Get Started</Text>
                         <TouchableOpacity onPress={() => { navigation.navigate('register') }}>
-                            <Icon style={styles.startIcon} name='arrow-forward-ios' size={20} color='white' />
+                            <Icon style={styles.startIcon} name='arrow-forward-ios' size={20} color='black' />
                         </TouchableOpacity>
                     </View>
                     <View style={styles.ref}>
-                        <Text style={{color: '#fff'}}>Already have an account?</Text>
+                        <Text style={{color: '#000'}}>Already have an account?</Text>
                         <TouchableOpacity onPress={() => { navigation.navigate('login') }}>
                             <Text style={styles.hrefLink}>Login</Text>
                         </TouchableOpacity>
@@ -43,7 +43,9 @@ const styles = StyleSheet.create({
         fontSize: 42,
     },
     headerSpacing: {
-        marginHorizontal: 20,
+        width: 200,
+        lineHeight: 55,
+        marginLeft: 20,
         marginVertical: 50,
     },
     textUnderline: {
@@ -52,7 +54,7 @@ const styles = StyleSheet.create({
     startParent: {
         marginBottom: 30,
         flexDirection: 'row',
-        backgroundColor: '#1B2763',
+        backgroundColor: '#ef4136',
         width: 300,
         height: 80,
         borderRadius: 50,
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
     startIcon: {
         paddingHorizontal: 20,
         paddingVertical: 20,
-        backgroundColor: '#2B3980',
+        backgroundColor: '#ffe759',
         height: 60,
         width: 60,
         borderRadius: 50,
@@ -79,10 +81,17 @@ const styles = StyleSheet.create({
     },
     ref: {
         flexDirection: 'row',
-        marginBottom: 40,
+        marginBottom: 20,
+    },
+    refTxt: {
+        color: '#000', 
+        fontWeight: '500', 
+        fontSize: 20, 
+        marginHorizontal: 30, 
+        textAlign: 'center'
     },
     hrefLink: {
-        color: '#fff',
+        color: '#000',
         marginLeft: 5,
         textDecorationLine: 'underline'
     }
